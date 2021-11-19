@@ -1,0 +1,33 @@
+{
+    "language": "English",
+    "app": {
+        "title": "NİBGAT® - Core Mobile"
+    },
+    "coreComponents": {
+        "selectBox": {
+            "selection": "Choice",
+            "errors": {
+                "nonSelecet": "No selection"
+            }
+        },
+        "searchBox": {
+            "validation": {
+                "enterContent": "Enter content"
+            }
+        },
+        "multiSelectBox": {
+            "title": "Category selection tool",
+            "validation": {
+                "enterContent": "Enter value"
+            }
+        }
+    },
+    "corePages": {
+        "selectPage": {
+            "validation": {
+                "minSelectRequired": "At least one selection is mandatory.",
+                "noMoreSelectable": "You cannot choose any more."
+            }
+        }
+    }
+}
