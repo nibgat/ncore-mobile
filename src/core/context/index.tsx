@@ -1,16 +1,18 @@
 import React, {
+    ReducerAction,
     createContext,
     useContext,
-    useReducer
+    useReducer,
 } from 'react';
 import {
     DEFAULT_NCORE_BOTTOM_SHEET_STORE,
     DEFAULT_NCORE_MODAL_STORE,
     DEFAULT_NCORE_THEME_STORE,
-    DEFAULT_NCORE_LOCALES
+    DEFAULT_NCORE_LOCALES,
 } from '../constants';
 import {
-    settingsStoreInitial
+    SettingsStoreInitial,
+    SettingsStore
 } from '../constants';
 
 const NCoreThemeContext = createContext(DEFAULT_NCORE_THEME_STORE);
@@ -25,8 +27,10 @@ const NCoreBottomSheetDispatchContext = createContext(undefined);
 const NCoreLocalesContext = createContext(DEFAULT_NCORE_LOCALES);
 const NCoreLocalesDispatchContext = createContext(undefined);
 
-const NCoreSettingsContext = createContext(settingsStoreInitial);
-const NCoreSettingsDispatchContext = createContext(undefined);
+const NCoreSettingsContext = createContext<SettingsStore>(SettingsStoreInitial);
+
+type SettingsDispatch = () => void | undefined;
+const NCoreSettingsDispatchContext = createContext<ReducerAction<SettingsDispatch>>(undefined);
 
 const NCoreContext = ({
     children
@@ -59,11 +63,11 @@ const NCoreContext = ({
         DEFAULT_NCORE_LOCALES
     );
 
-    const [nCoreSettings, setNCoreSettings]: [any, any] = useReducer(
+    const [nCoreSettings, setNCoreSettings] = useReducer(
         (state: any, newValue: any) => ({
             ...state, ...newValue 
         }),
-        DEFAULT_NCORE_SETTINGS_STORE
+        settingsStoreInitial
     );
 
     return (

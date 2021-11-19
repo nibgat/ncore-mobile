@@ -4,7 +4,7 @@ import {
 import lightTheme from '../theme/variants/light';
 import trTR from '../locales/variants/tr.json';
 
-export { default as settingsStoreInitial } from './settings';
+export { default as SettingsStoreInitial, SettingsStore } from './settings';
 
 export const DEFAULT_NCORE_THEME_STORE = {
     value: "light",

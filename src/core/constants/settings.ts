@@ -1,4 +1,4 @@
-type SettingsStore = {
+export type SettingsStore = {
     ready: boolean;
     setReady: () => void;
 };
