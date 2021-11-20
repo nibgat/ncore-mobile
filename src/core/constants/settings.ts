@@ -1,10 +1,11 @@
 export type SettingsStore = {
-    ready: boolean;
     setReady: () => void;
+    ready: boolean;
 };
 
-const nCoreSettingsStore: SettingsStore = {
+const settingsStore: SettingsStore = {
     ready: false,
-    setReady: () => { }
+    setReady: () => {
+    }
 };
-export default nCoreSettingsStore;
+export default settingsStore;

@@ -1,4 +1,4 @@
-import 
+import lightTheme from '../theme/variants/light';
 
 type BottomSheetConfigs = {
     animationsDuration: number;
@@ -10,11 +10,11 @@ type ThemeConfigs = {
 
 export type ThemeStore = {
     initialConfigs: boolean;
-    mergedTheme: () => void;
     switchTheme: () => void;
     changeTheme: () => void;
+    mergeTheme: () => void;
     configs: ThemeConfigs;
-    mergeTheme: boolean;
+    mergedTheme: boolean;
     value: string;
     typographyScheme: ;
     typography: ;
@@ -23,23 +23,23 @@ export type ThemeStore = {
     tokens: ;
 };
 
-const nCoreThemeStore: ThemeStore = {
-    value: "light",
-    styles: {
-    },
+const themeStore: ThemeStore = {
+    typographyScheme: lightTheme.typographyScheme,
+    typography: lightTheme.typography,
     colors: lightTheme.palette,
+    tokens: lightTheme.tokens,
+    initialConfigs: false,
+    switchTheme: () => {},
+    changeTheme: () => {},
+    mergeTheme: () => {},
+    mergedTheme: false,
+    value: "light",
     configs: {
         bottomSheet: {
             animationsDuration: 150
         }
     },
-    typographyScheme: lightTheme.typographyScheme,
-    typography: lightTheme.typography,
-    tokens: lightTheme.tokens,
-    initialConfigs: false,
-    mergedTheme: false,
-    switchTheme: () => {},
-    changeTheme: () => {},
-    mergeTheme: () => {}
+    styles: {
+    }
 };
-export default nCoreThemeStore;
+export default themeStore;
