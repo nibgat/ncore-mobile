@@ -59,11 +59,11 @@ declare global {
 
         type TypograpghyVariant = {
             fontFamily: string;
-            fontWeight: 'normal' | 'bold' | '100' | '200' | '300' | '400' | '500' | '600' | '700' | '800' | '900';
+            fontWeight: "normal" | "bold" | "100" | "200" | "300" | "400" | "500" | "600" | "700" | "800" | "900";
             fontSize: number;
             lineHeight?: number;
             letterSpacing?: number;
-            textTransform?: 'none' | 'capitalize' | 'uppercase' | 'lowercase';
+            textTransform?: "none" | "capitalize" | "uppercase" | "lowercase";
         }
 
         interface DesignTokens {

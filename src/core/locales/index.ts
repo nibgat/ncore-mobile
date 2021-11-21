@@ -1,5 +1,5 @@
-import trTR from './variants/tr.json';
-import enUS from './variants/en.json';
+import trTR from "./variants/tr.json";
+import enUS from "./variants/en.json";
 
 const locales = {
     trTR,

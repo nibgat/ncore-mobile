@@ -4,15 +4,19 @@ import React, {
     useReducer,
     useEffect,
     ReactNode
-} from 'react';
+} from "react";
 import {
-    NCoreReducerDispatch,
-    ProviderProps
-} from './types';
+    NCoreReducerDispatch
+} from "./types";
 import {
     ThemeStoreInitial,
     ThemeStore
-} from '../constants';
+} from "../constants";
+import {
+    mergeGivenColorsWithNCore,
+    mergeGivenTypographyWithNCore,
+    mergeGivenDesignTokensWithNCore
+} from "../theme";
 
 export const ThemeContext = createContext<ThemeStore>(ThemeStoreInitial);
 export const ThemeDispatchContext = createContext<ReducerAction<NCoreReducerDispatch>>(undefined);
@@ -20,12 +24,15 @@ export const ThemeDispatchContext = createContext<ReducerAction<NCoreReducerDisp
 type ThemeProvider = {
     children: ReactNode;
     themes: Array<NCore.Theme>;
+    designTokens: NCore.DesignTokens;
+    initialThemeKey: NCore.ThemeKey;
 };
 
 const ThemeProvider = ({
     children,
     themes,
-    designTokens
+    designTokens,
+    initialThemeKey
 }: ThemeProvider) => {
     const [theme, setTheme] = useReducer(
         (state: ThemeStore, newValue: ThemeStore) => ({
@@ -36,14 +43,20 @@ const ThemeProvider = ({
 
     const switchTheme = (themeKey: NCore.ThemeKey) => {
         const currentProjectTheme = themes.find(e => e.key === themeKey);
-        const typography = generateTypography(themeKey, currentProjectTheme?.typography);
-        const colors = generateColors(themeKey, currentProjectTheme?.colors);
-        const _designTokens = generateDesignTokens(designTokens);
+
+        if(themeKey !== "light" && themeKey !== "dark" && !(currentProjectTheme)) {
+            throw Error(`Can not find a theme for the given themeKey: ${themeKey}.`);
+        }
+
+        const typography = mergeGivenTypographyWithNCore(themeKey, currentProjectTheme?.typography);
+        const colors = mergeGivenColorsWithNCore(themeKey, currentProjectTheme?.colors);
+        const _designTokens = mergeGivenDesignTokensWithNCore(designTokens);
 
         setTheme({
             typography,
             colors,
-            designTokens: _designTokens
+            designTokens: _designTokens,
+            activeTheme: initialThemeKey
         });
     };
 

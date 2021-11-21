@@ -3,34 +3,34 @@ import React, {
     useEffect,
     useState,
     useRef
-} from 'react';
+} from "react";
 import {
     ActivityIndicator,
     SafeAreaView
-} from 'react-native';
+} from "react-native";
 import NCoreContext, {
     useNCoreBottomSheet,
     useNCoreSettings,
     useNCoreLocales,
     useNCoreTheme,
     useNCoreModal
-} from './context';
+} from "./context";
 import {
     // BottomSheet,
     PageContainer,
     Dialog,
     Modal
-} from '..';
+} from "..";
 import {
     styles_main
-} from './stylesheet';
+} from "./stylesheet";
 import {
     Modalize
-} from 'react-native-modalize';
-import generateTheme from './theme';
-import getLocales from './locales';
+} from "react-native-modalize";
+import generateTheme from "./theme";
+import getLocales from "./locales";
 
-import './types';
+import "./types";
 
 type NCoreProvider = {
     children: ReactNode;
@@ -297,7 +297,7 @@ const SetDefaults = ({
             modal && modal.data && modal.data.length ?
                 modal.data.map((item: any, index: number) => {
                     return <Modal
-                        key={`modal-` + index}
+                        key={"modal-" + index}
                         {...item.modalProps}
                         onDismiss={item.onDismiss}
                         type={item.type}

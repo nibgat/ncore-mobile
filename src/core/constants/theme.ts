@@ -1,4 +1,4 @@
-import lightTheme from '../theme/variants/light';
+import lightTheme from "../theme/variants/light";
 
 type ThemeKey = "light" | "dark" | string;
 

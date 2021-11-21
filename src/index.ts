@@ -5,6 +5,8 @@ export {
     useNCoreLocales,
     useNCoreModal,
     useNCoreTheme
-} from './core/context';
+} from "./core/context";
 
-export { default as NCoreProvider } from './core';
+export {
+    default as NCoreProvider 
+} from "./core";

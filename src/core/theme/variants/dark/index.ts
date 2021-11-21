@@ -1,4 +1,4 @@
-export const palette = {
+export const colors: NCore.Colors = {
     "primary":          "#00C2A0",
     "body":             "#f5f5f5",
     "constrastBody":    "#2a2a2a",
@@ -29,28 +29,7 @@ export const palette = {
     "modalBackground":  "rgba(0, 0, 0, 0.5)"
 };
 
-export const designTokens = {
-    spaces: {
-        container: 20,
-        content: 8,
-        inline: 4,
-        item: 20
-    },
-    borders: {
-        indicator: 2,
-        line: 1
-    },
-    radiuses: {
-        quarter: 5,
-        hard: 20,
-        half: 10
-    },
-    disabled: {
-        opacity: 0.33
-    }
-};
-
-export const typography = {
+export const typography: NCore.Typography = {
     header1: {
         fontFamily: "Montserrat-Light",
         fontWeight: "300",
@@ -134,10 +113,10 @@ export const typography = {
     }
 };
 
-const theme = {
-    designTokens,
+const theme: NCore.Theme = {
+    key: "dark",
     typography,
-    palette
+    colors
 };
 
 export default theme;
