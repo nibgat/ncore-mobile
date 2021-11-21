@@ -29,7 +29,7 @@ export const palette = {
     "modalBackground":  "rgba(0, 0, 0, 0.5)"
 };
 
-export const tokens = {
+export const designTokens = {
     spaces: {
         container: 20,
         content: 8,
@@ -50,147 +50,94 @@ export const tokens = {
     }
 };
 
-export const typographyScheme = {
-    "type": "value", // or "number"
-    "normal": {
-        "100": "Montserrat-Thin",
-        "200": "Montserrat-ExtraLight",
-        "300": "Montserrat-Light",
-        "400": "Montserrat-Regular",
-        "500": "Montserrat-Medium",
-        "600": "Montserrat-SemiBold",
-        "700": "Montserrat-Bold",
-        "800": "Montserrat-ExtraBold",
-        "900": "Montserrat-Black"
-    },
-    "italic": {
-        "100": "Montserrat-Thin",
-        "200": "Montserrat-ExtraLightItalic",
-        "300": "Montserrat-LightItalic",
-        "400": "Montserrat-Italic",
-        "500": "Montserrat-MediumItalic",
-        "600": "Montserrat-SemiBoldItalic",
-        "700": "Montserrat-BoldItalic",
-        "800": "Montserrat-ExtraBoldItalic",
-        "900": "Montserrat-BlackItalic"
-    }
-};
-
 export const typography = {
     header1: {
-        family: "Montserrat",
+        fontFamily: "Montserrat-Light",
         fontWeight: "300",
-        tokens: {
-            lineHeight: 62.4,
-            fontSize: 48
-        }
+        lineHeight: 62.4,
+        fontSize: 48
     },
     header2: {
-        family: "Montserrat",
+        fontFamily: "Montserrat-Regular",
         fontWeight: "400",
-        tokens: {
-            lineHeight: 41.6,
-            fontSize: 32
-        }
+        lineHeight: 41.6,
+        fontSize: 32
     },
     header3: {
-        family: "Montserrat",
+        fontFamily: "Montserrat-Medium",
         fontWeight: "500",
-        tokens: {
-            lineHeight: 31.2,
-            fontSize: 26
-        }
+        lineHeight: 31.2,
+        fontSize: 26
     },
     header4: {
-        family: "Montserrat",
+        fontFamily: "Montserrat-Regular",
         fontWeight: "400",
-        tokens: {
-            lineHeight: 26,
-            fontSize: 22
-        }
+        lineHeight: 26,
+        fontSize: 22
     },
     header5: {
-        family: "Montserrat",
+        fontFamily: "Montserrat-SemiBold",
         fontWeight: "600",
-        tokens: {
-            lineHeight: 26,
-            fontSize: 22
-        }
+        lineHeight: 26,
+        fontSize: 22
     },
     header6: {
-        family: "Montserrat",
+        fontFamily: "Montserrat-Regular",
         fontWeight: "400",
-        tokens: {
-            lineHeight: 23.4,
-            fontSize: 18
-        }
+        lineHeight: 23.4,
+        fontSize: 18
     },
     header7: {
-        family: "Montserrat",
+        fontFamily: "Montserrat-SemiBold",
         fontWeight: "600",
-        tokens: {
-            lineHeight: 23.4,
-            fontSize: 18
-        }
+        lineHeight: 23.4,
+        fontSize: 18
     },
     header8: {
-        family: "Montserrat",
+        fontFamily: "Montserrat-SemiBold",
         fontWeight: "600",
-        tokens: {
-            lineHeight: 20.8,
-            fontSize: 14
-        }
+        lineHeight: 20.8,
+        fontSize: 14
     },
     header9: {
-        family: "Montserrat",
+        fontFamily: "Montserrat-SemiBold",
         fontWeight: "600",
-        tokens: {
-            lineHeight: 20.8,
-            fontSize: 12
-        }
+        lineHeight: 20.8,
+        fontSize: 12
     },
     body: {
-        family: "Montserrat",
+        fontFamily: "Montserrat-Ragular",
         fontWeight: "400",
-        tokens: {
-            lineHeight: 22.72,
-            fontSize: 14
-        }
+        lineHeight: 22.72,
+        fontSize: 14
     },
     caption: {
-        family: "Montserrat",
+        fontFamily: "Montserrat-SemiBold",
         fontWeight: "600",
-        tokens: {
-            letterSpacing: -0.5,
-            lineHeight: 14.4,
-            fontSize: 10
-        }
+        letterSpacing: -0.5,
+        lineHeight: 14.4,
+        fontSize: 10
     },
     button: {
-        family: "Montserrat",
+        fontFamily: "Montserrat-SemiBold",
         fontWeight: "600",
-        tokens: {
-            letterSpacing: 0.5,
-            lineHeight: 22.72,
-            fontSize: 14
-        }
+        letterSpacing: 0.5,
+        lineHeight: 22.72,
+        fontSize: 14
     },
     overline: {
-        family: "Montserrat",
+        fontFamily: "Montserrat-Regular",
         fontWeight: "400",
-        tokens: {
-            textTransform: "uppercase",
-            letterSpacing: 2,
-            fontSize: 12
-        }
+        textTransform: "uppercase",
+        letterSpacing: 2,
+        fontSize: 12
     }
 };
 
 const theme = {
-    typographyScheme,
+    designTokens,
     typography,
-    palette,
-    tokens
+    palette
 };
 
 export default theme;

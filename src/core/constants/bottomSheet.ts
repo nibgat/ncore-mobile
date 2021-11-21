@@ -1,49 +1,32 @@
 import {
-    Platform
-} from 'react-native';
-
-type DragLink = {
-    // enabled: boolean;
-};
-
-type BottomSheetConfigs = {
-    closeOnOverlayTap: boolean;
-    swipeToTopEnabled: boolean;
-    scrollEnabled: boolean;
-    swipeEnabled: boolean;
-    cancelable: boolean;
-    withModal: boolean;
-    draglink: DragLink;
-};
+    ReactNode
+} from 'react';
+import {
+    ModalizeProps
+} from 'react-native-modalize';
 
 export type BottomSheetStore = {
-    closeBottomSheet: () => void;
-    configs: BottomSheetConfigs;
-    openBottomSheet: () => void;
-    snapTo: () => void;
     isActive: boolean;
-    index: number;
-    snapPoints: ; // bura;
-    data: ; // bura;
+    children: ReactNode;
+    openBottomSheet: () => void;
+    closeBottomSheet: () => void;
+    props: ModalizeProps | undefined;
+    autoHeight: boolean;
+};
+
+export type nCoreBottomSheetReturnType = {
+    openBottomSheet: (children: ReactNode, props: ModalizeProps) => void;
+    closeBottomSheet: () => void;
 };
 
 const bottomSheetStore: BottomSheetStore = {
-    snapPoints: ["0%", Platform.OS === "ios" ? "25%" : "32%", "100%"],
-    closeBottomSheet: () => { },
-    openBottomSheet: () => { },
-    snapTo: () => { },
+    openBottomSheet: () => {
+    },
+    closeBottomSheet: () => {
+    },
     isActive: false,
-    data: null,
-    index: 0,
-    configs: {
-        closeOnOverlayTap: true,
-        swipeToTopEnabled: true,
-        scrollEnabled: false,
-        swipeEnabled: true,
-        cancelable: true,
-        withModal: false,
-        draglink: {
-        }
-    }
+    children: undefined,
+    autoHeight: true,
+    props: undefined
 };
 export default bottomSheetStore;

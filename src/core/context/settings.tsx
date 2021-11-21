@@ -4,8 +4,8 @@ import React, {
     useReducer
 } from 'react';
 import {
-    ProviderProps,
-    Dispatch
+    NCoreReducerDispatch,
+    ProviderProps
 } from './types';
 import {
     SettingsStoreInitial,
@@ -13,14 +13,14 @@ import {
 } from '../constants';
 
 export const SettingsContext = createContext<SettingsStore>(SettingsStoreInitial);
-export const SettingsDispatchContext = createContext<ReducerAction<Dispatch>>(undefined);
+export const SettingsDispatchContext = createContext<ReducerAction<NCoreReducerDispatch>>(undefined);
 
 const SettingsProvider = ({
     children
 }: ProviderProps) => {
     const [settings, setSettings] = useReducer(
-        (state: any, newValue: any) => ({
-            ...state, ...newValue 
+        (state: SettingsStore, newValue: SettingsStore) => ({
+            ...state, ...newValue
         }),
         SettingsStoreInitial
     );

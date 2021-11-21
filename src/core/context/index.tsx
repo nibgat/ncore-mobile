@@ -1,15 +1,11 @@
 import React, {
-    useContext
+    useContext,
+    ReactNode
 } from 'react';
-import {
-    ProviderProps
-} from './types';
 import ModalProvider, {
-    ModalDispatchContext,
     ModalContext
 } from './modal';
 import SettingsProvider, {
-    SettingsDispatchContext,
     SettingsContext
 } from './settings';
 import LocalesProvider, {
@@ -17,30 +13,38 @@ import LocalesProvider, {
     LocalesContext
 } from './locales';
 import BottomSheetProvider, {
-    BottomSheetDispatchContext,
     BottomSheetContext
 } from './bottomSheet';
 import ThemeProvider, {
     ThemeDispatchContext,
     ThemeContext
 } from './theme';
+import {
+    useNCoreSettingsReturnType,
+    nCoreBottomSheetReturnType,
+    useNCoreModalReturnType
+} from '../constants';
+
+type Context = {
+    children: ReactNode;
+    themes: Array<NCore.Theme>;
+};
 
 const Context = ({
-    children
-}: ProviderProps) => {
-    return (
-        <ThemeProvider>
-            <ModalProvider>
-                <BottomSheetProvider>
-                    <LocalesProvider>
-                        <SettingsProvider>
-                            {children}
-                        </SettingsProvider>
-                    </LocalesProvider>
-                </BottomSheetProvider>
-            </ModalProvider>
-        </ThemeProvider>
-    );
+    children,
+    themes
+}: Context) => {
+    return <ThemeProvider themes={themes}>
+        <ModalProvider>
+            <BottomSheetProvider>
+                <LocalesProvider>
+                    <SettingsProvider>
+                        {children}
+                    </SettingsProvider>
+                </LocalesProvider>
+            </BottomSheetProvider>
+        </ModalProvider>
+    </ThemeProvider>;
 };
 
 export const useNCoreTheme = () => [
@@ -48,24 +52,15 @@ export const useNCoreTheme = () => [
     useContext(ThemeDispatchContext)
 ];
 
-export const useNCoreModal = () => [
-    useContext(ModalContext),
-    useContext(ModalDispatchContext)
-];
+export const useNCoreModal = (): useNCoreModalReturnType => useContext(ModalContext);
 
-export const useNCoreBottomSheet = () => [
-    useContext(BottomSheetContext),
-    useContext(BottomSheetDispatchContext)
-];
+export const useNCoreBottomSheet = (): nCoreBottomSheetReturnType => useContext(BottomSheetContext);
 
 export const useNCoreLocales = () => [
     useContext(LocalesContext),
     useContext(LocalesDispatchContext)
 ];
 
-export const useNCoreSettings = () => [
-    useContext(SettingsContext),
-    useContext(SettingsDispatchContext)
-];
+export const useNCoreSettings = (): useNCoreSettingsReturnType => useContext(SettingsContext);
 
 export default Context;

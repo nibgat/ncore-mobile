@@ -1,4 +1,5 @@
 import React, {
+    ReactNode,
     useEffect,
     useState,
     useRef
@@ -28,6 +29,13 @@ import {
 } from 'react-native-modalize';
 import generateTheme from './theme';
 import getLocales from './locales';
+
+import './types';
+
+type NCoreProvider = {
+    children: ReactNode;
+    themes: Array<NCore.Theme>;
+};
 
 const SetDefaults = ({
     children
@@ -322,11 +330,12 @@ const SetDefaults = ({
     </SafeAreaView>;
 };
 
-const NCore = ({
-    children
-}: any) => {
+const NCoreProvider = ({
+    children,
+    themes
+}: NCoreProvider) => {
     return (
-        <NCoreContext>
+        <NCoreContext themes={themes}>
             <SetDefaults>
                 {children}
             </SetDefaults>
@@ -334,4 +343,4 @@ const NCore = ({
     );
 };
 
-export default NCore;
+export default NCoreProvider;

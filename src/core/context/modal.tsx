@@ -4,8 +4,8 @@ import React, {
     useReducer
 } from 'react';
 import {
-    ProviderProps,
-    Dispatch
+    NCoreReducerDispatch,
+    ProviderProps
 } from './types';
 import {
     ModalStoreInitial,
@@ -13,14 +13,14 @@ import {
 } from '../constants';
 
 export const ModalContext = createContext<ModalStore>(ModalStoreInitial);
-export const ModalDispatchContext = createContext<ReducerAction<Dispatch>>(undefined);
+export const ModalDispatchContext = createContext<ReducerAction<NCoreReducerDispatch>>(undefined);
 
 const ModalProvider = ({
     children
 }: ProviderProps) => {
-    const [modal, setModal]: [any, any] = useReducer(
-        (state: any, newValue: any) => ({
-            ...state, ...newValue 
+    const [modal, setModal] = useReducer(
+        (state: ModalStore, newValue: ModalStore) => ({
+            ...state, ...newValue
         }),
         ModalStoreInitial
     );

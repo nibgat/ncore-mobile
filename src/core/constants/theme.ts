@@ -1,45 +1,17 @@
 import lightTheme from '../theme/variants/light';
 
-type BottomSheetConfigs = {
-    animationsDuration: number;
-};
-
-type ThemeConfigs = {
-    bottomSheet: BottomSheetConfigs;
-};
+type ThemeKey = "light" | "dark" | string;
 
 export type ThemeStore = {
-    initialConfigs: boolean;
-    switchTheme: () => void;
-    changeTheme: () => void;
-    mergeTheme: () => void;
-    configs: ThemeConfigs;
-    mergedTheme: boolean;
-    value: string;
-    typographyScheme: ;
-    typography: ;
-    colors: ;
-    styles: ;
-    tokens: ;
+    switchTheme: (themeKey: ThemeKey) => void;
+    activeTheme: string;
 };
 
 const themeStore: ThemeStore = {
-    typographyScheme: lightTheme.typographyScheme,
+    designTokens: lightTheme.designTokens,
     typography: lightTheme.typography,
     colors: lightTheme.palette,
-    tokens: lightTheme.tokens,
-    initialConfigs: false,
     switchTheme: () => {},
-    changeTheme: () => {},
-    mergeTheme: () => {},
-    mergedTheme: false,
-    value: "light",
-    configs: {
-        bottomSheet: {
-            animationsDuration: 150
-        }
-    },
-    styles: {
-    }
+    activeTheme: "light"
 };
 export default themeStore;

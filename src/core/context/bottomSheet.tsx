@@ -4,8 +4,8 @@ import React, {
     useReducer
 } from 'react';
 import {
-    ProviderProps,
-    Dispatch
+    NCoreReducerDispatch,
+    ProviderProps
 } from './types';
 import {
     BottomSheetStoreInitial,
@@ -13,14 +13,14 @@ import {
 } from '../constants';
 
 export const BottomSheetContext = createContext<BottomSheetStore>(BottomSheetStoreInitial);
-export const BottomSheetDispatchContext = createContext<ReducerAction<Dispatch>>(undefined);
+export const BottomSheetDispatchContext = createContext<ReducerAction<NCoreReducerDispatch>>(undefined);
 
 const BottomSheetProvider = ({
     children
 }: ProviderProps) => {
-    const [bottomSheet, setBottomSheet]: [any, any] = useReducer(
-        (state: any, newValue: any) => ({
-            ...state, ...newValue 
+    const [bottomSheet, setBottomSheet] = useReducer(
+        (state: BottomSheetStore, newValue: BottomSheetStore) => ({
+            ...state, ...newValue
         }),
         BottomSheetStoreInitial
     );

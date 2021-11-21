@@ -4,8 +4,8 @@ import React, {
     useReducer
 } from 'react';
 import {
-    ProviderProps,
-    Dispatch
+    NCoreReducerDispatch,
+    ProviderProps
 } from './types';
 import {
     LocalesStoreInitial,
@@ -13,14 +13,14 @@ import {
 } from '../constants';
 
 export const LocalesContext = createContext<LocalesStore>(LocalesStoreInitial);
-export const LocalesDispatchContext = createContext<ReducerAction<Dispatch>>(undefined);
+export const LocalesDispatchContext = createContext<ReducerAction<NCoreReducerDispatch>>(undefined);
 
 const LocalesProvider = ({
     children
 }: ProviderProps) => {
-    const [locales, setLocales]: [any, any] = useReducer(
-        (state: any, newValue: any) => ({
-            ...state, ...newValue 
+    const [locales, setLocales] = useReducer(
+        (state: LocalesStore, newValue: LocalesStore) => ({
+            ...state, ...newValue
         }),
         LocalesStoreInitial
     );

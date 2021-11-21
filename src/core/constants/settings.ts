@@ -3,6 +3,11 @@ export type SettingsStore = {
     ready: boolean;
 };
 
+export type useNCoreSettingsReturnType = {
+    setReady: () => void;
+    ready: boolean;
+};
+
 const settingsStore: SettingsStore = {
     ready: false,
     setReady: () => {

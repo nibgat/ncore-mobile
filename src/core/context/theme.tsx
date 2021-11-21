@@ -1,11 +1,13 @@
 import React, {
     ReducerAction,
     createContext,
-    useReducer
+    useReducer,
+    useEffect,
+    ReactNode
 } from 'react';
 import {
-    ProviderProps,
-    Dispatch
+    NCoreReducerDispatch,
+    ProviderProps
 } from './types';
 import {
     ThemeStoreInitial,
@@ -13,17 +15,43 @@ import {
 } from '../constants';
 
 export const ThemeContext = createContext<ThemeStore>(ThemeStoreInitial);
-export const ThemeDispatchContext = createContext<ReducerAction<Dispatch>>(undefined);
+export const ThemeDispatchContext = createContext<ReducerAction<NCoreReducerDispatch>>(undefined);
+
+type ThemeProvider = {
+    children: ReactNode;
+    themes: Array<NCore.Theme>;
+};
 
 const ThemeProvider = ({
-    children
-}: ProviderProps) => {
-    const [theme, setTheme]: [any, any] = useReducer(
-        (state: any, newValue: any) => ({
-            ...state, ...newValue 
+    children,
+    themes,
+    designTokens
+}: ThemeProvider) => {
+    const [theme, setTheme] = useReducer(
+        (state: ThemeStore, newValue: ThemeStore) => ({
+            ...state, ...newValue
         }),
         ThemeStoreInitial
     );
+
+    const switchTheme = (themeKey: NCore.ThemeKey) => {
+        const currentProjectTheme = themes.find(e => e.key === themeKey);
+        const typography = generateTypography(themeKey, currentProjectTheme?.typography);
+        const colors = generateColors(themeKey, currentProjectTheme?.colors);
+        const _designTokens = generateDesignTokens(designTokens);
+
+        setTheme({
+            typography,
+            colors,
+            designTokens: _designTokens
+        });
+    };
+
+    useEffect(() => {
+        setTheme({
+            switchTheme
+        });
+    }, [themes, designTokens]);
 
     return <ThemeContext.Provider
         value={theme}
