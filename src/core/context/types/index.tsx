@@ -1,6 +1,6 @@
 import {
     ReactNode
-} from 'react';
+} from "react";
 
 export type ProviderProps = {
     children: ReactNode

@@ -1,4 +1,4 @@
-export const colors: NCore.Colors = {
+export const colors: Required<NCore.Colors> = {
     "primary":          "#00C2A0",
     "body":             "#f5f5f5",
     "constrastBody":    "#2a2a2a",
@@ -29,7 +29,7 @@ export const colors: NCore.Colors = {
     "modalBackground":  "rgba(0, 0, 0, 0.5)"
 };
 
-export const typography: NCore.Typography = {
+export const typography: Required<NCore.Typography> = {
     header1: {
         fontFamily: "Montserrat-Light",
         fontWeight: "300",
@@ -113,7 +113,7 @@ export const typography: NCore.Typography = {
     }
 };
 
-const theme: NCore.Theme = {
+const theme: Required<NCore.Theme> = {
     key: "dark",
     typography,
     colors

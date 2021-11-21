@@ -2,15 +2,15 @@ import React, {
     ReducerAction,
     createContext,
     useReducer
-} from 'react';
+} from "react";
 import {
     NCoreReducerDispatch,
     ProviderProps
-} from './types';
+} from "./types";
 import {
     SettingsStoreInitial,
     SettingsStore
-} from '../constants';
+} from "../constants";
 
 export const SettingsContext = createContext<SettingsStore>(SettingsStoreInitial);
 export const SettingsDispatchContext = createContext<ReducerAction<NCoreReducerDispatch>>(undefined);

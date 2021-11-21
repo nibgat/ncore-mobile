@@ -1,250 +1,126 @@
 import React, {
     ReactNode,
     useEffect,
+    /*
     useState,
     useRef
+    */
 } from "react";
 import {
-    ActivityIndicator,
+    // ActivityIndicator,
     SafeAreaView
 } from "react-native";
 import NCoreContext, {
     useNCoreBottomSheet,
     useNCoreSettings,
-    useNCoreLocales,
+    // useNCoreLocales,
     useNCoreTheme,
     useNCoreModal
 } from "./context";
+/*
 import {
     // BottomSheet,
     PageContainer,
     Dialog,
     Modal
 } from "..";
-import {
-    styles_main
+*/
+import styles, {
+// bottomSheetStyle,
 } from "./stylesheet";
+/*
 import {
     Modalize
 } from "react-native-modalize";
 import generateTheme from "./theme";
 import getLocales from "./locales";
-
+*/
 import "./types";
 
 type NCoreProvider = {
     children: ReactNode;
-    themes: Array<NCore.Theme>;
+    themes?: Array<NCore.Theme>;
+    designTokens?: NCore.DesignTokens;
+};
+
+type SetDefaults = {
+    children: ReactNode;
+    themes?: Array<NCore.Theme>;
+    designTokens?: NCore.DesignTokens;
 };
 
 const SetDefaults = ({
-    children
-}: any) => {
-    const modalizeRef = useRef(null);
+    children,
+    themes,
+    designTokens
+}: SetDefaults) => {
+    // const modalizeRef = useRef(null);
 
-    const [settings, setSettings] = useNCoreSettings();
-    const [bottomSheet, setBottomSheet] = useNCoreBottomSheet();
-    const [locales, setLocales] = useNCoreLocales();
-    const [themeVariants, setThemeVariants] = useState({
-        data: [],
-        value: null
+    /*
+    const [modal] = useState({
+        data: []
     });
-    const [languageVariants, setLanguageVariants] = useState({
-        data: {
+
+    const [bottomSheet] = useState({
+        props: {
         },
-        value: null
+        data: null
     });
-    const [modal, setModal] = useNCoreModal();
-    const [theme, setTheme] = useNCoreTheme();
+    */
 
     const {
-        colors
-    }: any = theme;
+        // ready
+    } = useNCoreSettings();
     const {
-        radiuses,
-        spaces
-    }: any = theme?.tokens;
+        // closeBottomSheet
+    } = useNCoreBottomSheet();
+    const {
+        
+    } = useNCoreModal();
+    const {
+        colors,
+        // radiuses,
+        // spaces
+    } = useNCoreTheme();
 
     useEffect(() => {
-        if(themeVariants.value) {
-            if(themeVariants.value === theme?.value) {
-                const currentThemeVariant = themeVariants && themeVariants.data && themeVariants.data[theme.value] ? themeVariants.data[theme.value] : null;
-                setTheme({
-                    ...generateTheme(theme?.value, currentThemeVariant),
-                    mergedTheme: true
-                });
-            } else {
-                setTheme({
-                    value: themeVariants.value,
-                    mergedTheme: true
-                });
-            }
-        }
-    }, [themeVariants.value]);
-
-    useEffect(() => {
-        if(languageVariants.value) {
-            if(languageVariants.value === locales?.value) {
-                setLocales({
-                    data: getLocales({
-                        mergeLocales: languageVariants.data,
-                        language: languageVariants.value
-                    }),
-                    mergedLocales: true
-                });
-            } else {
-                setLocales({
-                    value: languageVariants.value,
-                    mergedLocales: true
-                });
-            }
-        }
-    }, [languageVariants.value]);
-
-    useEffect(() => {
-        if(theme.value) {
-            const currentThemeVariant = themeVariants && themeVariants.data && themeVariants.data[theme.value] ? themeVariants.data[theme.value] : null;
-            setTheme({
-                ...generateTheme(theme.value, currentThemeVariant),
-                switchTheme: () => {
-                    setTheme({
-                        value: theme.value === "dark" ? "light" : "dark"
-                    });
-                }
-            });
-        }
-    }, [theme.value]);
-
-    useEffect(() => {
-        if(locales.value) setLocales({
-            data: getLocales({
-                mergeLocales: languageVariants.data,
-                language: locales.value
-            })
-        });
-    }, [locales.value]);
-
-    useEffect(() => {
-        if(bottomSheet.isActive) {
-            modalizeRef.current.open();
-        } else {
-            modalizeRef.current.close();
-        }
-    }, [bottomSheet.isActive]);
-
-    useEffect(() => {
-        setModal({
-            openModal: (props: any) => {
-                let newData = JSON.parse(JSON.stringify(modal.data));
-                newData.unshift({
-                    ...props
-                });
-                setModal({
-                    data: newData
-                });
-            },
-            closeModal: (index: number) => {
-                let newData = JSON.parse(JSON.stringify(modal.data)).filter((e, i) => i !== index);
-                setModal({
-                    data: newData
-                });
-            },
-            closeAllModal: () => {
-                setModal({
-                    data: []
-                });
-            }
-        });
-
-        setBottomSheet({
-            openBottomSheet: (data: any, configs: any) => {
-                let _data: any = {
-                    isActive: true,
-                    index: 1
-                };
-                if(data) _data.data = data;
-                if(configs) _data.configs = {
-                    ...bottomSheet.configs,
-                    ...configs
-                };
-                setBottomSheet(_data);
-            },
-            snapTo: (index: number, data: any, configs: any) => {
-                let _data: any = {
-                    index: index ? index : 1
-                };
-                if(data) _data.data = data;
-                if(configs) _data.configs = {
-                    ...bottomSheet.configs,
-                    ...configs
-                };
-                setBottomSheet(_data);
-            },
-            closeBottomSheet: () => {
-                setBottomSheet({
-                    isActive: false,
-                    index: 0,
-                    // moved: null,
-                });
-            }
-        });
-
-        setLocales({
-            initialConfigs: true,
-            data: getLocales({
-                language: locales.value
-            }),
-            setLanguage: (lang) => {
-                setLocales({
-                    value: lang
-                });
-            },
-            mergeLocales: (language: string, mergeLocales: any) => {
-                let newLocales: any = {
-                };
-                newLocales.data = mergeLocales;
-                newLocales.value = language;
-                setLanguageVariants(newLocales);
-            }
-        });
-
         setTheme({
-            initialConfigs: true,
-            ...generateTheme(theme.value),
-            changeTheme: e => {
-                setTheme({
-                    value: e
-                });
-            },
-            mergeTheme: (themes: any, selectTheme: string) => {
-                let customVariants: any = {
-                };
-                customVariants.data = JSON.parse(JSON.stringify(themes));
-                customVariants.value = selectTheme;
-                setThemeVariants(customVariants);
-            }
-        });
+            switchTheme: (themeKey: NCore.ThemeKey) => {
+                const currentProjectTheme = themes?.find(e => e.key === themeKey);
 
-        setSettings({
-            setReady: () => {
-                setSettings({
-                    ready: true
+                if(themeKey !== "light" && themeKey !== "dark" && !(currentProjectTheme)) {
+                    throw Error(`Can not find a theme for the given themeKey: ${themeKey}.`);
+                }
+        
+                const typography = mergeGivenTypographyWithNCore(themeKey, currentProjectTheme?.typography);
+                const colors = mergeGivenColorsWithNCore(themeKey, currentProjectTheme?.colors);
+                const _designTokens = mergeGivenDesignTokensWithNCore(designTokens);
+        
+                setTheme({
+                    activeTheme: themeKey,
+                    typography,
+                    colors,
+                    spaces: _designTokens.spaces,
+                    borders: _designTokens.borders,
+                    radiuses: _designTokens.radiuses,
+                    disabled: _designTokens.disabled
                 });
             }
         });
-    }, []);
+    }, [themes, designTokens]);
 
     return <SafeAreaView
         style={[
-            styles_main.container,
+            styles.container,
             {
-                backgroundColor: colors.layer1
+                backgroundColor: colors?.layer1
             }
         ]}
     >
         {children}
+        {/*
         {
-            settings.ready ?
+            ready ?
                 null
                 :
                 <PageContainer
@@ -262,25 +138,15 @@ const SetDefaults = ({
         <Modalize
             panGestureEnabled={true}
             tapGestureEnabled={true}
-            {...bottomSheet.configs}
+            {...bottomSheet.props}
             ref={modalizeRef}
-            adjustToContentHeight={bottomSheet.autoHeight ? true : false}
-            snapPoint={bottomSheet.autoHeight ? null : 300}
-            modalStyle={{
-                borderTopRightRadius: 50,
-                borderTopLeftRadius: 50
-            }}
-            rootStyle={{
-                borderTopRightRadius: 50,
-                borderTopLeftRadius: 50,
-                zIndex: 99,
-            }}
-            childrenStyle={{
-                borderTopRightRadius: 50,
-                borderTopLeftRadius: 50
-            }}
-            onClosed={() => bottomSheet.closeBottomSheet()}
-            onOverlayPress={() => bottomSheet.closeBottomSheet()}
+            adjustToContentHeight={autoHeight ? true : false}
+            snapPoint={autoHeight ? undefined : 300}
+            modalStyle={bottomSheetStyle.modalStyle}
+            rootStyle={bottomSheetStyle.rootStyle}
+            childrenStyle={bottomSheetStyle.childrenStyle}
+            onClosed={() => closeBottomSheet()}
+            onOverlayPress={() => closeBottomSheet()}
         >
             <PageContainer
                 style={{
@@ -292,7 +158,6 @@ const SetDefaults = ({
                 {bottomSheet.data}
             </PageContainer>
         </Modalize>
-        {/*<BottomSheet/>*/}
         {
             modal && modal.data && modal.data.length ?
                 modal.data.map((item: any, index: number) => {
@@ -327,16 +192,21 @@ const SetDefaults = ({
                 :
                 null
         }
+        */}
     </SafeAreaView>;
 };
 
 const NCoreProvider = ({
     children,
-    themes
+    themes,
+    designTokens
 }: NCoreProvider) => {
     return (
-        <NCoreContext themes={themes}>
-            <SetDefaults>
+        <NCoreContext>
+            <SetDefaults
+                themes={themes}
+                designTokens={designTokens}
+            >
                 {children}
             </SetDefaults>
         </NCoreContext>

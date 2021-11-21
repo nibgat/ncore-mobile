@@ -1,4 +1,4 @@
-const designTokens = {
+const designTokens: Required<NCore.DesignTokens> = {
     spaces: {
         container: 20,
         content: 8,

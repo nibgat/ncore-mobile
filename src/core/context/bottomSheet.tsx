@@ -2,15 +2,15 @@ import React, {
     ReducerAction,
     createContext,
     useReducer
-} from 'react';
+} from "react";
 import {
     NCoreReducerDispatch,
     ProviderProps
-} from './types';
+} from "./types";
 import {
     BottomSheetStoreInitial,
     BottomSheetStore
-} from '../constants';
+} from "../constants";
 
 export const BottomSheetContext = createContext<BottomSheetStore>(BottomSheetStoreInitial);
 export const BottomSheetDispatchContext = createContext<ReducerAction<NCoreReducerDispatch>>(undefined);

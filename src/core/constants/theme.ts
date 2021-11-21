@@ -1,17 +1,36 @@
+import designTokens from "../theme/designTokens";
 import lightTheme from "../theme/variants/light";
 
-type ThemeKey = "light" | "dark" | string;
-
 export type ThemeStore = {
-    switchTheme: (themeKey: ThemeKey) => void;
-    activeTheme: string;
+    activeTheme?: NCore.ThemeKey;
+    switchTheme?: (themeKey: NCore.ThemeKey) => void;
+    typography?: NCore.Typography;
+    colors?: NCore.Colors;
+    spaces?: NCore.SpacesTokens;
+    borders?: NCore.BordersTokens;
+    radiuses?: NCore.RadiusesTokens;
+    disabled?: NCore.DisabledTokens;
+};
+
+export type useNCoreThemeReturnType = {
+    activeTheme?: NCore.ThemeKey;
+    switchTheme?: (themeKey: NCore.ThemeKey) => void;
+    typography?: NCore.Typography;
+    colors?: NCore.Colors;
+    spaces?: NCore.SpacesTokens;
+    borders?: NCore.BordersTokens;
+    radiuses?: NCore.RadiusesTokens;
+    disabled?: NCore.DisabledTokens;
 };
 
 const themeStore: ThemeStore = {
-    designTokens: lightTheme.designTokens,
-    typography: lightTheme.typography,
-    colors: lightTheme.palette,
+    activeTheme: "light",
     switchTheme: () => {},
-    activeTheme: "light"
+    typography: lightTheme.typography,
+    colors: lightTheme.colors,
+    spaces: designTokens.spaces,
+    borders: designTokens.borders,
+    radiuses: designTokens.radiuses,
+    disabled: designTokens.disabled
 };
 export default themeStore;

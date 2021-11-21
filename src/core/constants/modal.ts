@@ -1,12 +1,12 @@
 import {
     ReactNode 
-} from 'react';
+} from "react";
 import {
     ViewStyle 
-} from 'react-native';
+} from "react-native";
 
 type ModalData = {
-    type: 'dialog' | 'custom';
+    type: "dialog" | "custom";
     cancelable?: boolean;
     onDismiss?: () => void;
     children?: ReactNode;
@@ -17,7 +17,7 @@ type ModalData = {
 };
 
 type DialogProps = {
-    dialogType?: 'yes-no' | 'ok' | 'info';
+    dialogType?: "yes-no" | "ok" | "info";
     title?: string;
     content?: string;
     confirmButtonProps?: DialogButton;

@@ -2,20 +2,24 @@ export {
     default as SettingsStoreInitial,
     useNCoreSettingsReturnType,
     SettingsStore 
-} from './settings';
+} from "./settings";
+/*
 export {
     default as LocalesStoreInitial, LocalesStore 
-} from './locales';
+} from "./locales";
+*/
 export {
     default as ModalStoreInitial,
     useNCoreModalReturnType,
     ModalStore 
-} from './modal';
+} from "./modal";
 export {
     default as BottomSheetStoreInitial,
-    nCoreBottomSheetReturnType,
+    useNCoreBottomSheetReturnType,
     BottomSheetStore 
-} from './bottomSheet';
+} from "./bottomSheet";
 export {
-    default as ThemeStoreInitial, ThemeStore 
-} from './theme';
+    default as ThemeStoreInitial,
+    useNCoreThemeReturnType,
+    ThemeStore
+} from "./theme";

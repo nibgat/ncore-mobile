@@ -1,8 +1,7 @@
 export {
-    default as NCoreContext,
     useNCoreBottomSheet,
     useNCoreSettings,
-    useNCoreLocales,
+    //useNCoreLocales,
     useNCoreModal,
     useNCoreTheme
 } from "./core/context";

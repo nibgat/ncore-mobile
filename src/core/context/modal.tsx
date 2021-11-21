@@ -2,15 +2,15 @@ import React, {
     ReducerAction,
     createContext,
     useReducer
-} from 'react';
+} from "react";
 import {
     NCoreReducerDispatch,
     ProviderProps
-} from './types';
+} from "./types";
 import {
     ModalStoreInitial,
     ModalStore
-} from '../constants';
+} from "../constants";
 
 export const ModalContext = createContext<ModalStore>(ModalStoreInitial);
 export const ModalDispatchContext = createContext<ReducerAction<NCoreReducerDispatch>>(undefined);

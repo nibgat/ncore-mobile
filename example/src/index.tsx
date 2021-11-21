@@ -1,30 +1,44 @@
-import React from 'react';
+import React from "react";
 import {
     StyleSheet,
+    Button,
     View,
     Text
-} from 'react-native';
+} from "react-native";
 import {
     NCoreProvider,
-    useNCoreModal
-} from 'ncore-mobile';
+    useNCoreTheme
+} from "ncore-mobile";
 
 const App = () => {
     const {
-        
-    } = useNCoreModal();
+        activeTheme,
+        switchTheme,
+        colors
+    } = useNCoreTheme();
 
     return <NCoreProvider>
-        <View style={styles.container}>
-            <Text>Hello NİBGAT</Text>
+        <View
+            style={[
+                styles.container,
+                {
+                    backgroundColor: colors?.layer1
+                }
+            ]}
+        >
+            <Text>Hello NİBGAT®. Your selected theme is {activeTheme}</Text>
+            <Button
+                title="Switch Theme"
+                onPress={() => switchTheme("dark")}
+            />
         </View>
     </NCoreProvider>;
 };
 
 const styles = StyleSheet.create({
     container: {
-        justifyContent: 'center',
-        alignItems: 'center',
+        justifyContent: "center",
+        alignItems: "center",
         flex: 1
     },
     box: {

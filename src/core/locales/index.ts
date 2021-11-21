@@ -1,3 +1,4 @@
+/*
 import trTR from "./variants/tr.json";
 import enUS from "./variants/en.json";
 
@@ -25,3 +26,4 @@ const getLocales = ({
     return _locales;
 };
 export default getLocales;
+*/

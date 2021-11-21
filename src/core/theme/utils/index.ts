@@ -2,10 +2,10 @@ import designTokens from "../designTokens";
 import light from "../variants/light";
 import dark from "../variants/dark";
 
-const themes: Array<NCore.Theme> = [light, dark];
+const themes: Array<Required<NCore.Theme>> = [light, dark];
 
 export const mergeGivenTypographyWithNCore = (themeKey: NCore.ThemeKey, customTypography: NCore.Typography | undefined): NCore.Typography => {
-    const lightThemeTypography = themes[0].typography as Required<NCore.Typography>;
+    const lightThemeTypography = themes[0].typography;
 
     if(!(customTypography)) {
         return lightThemeTypography;
@@ -20,7 +20,7 @@ export const mergeGivenTypographyWithNCore = (themeKey: NCore.ThemeKey, customTy
 };
 
 export const mergeGivenColorsWithNCore = (themeKey: NCore.ThemeKey, customColors: NCore.Colors | undefined): NCore.Colors => {
-    const lightThemeColors = themes[0].colors as Required<NCore.Colors>;
+    const lightThemeColors = themes[0].colors;
 
     if(!(customColors)) {
         return lightThemeColors;
@@ -34,7 +34,7 @@ export const mergeGivenColorsWithNCore = (themeKey: NCore.ThemeKey, customColors
     };
 };
 
-export const mergeGivenDesignTokensWithNCore = (customDesignTokens: NCore.DesignTokens | undefined): NCore.DesignTokens => {
+export const mergeGivenDesignTokensWithNCore = (customDesignTokens: NCore.DesignTokens | undefined): Required<NCore.DesignTokens> => {
     if(!(customDesignTokens)) {
         return designTokens;
     }

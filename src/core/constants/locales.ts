@@ -1,4 +1,5 @@
-import trTR from '../locales/variants/tr.json';
+/*
+import trTR from "../locales/variants/tr.json";
 
 export type LocalesStore = {
     mergeLocales: () => void;
@@ -16,3 +17,4 @@ const localesStore: LocalesStore = {
     data: trTR // bura;
 };
 export default localesStore;
+*/

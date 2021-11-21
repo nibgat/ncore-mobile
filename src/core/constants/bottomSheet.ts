@@ -1,9 +1,9 @@
 import {
     ReactNode
-} from 'react';
+} from "react";
 import {
     ModalizeProps
-} from 'react-native-modalize';
+} from "react-native-modalize";
 
 export type BottomSheetStore = {
     isActive: boolean;
@@ -14,7 +14,7 @@ export type BottomSheetStore = {
     autoHeight: boolean;
 };
 
-export type nCoreBottomSheetReturnType = {
+export type useNCoreBottomSheetReturnType = {
     openBottomSheet: (children: ReactNode, props: ModalizeProps) => void;
     closeBottomSheet: () => void;
 };

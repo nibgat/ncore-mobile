@@ -1,3 +1,4 @@
+/*
 import React, {
     ReducerAction,
     createContext,
@@ -36,3 +37,4 @@ const LocalesProvider = ({
     </LocalesContext.Provider>;
 };
 export default LocalesProvider;
+*/
