@@ -1,6 +1,5 @@
 import React, {
     ReactNode,
-    useEffect,
     /*
     useState,
     useRef
@@ -13,8 +12,8 @@ import {
 import NCoreContext, {
     useNCoreBottomSheet,
     useNCoreSettings,
-    // useNCoreLocales,
     useNCoreTheme,
+    // useNCoreLocales,
     useNCoreModal
 } from "./context";
 /*
@@ -45,14 +44,10 @@ type NCoreProvider = {
 
 type SetDefaults = {
     children: ReactNode;
-    themes?: Array<NCore.Theme>;
-    designTokens?: NCore.DesignTokens;
 };
 
 const SetDefaults = ({
-    children,
-    themes,
-    designTokens
+    children
 }: SetDefaults) => {
     // const modalizeRef = useRef(null);
 
@@ -71,43 +66,20 @@ const SetDefaults = ({
     const {
         // ready
     } = useNCoreSettings();
+
     const {
         // closeBottomSheet
     } = useNCoreBottomSheet();
+
     const {
         
     } = useNCoreModal();
+
     const {
         colors,
         // radiuses,
         // spaces
     } = useNCoreTheme();
-
-    useEffect(() => {
-        setTheme({
-            switchTheme: (themeKey: NCore.ThemeKey) => {
-                const currentProjectTheme = themes?.find(e => e.key === themeKey);
-
-                if(themeKey !== "light" && themeKey !== "dark" && !(currentProjectTheme)) {
-                    throw Error(`Can not find a theme for the given themeKey: ${themeKey}.`);
-                }
-        
-                const typography = mergeGivenTypographyWithNCore(themeKey, currentProjectTheme?.typography);
-                const colors = mergeGivenColorsWithNCore(themeKey, currentProjectTheme?.colors);
-                const _designTokens = mergeGivenDesignTokensWithNCore(designTokens);
-        
-                setTheme({
-                    activeTheme: themeKey,
-                    typography,
-                    colors,
-                    spaces: _designTokens.spaces,
-                    borders: _designTokens.borders,
-                    radiuses: _designTokens.radiuses,
-                    disabled: _designTokens.disabled
-                });
-            }
-        });
-    }, [themes, designTokens]);
 
     return <SafeAreaView
         style={[
@@ -202,11 +174,11 @@ const NCoreProvider = ({
     designTokens
 }: NCoreProvider) => {
     return (
-        <NCoreContext>
-            <SetDefaults
-                themes={themes}
-                designTokens={designTokens}
-            >
+        <NCoreContext
+            themes={themes}
+            designTokens={designTokens}
+        >
+            <SetDefaults>
                 {children}
             </SetDefaults>
         </NCoreContext>

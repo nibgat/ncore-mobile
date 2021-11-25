@@ -21,5 +21,6 @@ export {
 export {
     default as ThemeStoreInitial,
     useNCoreThemeReturnType,
+    ThemeStoreReducer,
     ThemeStore
 } from "./theme";

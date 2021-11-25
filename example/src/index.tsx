@@ -17,21 +17,27 @@ const App = () => {
         colors
     } = useNCoreTheme();
 
+    return <View
+        style={[
+            styles.container,
+            {
+                backgroundColor: colors?.layer1
+            }
+        ]}
+    >
+        <Text>Hello NİBGAT®. Your selected theme is {activeTheme}</Text>
+        <Button
+            title="Switch Theme"
+            onPress={() => {
+                switchTheme(activeTheme === "dark" ? "light" : "dark");
+            }}
+        />
+    </View>;
+};
+
+const NCoreContext = () => {
     return <NCoreProvider>
-        <View
-            style={[
-                styles.container,
-                {
-                    backgroundColor: colors?.layer1
-                }
-            ]}
-        >
-            <Text>Hello NİBGAT®. Your selected theme is {activeTheme}</Text>
-            <Button
-                title="Switch Theme"
-                onPress={() => switchTheme("dark")}
-            />
-        </View>
+        <App/>
     </NCoreProvider>;
 };
 
@@ -47,4 +53,4 @@ const styles = StyleSheet.create({
         width: 60
     }
 });
-export default App;
+export default NCoreContext;

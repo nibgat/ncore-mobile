@@ -5,13 +5,11 @@ import dark from "../variants/dark";
 const themes: Array<Required<NCore.Theme>> = [light, dark];
 
 export const mergeGivenTypographyWithNCore = (themeKey: NCore.ThemeKey, customTypography: NCore.Typography | undefined): NCore.Typography => {
-    const lightThemeTypography = themes[0].typography;
+    const defaultThemeTypography = themes.find(e => e.key === themeKey)?.typography ?? themes[0].typography;
 
     if(!(customTypography)) {
-        return lightThemeTypography;
+        return defaultThemeTypography;
     }
-
-    const defaultThemeTypography = themes.find(e => e.key === themeKey)?.typography ?? lightThemeTypography;
 
     return {
         ...defaultThemeTypography,
@@ -20,13 +18,11 @@ export const mergeGivenTypographyWithNCore = (themeKey: NCore.ThemeKey, customTy
 };
 
 export const mergeGivenColorsWithNCore = (themeKey: NCore.ThemeKey, customColors: NCore.Colors | undefined): NCore.Colors => {
-    const lightThemeColors = themes[0].colors;
+    const defaultThemeColors = themes.find(e => e.key === themeKey)?.colors ?? themes[0].colors;
 
     if(!(customColors)) {
-        return lightThemeColors;
+        return defaultThemeColors;
     }
-
-    const defaultThemeColors = themes.find(e => e.key === themeKey)?.colors ?? lightThemeColors;
 
     return {
         ...defaultThemeColors,

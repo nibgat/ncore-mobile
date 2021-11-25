@@ -30,14 +30,20 @@ import {
 type NCoreContext = {
     children: ReactNode;
     initialThemeKey?: NCore.ThemeKey;
+    themes?: Array<NCore.Theme>;
+    designTokens?: NCore.DesignTokens;
 };
 
 const NCoreContext = ({
     children,
-    initialThemeKey
+    initialThemeKey,
+    themes,
+    designTokens
 }: NCoreContext) => {
     return <ThemeProvider
         initialThemeKey={initialThemeKey}
+        themes={themes}
+        designTokens={designTokens}
     >
         <ModalProvider>
             <BottomSheetProvider>
