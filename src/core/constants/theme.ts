@@ -13,17 +13,7 @@ export type ThemeStore = {
 };
 
 export type ThemeStoreReducer = Partial<ThemeStore>;
-
-export type useNCoreThemeReturnType = {
-    activeTheme: NCore.ThemeKey;
-    switchTheme: (themeKey: NCore.ThemeKey) => void;
-    typography: NCore.Typography;
-    colors: NCore.Colors;
-    spaces: NCore.SpacesTokens;
-    borders: NCore.BordersTokens;
-    radiuses: NCore.RadiusesTokens;
-    disabled: NCore.DisabledTokens;
-};
+export type useNCoreThemeReturnType = ThemeStore;
 
 const themeStore: ThemeStore = {
     activeTheme: "light",

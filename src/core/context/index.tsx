@@ -8,21 +8,19 @@ import ModalProvider, {
 import SettingsProvider, {
     SettingsContext
 } from "./settings";
-/*
-import LocalesProvider, {
-    LocalesDispatchContext,
-    LocalesContext
-} from "./locales";
-*/
 import BottomSheetProvider, {
     BottomSheetContext
 } from "./bottomSheet";
+import LocalesProvider, {
+    LocalesContext
+} from "./locales";
 import ThemeProvider, {
     ThemeContext
 } from "./theme";
 import {
     useNCoreBottomSheetReturnType,
     useNCoreSettingsReturnType,
+    useNCoreLocalesReturnType,
     useNCoreThemeReturnType,
     useNCoreModalReturnType
 } from "../constants";
@@ -32,13 +30,15 @@ type NCoreContext = {
     initialThemeKey?: NCore.ThemeKey;
     themes?: Array<NCore.Theme>;
     designTokens?: NCore.DesignTokens;
+    locales?: Array<Record<string, string>>
 };
 
 const NCoreContext = ({
     children,
     initialThemeKey,
     themes,
-    designTokens
+    designTokens,
+    locales
 }: NCoreContext) => {
     return <ThemeProvider
         initialThemeKey={initialThemeKey}
@@ -47,29 +47,22 @@ const NCoreContext = ({
     >
         <ModalProvider>
             <BottomSheetProvider>
-                {/*<LocalesProvider>*/}
-                <SettingsProvider>
-                    {children}
-                </SettingsProvider>
-                {/*</LocalesProvider>*/}
+                <LocalesProvider
+                    locales={locales}
+                >
+                    <SettingsProvider>
+                        {children}
+                    </SettingsProvider>
+                </LocalesProvider>
             </BottomSheetProvider>
         </ModalProvider>
     </ThemeProvider>;
 };
 
 export const useNCoreTheme = (): useNCoreThemeReturnType => useContext(ThemeContext);
-
 export const useNCoreModal = (): useNCoreModalReturnType => useContext(ModalContext);
-
 export const useNCoreBottomSheet = (): useNCoreBottomSheetReturnType => useContext(BottomSheetContext);
-
-/*
-export const useNCoreLocales = () => [
-    useContext(LocalesContext),
-    useContext(LocalesDispatchContext)
-];
-*/
-
+export const useNCoreLocales:<T extends Record<string, string>> = (): useNCoreLocalesReturnType => useContext(LocalesContext);
 export const useNCoreSettings = (): useNCoreSettingsReturnType => useContext(SettingsContext);
 
 export default NCoreContext;

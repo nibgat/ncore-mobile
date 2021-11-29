@@ -3,11 +3,11 @@ export {
     useNCoreSettingsReturnType,
     SettingsStore 
 } from "./settings";
-/*
 export {
-    default as LocalesStoreInitial, LocalesStore 
+    default as LocalesStoreInitial,
+    useNCoreLocalesReturnType,
+    LocalesStore 
 } from "./locales";
-*/
 export {
     default as ModalStoreInitial,
     useNCoreModalReturnType,

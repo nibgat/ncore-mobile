@@ -1,33 +1,11 @@
 {
     "language": "Türkçe",
-    "app": {
-        "title": "NİBGAT® - Core Mobile"
-    },
-    "coreComponents": {
-        "selectBox": {
-            "selection": "Seçim",
-            "errors": {
-                "nonSelecet": "Seçim yapılmadı"
-            }
-        },
-        "searchBox": {
-            "validation": {
-                "enterContent": "İçerik giriniz"
-            }
-        },
-        "multiSelectBox": {
-            "title": "Kategori seçim aracı",
-            "validation": {
-                "enterContent": "Değer giriniz"
-            }
-        }
-    },
-    "corePages": {
-        "selectPage": {
-            "validation": {
-                "minSelectRequired": "En az bir seçim zorunlu.",
-                "noMoreSelectable": "Daha fazla seçemezsiniz."
-            }
-        }
-    }
+    "appTitle": "NİBGAT® - Core Mobile",
+    "coreSelectBoxSelection": "Seçim",
+    "coreSelectBoxErrorsNonSelect": "Seçim yapılmadı",
+    "coreSearchBoxValidationEnterContent": "İçerik giriniz",
+    "coreMultiSelectBoxTitle": "Kategori seçim aracı",
+    "coreMultiSelectBoxValidationEnterContent": "Değer giriniz",
+    "corePagesSelectPageValidationMinSelectRequired": "En az bir seçim zorunlu.",
+    "corePagesSelectPageValidationNoMoreSelectable": "Daha fazla seçemezsiniz."
 }

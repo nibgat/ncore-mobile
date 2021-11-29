@@ -1,20 +1,23 @@
-/*
-import trTR from "../locales/variants/tr.json";
+import enUS from "../locales/variants/en.json";
 
 export type LocalesStore = {
-    mergeLocales: () => void;
-    data: keyof typeof trTR; // bura;
-    initialConfigs: boolean;
-    mergedLocales: boolean;
-    value: string;
+    activeLocale: string;
+    switchLocale: () => void;
+    isRTL: boolean;
+};
+
+export type LocalesStoreReducer = Partial<LocalesStore>;
+export type useNCoreLocalesReturnType = {
+    activeLocale: "",
+    switchLocale: () => void,
+    localize: <T> (key: keyof T) => string,
+    isRTL: boolean
 };
 
 const localesStore: LocalesStore = {
-    mergeLocales: () => {},
-    initialConfigs: false,
-    mergedLocales: false,
-    value: "trTR",
-    data: trTR // bura;
+    activeLocale: "enUS",
+    switchLocale: () => {},
+    localize: enUS,
+    isRTL: false
 };
 export default localesStore;
-*/

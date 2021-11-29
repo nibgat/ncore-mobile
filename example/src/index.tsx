@@ -7,8 +7,10 @@ import {
 } from "react-native";
 import {
     NCoreProvider,
+    useNCoreLocales,
     useNCoreTheme
 } from "ncore-mobile";
+import trTR from "../../src/core/locales/variants/tr.json";
 
 const App = () => {
     const {
@@ -16,6 +18,12 @@ const App = () => {
         switchTheme,
         colors
     } = useNCoreTheme();
+
+    const {
+        data
+    } = useNCoreLocales();
+
+    console.error(data);
 
     return <View
         style={[
@@ -36,7 +44,9 @@ const App = () => {
 };
 
 const NCoreContext = () => {
-    return <NCoreProvider>
+    return <NCoreProvider
+        locales={[trTR]}
+    >
         <App/>
     </NCoreProvider>;
 };

@@ -40,6 +40,7 @@ type NCoreProvider = {
     children: ReactNode;
     themes?: Array<NCore.Theme>;
     designTokens?: NCore.DesignTokens;
+    locales?: Array<Record<string, string>>
 };
 
 type SetDefaults = {
@@ -171,12 +172,14 @@ const SetDefaults = ({
 const NCoreProvider = ({
     children,
     themes,
-    designTokens
+    designTokens,
+    locales
 }: NCoreProvider) => {
     return (
         <NCoreContext
             themes={themes}
             designTokens={designTokens}
+            locales={locales}
         >
             <SetDefaults>
                 {children}
