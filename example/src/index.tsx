@@ -6,11 +6,13 @@ import {
     Text
 } from "react-native";
 import {
+    useNCoreLocale,
     NCoreProvider,
-    useNCoreLocales,
     useNCoreTheme
 } from "ncore-mobile";
-import trTR from "../../src/core/locales/variants/tr.json";
+import {
+    tr 
+} from "./locales";
 
 const App = () => {
     const {
@@ -20,10 +22,10 @@ const App = () => {
     } = useNCoreTheme();
 
     const {
-        data
-    } = useNCoreLocales();
-
-    console.error(data);
+        activeLocale,
+        switchLocale,
+        localize
+    } = useNCoreLocale();
 
     return <View
         style={[
@@ -33,11 +35,17 @@ const App = () => {
             }
         ]}
     >
-        <Text>Hello NİBGAT®. Your selected theme is {activeTheme}</Text>
+        <Text>Hello NİBGAT®. Your selected theme is {activeTheme}. And your text is {localize("language")}</Text>
         <Button
             title="Switch Theme"
             onPress={() => {
                 switchTheme(activeTheme === "dark" ? "light" : "dark");
+            }}
+        />
+        <Button
+            title="Switch Language"
+            onPress={() => {
+                switchLocale(activeLocale === "en" ? "tr" : "en");
             }}
         />
     </View>;
@@ -45,7 +53,9 @@ const App = () => {
 
 const NCoreContext = () => {
     return <NCoreProvider
-        locales={[trTR]}
+        locales={[
+            tr
+        ]}
     >
         <App/>
     </NCoreProvider>;

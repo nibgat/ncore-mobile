@@ -1,23 +1,28 @@
-import enUS from "../locales/variants/en.json";
+import {
+    en
+} from "../locales";
 
 export type LocalesStore = {
     activeLocale: string;
-    switchLocale: () => void;
+    switchLocale: (localizationKey: string) => void;
     isRTL: boolean;
+    localize: (localizationKey: string) => string;
+    currentLocalizationData: Record<string, string>;
 };
 
-export type LocalesStoreReducer = Partial<LocalesStore>;
-export type useNCoreLocalesReturnType = {
-    activeLocale: "",
-    switchLocale: () => void,
-    localize: <T> (key: keyof T) => string,
-    isRTL: boolean
+export type LocaleConfig = {
+    code: string;
+    isRTL: boolean;
+    translations: Record<string, string>;
 };
+
+export type useNCoreLocalesReturnType = Omit<LocalesStore, "currentLocalizationData">;
 
 const localesStore: LocalesStore = {
-    activeLocale: "enUS",
+    currentLocalizationData: en.translations,
     switchLocale: () => {},
-    localize: enUS,
+    activeLocale: "en",
+    localize: () => "",
     isRTL: false
 };
 export default localesStore;

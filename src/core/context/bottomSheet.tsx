@@ -1,10 +1,8 @@
 import React, {
-    ReducerAction,
     createContext,
     useReducer
 } from "react";
 import {
-    NCoreReducerDispatch,
     ProviderProps
 } from "./types";
 import {
@@ -13,12 +11,11 @@ import {
 } from "../constants";
 
 export const BottomSheetContext = createContext<BottomSheetStore>(BottomSheetStoreInitial);
-export const BottomSheetDispatchContext = createContext<ReducerAction<NCoreReducerDispatch>>(undefined);
 
 const BottomSheetProvider = ({
     children
 }: ProviderProps) => {
-    const [bottomSheet, setBottomSheet] = useReducer(
+    const [bottomSheet] = useReducer(
         (state: BottomSheetStore, newValue: BottomSheetStore) => ({
             ...state, ...newValue
         }),
@@ -28,11 +25,7 @@ const BottomSheetProvider = ({
     return <BottomSheetContext.Provider
         value={bottomSheet}
     >
-        <BottomSheetDispatchContext.Provider
-            value={setBottomSheet}
-        >
-            {children}
-        </BottomSheetDispatchContext.Provider>
+        {children}
     </BottomSheetContext.Provider>;
 };
 export default BottomSheetProvider;

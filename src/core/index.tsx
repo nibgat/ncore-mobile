@@ -9,6 +9,9 @@ import {
     // ActivityIndicator,
     SafeAreaView
 } from "react-native";
+import {
+    LocaleConfig
+} from "./constants";
 import NCoreContext, {
     useNCoreBottomSheet,
     useNCoreSettings,
@@ -40,7 +43,7 @@ type NCoreProvider = {
     children: ReactNode;
     themes?: Array<NCore.Theme>;
     designTokens?: NCore.DesignTokens;
-    locales?: Array<Record<string, string>>
+    locales?: Array<LocaleConfig>
 };
 
 type SetDefaults = {

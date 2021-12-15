@@ -6,6 +6,7 @@ export {
 export {
     default as LocalesStoreInitial,
     useNCoreLocalesReturnType,
+    LocaleConfig,
     LocalesStore 
 } from "./locales";
 export {

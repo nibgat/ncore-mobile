@@ -1,14 +1,10 @@
 import React, {
-    ReducerAction,
     createContext,
     useReducer,
     useEffect,
     ReactNode,
     Dispatch
 } from "react";
-import {
-    NCoreReducerDispatch
-} from "./types";
 import {
     ThemeStoreInitial,
     ThemeStoreReducer,
@@ -21,7 +17,6 @@ import {
 } from "../theme";
 
 export const ThemeContext = createContext<ThemeStore>(ThemeStoreInitial);
-export const ThemeDispatchContext = createContext<ReducerAction<NCoreReducerDispatch>>(undefined);
 
 type ThemeProvider = {
     children: ReactNode;
@@ -36,8 +31,8 @@ const ThemeProvider = ({
     themes,
     designTokens
 }: ThemeProvider) => {
-    const [theme, setTheme]: [ThemeStoreReducer, Dispatch<ThemeStoreReducer>] = useReducer(
-        (state: ThemeStoreReducer, newValue: ThemeStoreReducer) => ({
+    const [theme, setTheme]: [ThemeStore, Dispatch<ThemeStoreReducer>] = useReducer(
+        (state: ThemeStore, newValue: ThemeStoreReducer) => ({
             ...state, ...newValue
         }),
         ThemeStoreInitial,
@@ -53,7 +48,7 @@ const ThemeProvider = ({
                 const currentProjectTheme = themes?.find(e => e.key === themeKey);
         
                 if(themeKey !== "light" && themeKey !== "dark" && !(currentProjectTheme)) {
-                    throw Error(`Can not find a theme for the given themeKey: ${themeKey}.`);
+                    throw Error(`Can not find a theme for the given themeKey: ${themeKey}`);
                 }
         
                 const _typography = mergeGivenTypographyWithNCore(themeKey, currentProjectTheme?.typography);
@@ -76,11 +71,7 @@ const ThemeProvider = ({
     return <ThemeContext.Provider
         value={theme}
     >
-        <ThemeDispatchContext.Provider
-            value={setTheme}
-        >
-            {children}
-        </ThemeDispatchContext.Provider>
+        {children}
     </ThemeContext.Provider>;
 };
 export default ThemeProvider;

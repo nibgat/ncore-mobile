@@ -22,7 +22,8 @@ import {
     useNCoreSettingsReturnType,
     useNCoreLocalesReturnType,
     useNCoreThemeReturnType,
-    useNCoreModalReturnType
+    useNCoreModalReturnType,
+    LocaleConfig
 } from "../constants";
 
 type NCoreContext = {
@@ -30,7 +31,7 @@ type NCoreContext = {
     initialThemeKey?: NCore.ThemeKey;
     themes?: Array<NCore.Theme>;
     designTokens?: NCore.DesignTokens;
-    locales?: Array<Record<string, string>>
+    locales?: Array<LocaleConfig>;
 };
 
 const NCoreContext = ({
@@ -45,24 +46,40 @@ const NCoreContext = ({
         themes={themes}
         designTokens={designTokens}
     >
-        <ModalProvider>
-            <BottomSheetProvider>
-                <LocalesProvider
-                    locales={locales}
-                >
+        <LocalesProvider
+            locales={locales}
+        >
+            <ModalProvider>
+                <BottomSheetProvider>
                     <SettingsProvider>
                         {children}
                     </SettingsProvider>
-                </LocalesProvider>
-            </BottomSheetProvider>
-        </ModalProvider>
+                </BottomSheetProvider>
+            </ModalProvider>
+        </LocalesProvider>
     </ThemeProvider>;
 };
 
 export const useNCoreTheme = (): useNCoreThemeReturnType => useContext(ThemeContext);
 export const useNCoreModal = (): useNCoreModalReturnType => useContext(ModalContext);
 export const useNCoreBottomSheet = (): useNCoreBottomSheetReturnType => useContext(BottomSheetContext);
-export const useNCoreLocales:<T extends Record<string, string>> = (): useNCoreLocalesReturnType => useContext(LocalesContext);
+export const useNCoreLocale = (): useNCoreLocalesReturnType => {
+    const {
+        activeLocale,
+        switchLocale,
+        isRTL,
+        currentLocalizationData
+    } = useContext(LocalesContext);
+
+    return {
+        localize: (localizationKey: string) => {
+            return currentLocalizationData[localizationKey];
+        },
+        activeLocale,
+        switchLocale,
+        isRTL
+    };
+};
 export const useNCoreSettings = (): useNCoreSettingsReturnType => useContext(SettingsContext);
 
 export default NCoreContext;

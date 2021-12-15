@@ -1,7 +1,7 @@
 export {
     useNCoreBottomSheet,
     useNCoreSettings,
-    useNCoreLocales,
+    useNCoreLocale,
     useNCoreModal,
     useNCoreTheme
 } from "./core/context";
