@@ -27,34 +27,34 @@ declare global {
         }
 
         interface Colors {
-            primary?: string;
-            body?: string;
-            constrastBody?: string;
-            layer1?: string;
-            layer2?: string;
-            layer3?: string;
-            warning?: string;
-            danger?: string;
-            success?: string;
-            accent?: string;
-            attention?: string;
-            info?: string;
-            gray0?: string;
-            gray10?: string;
-            gray20?: string;
-            gray30?: string;
-            gray40?: string;
-            gray50?: string;
-            gray60?: string;
-            gray70?: string;
-            gray80?: string;
-            gray90?: string;
-            gray92?: string;
-            gray94?: string;
-            gray96?: string;
-            gray98?: string;
-            gray100?: string;
-            modalBackground?: string;
+            primary: string;
+            body: string;
+            constrastBody: string;
+            layer1: string;
+            layer2: string;
+            layer3: string;
+            warning: string;
+            danger: string;
+            success: string;
+            accent: string;
+            attention: string;
+            info: string;
+            gray0: string;
+            gray10: string;
+            gray20: string;
+            gray30: string;
+            gray40: string;
+            gray50: string;
+            gray60: string;
+            gray70: string;
+            gray80: string;
+            gray90: string;
+            gray92: string;
+            gray94: string;
+            gray96: string;
+            gray98: string;
+            gray100: string;
+            modalBackground: string;
         }
 
         type TypograpghyVariant = {
@@ -93,6 +93,18 @@ declare global {
 
         interface DisabledTokens {
             opacity?: number;
+        }
+
+        interface Translation {
+            language: string;
+            appTitle: string;
+            coreSelectBoxSelection: string;
+            coreSelectBoxErrorsNonSelect: string;
+            coreSearchBoxValidationEnterContent: string;
+            coreMultiSelectBoxTitle: string;
+            coreMultiSelectBoxValidationEnterContent: string;
+            corePagesSelectPageValidationMinSelectRequired: string;
+            corePagesSelectPageValidationNoMoreSelectable: string;
         }
     }
 }

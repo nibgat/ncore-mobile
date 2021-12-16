@@ -6,14 +6,14 @@ export type LocalesStore = {
     activeLocale: string;
     switchLocale: (localizationKey: string) => void;
     isRTL: boolean;
-    localize: (localizationKey: string) => string;
-    currentLocalizationData: Record<string, string>;
+    localize: (localizationKey: keyof NCore.Translation) => string;
+    currentLocalizationData: Record<keyof NCore.Translation, string>;
 };
 
 export type LocaleConfig = {
     code: string;
     isRTL: boolean;
-    translations: Record<string, string>;
+    translations: Record<keyof NCore.Translation, string>;
 };
 
 export type useNCoreLocalesReturnType = Omit<LocalesStore, "currentLocalizationData">;

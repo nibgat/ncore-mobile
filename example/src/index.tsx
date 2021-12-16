@@ -2,13 +2,13 @@ import React from "react";
 import {
     StyleSheet,
     Button,
-    View,
-    Text
+    View
 } from "react-native";
 import {
     useNCoreLocale,
     NCoreProvider,
-    useNCoreTheme
+    useNCoreTheme,
+    Text
 } from "ncore-mobile";
 import {
     tr 
@@ -35,7 +35,7 @@ const App = () => {
             }
         ]}
     >
-        <Text>Hello NİBGAT®. Your selected theme is {activeTheme}. And your text is {localize("language")}</Text>
+        <Text variant="body">Hello NİBGAT®. Your selected theme is {activeTheme}. And your text is {localize("language")}</Text>
         <Button
             title="Switch Theme"
             onPress={() => {

@@ -7,5 +7,9 @@ export {
 } from "./core/context";
 
 export {
+    Text
+} from "./components";
+
+export {
     default as NCoreProvider 
 } from "./core";

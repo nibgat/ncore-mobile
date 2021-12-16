@@ -72,7 +72,7 @@ export const useNCoreLocale = (): useNCoreLocalesReturnType => {
     } = useContext(LocalesContext);
 
     return {
-        localize: (localizationKey: string) => {
+        localize: (localizationKey: keyof NCore.Translation): string => {
             return currentLocalizationData[localizationKey];
         },
         activeLocale,
