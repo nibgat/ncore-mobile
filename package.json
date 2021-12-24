@@ -1,6 +1,6 @@
 {
   "name": "ncore-mobile",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "NİBGAT® | Component Library",
   "main": "lib/commonjs/index",
   "module": "lib/module/index",
@@ -13,7 +13,6 @@
     "android",
     "ios",
     "cpp",
-    "ncore-mobile.podspec",
     "!lib/typescript/example",
     "!android/build",
     "!ios/build",
