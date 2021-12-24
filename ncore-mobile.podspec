@@ -1,7 +1,7 @@
 require "json"
 
 package = JSON.parse(File.read(File.join(__dir__, "package.json")))
-2
+
 Pod::Spec.new do |s|
   s.name         = package["name"]
   s.version      = package["version"]
