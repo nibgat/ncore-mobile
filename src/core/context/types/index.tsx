@@ -5,4 +5,3 @@ import {
 export type ProviderProps = {
     children: ReactNode
 };
-export type NCoreReducerDispatch = () => void | undefined;
