@@ -3,22 +3,23 @@ import React, {
     FC
 } from  "react";
 import {
-    Text as NativeText,
     TextProps as NativeTextProps,
-    TextStyle
+    Text as NativeText,
+    TextStyle,
+    StyleProp
 } from "react-native";
 import {
     useNCoreTheme 
 } from "../../core/context";
 
-interface TextProps extends NativeTextProps {
+interface ITextProps extends NativeTextProps {
     variant?: keyof NCore.Typography;
     children?: ReactNode;
     color?: keyof NCore.Colors;
-    style?: TextStyle;
+    style?: StyleProp<TextStyle>;
 };
 
-const Text: FC<TextProps> = ({
+const Text: FC<ITextProps> = ({
     variant = "body",
     children,
     color,

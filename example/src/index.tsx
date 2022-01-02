@@ -1,17 +1,17 @@
 import React from "react";
 import {
     StyleSheet,
-    Button,
     View
 } from "react-native";
 import {
     useNCoreLocale,
     NCoreProvider,
     useNCoreTheme,
+    Button,
     Text
 } from "ncore-mobile";
 import {
-    tr 
+    tr
 } from "./locales";
 
 const App = () => {
@@ -35,17 +35,38 @@ const App = () => {
             }
         ]}
     >
-        <Text variant="body">Hello NİBGAT®. Your selected theme is {activeTheme}. And your text is {localize("language")}</Text>
+        <Text variant="body">Hello NİBGAT®. Your selected theme is {activeTheme}. Your text is "{localize("corePagesSelectPageValidationNoMoreSelectable")}" and your localize is "{localize("language")}"</Text>
         <Button
             title="Switch Theme"
             onPress={() => {
                 switchTheme(activeTheme === "dark" ? "light" : "dark");
+            }}
+            color="danger"
+            variant="outline"
+            size="small"
+            style={{
+                marginBottom: 20
             }}
         />
         <Button
             title="Switch Language"
             onPress={() => {
                 switchLocale(activeLocale === "en" ? "tr" : "en");
+            }}
+            size="large"
+            style={{
+                marginBottom: 20
+            }}
+        />
+        <Button
+            title="Switch Language"
+            onPress={() => {
+                switchLocale(activeLocale === "en" ? "tr" : "en");
+            }}
+            size="medium"
+            variant="filled"
+            style={{
+                marginBottom: 20
             }}
         />
     </View>;

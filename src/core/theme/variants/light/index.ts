@@ -85,7 +85,7 @@ export const typography: Required<NCore.Typography> = {
         fontSize: 12
     },
     body: {
-        fontFamily: "Montserrat-Ragular",
+        fontFamily: "Montserrat-Regular",
         fontWeight: "400",
         lineHeight: 22.72,
         fontSize: 14

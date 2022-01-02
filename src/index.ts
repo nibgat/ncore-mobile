@@ -7,6 +7,7 @@ export {
 } from "./core/context";
 
 export {
+    Button,
     Text
 } from "./components";
 
