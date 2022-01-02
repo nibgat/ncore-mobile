@@ -1,4 +1,16 @@
-export {};
+import {
+    FC
+} from "react";
+import {
+    SvgProps
+} from "react-native-svg";
+
+export interface INCoreIconProps extends SvgProps {
+    color: string;
+    size: number;
+};
+
+export type NCoreIcon = FC<INCoreIconProps>;
 
 declare global {
     namespace NCore {

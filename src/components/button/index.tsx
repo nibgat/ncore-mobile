@@ -1,5 +1,4 @@
 import React, {
-    ReactNode,
     FC
 } from "react";
 import {
@@ -9,10 +8,15 @@ import {
     TextStyle,
     StyleProp
 } from "react-native";
+import styles from "./stylesheet";
 import Text from "../text";
 import {
     useNCoreTheme 
 } from "ncore-mobile";
+import {
+    INCoreIconProps,
+    NCoreIcon 
+} from "src/core/types";
 
 type ButtonSpreadBehaviour = "baseline" | "stretch" | "free";
 type ButtonVariant = "filled" | "outline" | "ghost";
@@ -21,6 +25,7 @@ type ButtonSize = "small" | "medium" | "large";
 interface IButtonProps extends TouchableOpacityProps {
     spreadBehaviour?: ButtonSpreadBehaviour;
     titleStyle?: StyleProp<TextStyle>;
+    iconColor?: keyof NCore.Colors;
     textColor?: keyof NCore.Colors;
     color?: keyof NCore.Colors;
     variant?: ButtonVariant;
@@ -28,7 +33,7 @@ interface IButtonProps extends TouchableOpacityProps {
     disabled?: boolean;
     style?: ViewStyle;
     size?: ButtonSize;
-    icon?: ReactNode;
+    icon?: NCoreIcon;
     title: string;
 };
 
@@ -36,6 +41,7 @@ type ButtonStylerParams = {
     spreadBehaviour: ButtonSpreadBehaviour;
     radiuses: NCore.RadiusesTokens;
     textColor?: keyof NCore.Colors;
+    iconColor?: keyof NCore.Colors;
     borders: NCore.BordersTokens;
     color: keyof NCore.Colors;
     disabledStyle: ViewStyle;
@@ -46,8 +52,9 @@ type ButtonStylerParams = {
 };
 
 type ButtonStylerResult = {
-    container: ViewStyle,
-    title: StyleProp<TextStyle>
+    iconProps: INCoreIconProps,
+    container: ViewStyle;
+    title: TextStyle;
 };
 
 const SIZE_TO_STYLE_MAPPING = {
@@ -58,6 +65,9 @@ const SIZE_TO_STYLE_MAPPING = {
         },
         title: {
             fontSize: 12
+        },
+        icon: {
+            size: 14
         }
     },
     "medium": {
@@ -67,6 +77,9 @@ const SIZE_TO_STYLE_MAPPING = {
         },
         title: {
             fontSize: 16
+        },
+        icon: {
+            size: 18
         }
     },
     "large": {
@@ -76,6 +89,9 @@ const SIZE_TO_STYLE_MAPPING = {
         },
         title: {
             fontSize: 20
+        },
+        icon: {
+            size: 22
         }
     }
 };
@@ -83,6 +99,7 @@ const SIZE_TO_STYLE_MAPPING = {
 const buttonStyler = ({
     spreadBehaviour,
     disabledStyle,
+    iconColor,
     textColor,
     radiuses,
     disabled,
@@ -100,17 +117,20 @@ const buttonStyler = ({
         borderRadius: radiuses.half
     };
 
+    let titleColor: string = textColor ? colors[textColor] : "";
+
     let title: StyleProp<TextStyle> = {
-        color: textColor,
+        color: titleColor,
         ...SIZE_TO_STYLE_MAPPING[size].title
     };
 
     if(!textColor) {
         if(variant !== "filled") {
-            title.color = colors[color];
+            titleColor = colors[color];
         } else {
-            title.color = colors.constrastBody;
+            titleColor = colors.constrastBody;
         }
+        title.color = titleColor;
     }
 
     if(spreadBehaviour === "baseline" || spreadBehaviour === "stretch") {
@@ -124,7 +144,13 @@ const buttonStyler = ({
         };
     }
 
+    let iconProps: INCoreIconProps = {
+        size: SIZE_TO_STYLE_MAPPING[size].icon.size,
+        color: iconColor ? colors[iconColor] : titleColor
+    };
+
     return {
+        iconProps,
         container,
         title
     };
@@ -137,26 +163,30 @@ const Button: FC<IButtonProps> = ({
     disabled = false,
     size = "medium",
     titleStyle: titleStyleParam,
+    icon: Icon,
     textColor,
+    iconColor,
     onPress,
     title,
     style,
-    icon,
     ...props
 }) => {
     const {
         disabled: designTokensDisabled,
         radiuses,
         borders,
+        spaces,
         colors
     } = useNCoreTheme();
 
     const {
         container,
-        title: titleStyle
+        title: titleStyle,
+        iconProps
     } = buttonStyler({
         disabledStyle: designTokensDisabled,
         spreadBehaviour,
+        iconColor,
         textColor,
         disabled,
         radiuses,
@@ -171,19 +201,30 @@ const Button: FC<IButtonProps> = ({
         onPress={disabled ? undefined : onPress}
         disabled={disabled}
         style={[
+            styles.container,
             container,
             style
         ]}
         {...props}
     >
-        {icon ? icon : null}
+        {
+            Icon ?
+                <Icon
+                    {...iconProps}
+                />
+                :
+                null
+        }
         {
             title ?
                 <Text
                     variant="button"
                     style={[
                         titleStyle,
-                        titleStyleParam ? titleStyleParam : null
+                        titleStyleParam ? titleStyleParam : null,
+                        Icon ? {
+                            marginLeft: spaces.content
+                        } : null
                     ]}
                 >
                     {title}

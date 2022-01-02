@@ -13,6 +13,7 @@ import {
 import {
     tr
 } from "./locales";
+import SvgTest from "./assets/svg/Test";
 
 const App = () => {
     const {
@@ -41,33 +42,10 @@ const App = () => {
             onPress={() => {
                 switchTheme(activeTheme === "dark" ? "light" : "dark");
             }}
-            color="danger"
-            variant="outline"
-            size="small"
-            style={{
-                marginBottom: 20
-            }}
-        />
-        <Button
-            title="Switch Language"
-            onPress={() => {
-                switchLocale(activeLocale === "en" ? "tr" : "en");
-            }}
-            size="large"
-            style={{
-                marginBottom: 20
-            }}
-        />
-        <Button
-            title="Switch Language"
-            onPress={() => {
-                switchLocale(activeLocale === "en" ? "tr" : "en");
-            }}
-            size="medium"
+            color="primary"
             variant="filled"
-            style={{
-                marginBottom: 20
-            }}
+            size="medium"
+            icon={SvgTest}
         />
     </View>;
 };
