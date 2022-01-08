@@ -12,11 +12,11 @@ import styles from "./stylesheet";
 import Text from "../text";
 import {
     useNCoreTheme 
-} from "ncore-mobile";
+} from "../../core/context";
 import {
     INCoreIconProps,
     NCoreIcon 
-} from "src/core/types";
+} from "../../core/types";
 
 type ButtonSpreadBehaviour = "baseline" | "stretch" | "free";
 type ButtonVariant = "filled" | "outline" | "ghost";

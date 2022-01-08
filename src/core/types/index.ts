@@ -45,12 +45,14 @@ declare global {
             layer1: string;
             layer2: string;
             layer3: string;
+            panel: string;
             warning: string;
             danger: string;
             success: string;
             accent: string;
             attention: string;
             info: string;
+            hideBody: string;
             gray0: string;
             gray10: string;
             gray20: string;
@@ -86,10 +88,10 @@ declare global {
         }
 
         interface SpacesTokens {
-            container?: number;
-            content?: number;
-            inline?: number;
-            item?: number;
+            container: number;
+            content: number;
+            inline: number;
+            item: number;
         }
 
         interface BordersTokens {

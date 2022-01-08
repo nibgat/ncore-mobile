@@ -7,6 +7,7 @@ import {
     useNCoreLocale,
     NCoreProvider,
     useNCoreTheme,
+    TextInput,
     Button,
     Text
 } from "ncore-mobile";
@@ -23,8 +24,6 @@ const App = () => {
     } = useNCoreTheme();
 
     const {
-        activeLocale,
-        switchLocale,
         localize
     } = useNCoreLocale();
 
@@ -46,6 +45,10 @@ const App = () => {
             variant="filled"
             size="medium"
             icon={SvgTest}
+        />
+        <TextInput
+            title="Test"
+            initialValue="Merhaba"
         />
     </View>;
 };
