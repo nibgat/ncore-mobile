@@ -2,7 +2,9 @@ import React, {
     FC
 } from "react";
 import {
+    ActivityIndicatorProps,
     TouchableOpacityProps,
+    ActivityIndicator,
     TouchableOpacity,
     ViewStyle,
     TextStyle,
@@ -31,6 +33,7 @@ interface IButtonProps extends TouchableOpacityProps {
     variant?: ButtonVariant;
     onPress: () => void;
     disabled?: boolean;
+    loading?: boolean;
     style?: ViewStyle;
     size?: ButtonSize;
     icon?: NCoreIcon;
@@ -51,10 +54,16 @@ type ButtonStylerParams = {
     size: ButtonSize;
 };
 
+type TitleProps = {
+    color: keyof NCore.Colors;
+    style: TextStyle;
+};
+
 type ButtonStylerResult = {
+    loadingProps: ActivityIndicatorProps;
     iconProps: INCoreIconProps,
+    titleProps: TitleProps;
     container: ViewStyle;
-    title: TextStyle;
 };
 
 const SIZE_TO_STYLE_MAPPING = {
@@ -117,20 +126,20 @@ const buttonStyler = ({
         borderRadius: radiuses.half
     };
 
-    let titleColor: string = textColor ? colors[textColor] : "";
+    let titleColor: keyof NCore.Colors = textColor ? textColor : "body";
 
-    let title: StyleProp<TextStyle> = {
+    let titleProps: TitleProps = {
         color: titleColor,
-        ...SIZE_TO_STYLE_MAPPING[size].title
+        style: SIZE_TO_STYLE_MAPPING[size].title
     };
 
     if(!textColor) {
         if(variant !== "filled") {
-            titleColor = colors[color];
+            titleColor = color;
         } else {
-            titleColor = colors.constrastBody;
+            titleColor = "constrastBody";
         }
-        title.color = titleColor;
+        titleProps.color = titleColor;
     }
 
     if(spreadBehaviour === "baseline" || spreadBehaviour === "stretch") {
@@ -146,13 +155,19 @@ const buttonStyler = ({
 
     let iconProps: INCoreIconProps = {
         size: SIZE_TO_STYLE_MAPPING[size].icon.size,
-        color: iconColor ? colors[iconColor] : titleColor
+        color: iconColor ? colors[iconColor] : colors[titleColor]
+    };
+
+    let loadingProps: ActivityIndicatorProps = {
+        color: colors[titleColor],
+        size: "small"
     };
 
     return {
+        loadingProps,
+        titleProps,
         iconProps,
-        container,
-        title
+        container
     };
 };
 
@@ -162,10 +177,11 @@ const Button: FC<IButtonProps> = ({
     color = "primary",
     disabled = false,
     size = "medium",
-    titleStyle: titleStyleParam,
+    titleStyle,
     icon: Icon,
     textColor,
     iconColor,
+    loading,
     onPress,
     title,
     style,
@@ -180,8 +196,9 @@ const Button: FC<IButtonProps> = ({
     } = useNCoreTheme();
 
     const {
+        loadingProps,
+        titleProps,
         container,
-        title: titleStyle,
         iconProps
     } = buttonStyler({
         disabledStyle: designTokensDisabled,
@@ -197,41 +214,68 @@ const Button: FC<IButtonProps> = ({
         size
     });
 
+    const renderLoading = () => {
+        if(!loading) {
+            return null;
+        }
+
+        return <ActivityIndicator
+            {...loadingProps}
+        />;
+    };
+
+    const renderIcon = () => {
+        if(loading) {
+            return null;
+        }
+
+        if(!Icon) {
+            return null;
+        }
+
+        return <Icon
+            {...iconProps}
+        />;
+    };
+
+    const renderTitle = () => {
+        if(!title) {
+            return null;
+        }
+
+        let textStyle = {
+            ...titleProps.style
+        };
+
+        if(Icon || loading) {
+            textStyle.marginLeft = spaces.content;
+        }
+
+        return <Text
+            variant="button"
+            color={titleProps.color}
+            style={[
+                titleStyle,
+                textStyle
+            ]}
+        >
+            {title}
+        </Text>;
+    };
+
     return <TouchableOpacity
-        onPress={disabled ? undefined : onPress}
-        disabled={disabled}
+        onPress={disabled || loading ? undefined : onPress}
+        disabled={disabled || loading}
         style={[
             styles.container,
-            container,
-            style
+            style,
+            container
         ]}
         {...props}
     >
-        {
-            Icon ?
-                <Icon
-                    {...iconProps}
-                />
-                :
-                null
-        }
-        {
-            title ?
-                <Text
-                    variant="button"
-                    style={[
-                        titleStyle,
-                        titleStyleParam ? titleStyleParam : null,
-                        Icon ? {
-                            marginLeft: spaces.content
-                        } : null
-                    ]}
-                >
-                    {title}
-                </Text>
-                :
-                null
-        }
+        {renderLoading()}
+        {renderIcon()}
+        {renderTitle()}
     </TouchableOpacity>;
 };
 export default Button;

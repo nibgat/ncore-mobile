@@ -48,9 +48,14 @@ type TextInputStylerParams = {
     value: string;
 };
 
+type TitleProps = {
+    color: keyof NCore.Colors;
+    style: TextStyle;
+};
+
 type TextInputStylerResult = {
+    titleProps: TitleProps;
     container: ViewStyle;
-    title: TextStyle;
     input: TextStyle;
     clear: ViewStyle;
 };
@@ -82,9 +87,11 @@ const textInputStyler = ({
         borderWidth: borders.line
     };
 
-    let title: TextStyle = {
-        color: value?.length || isFocused ? colors.primary : colors.gray50,
-        marginBottom: spaces.content / 2
+    let titleProps: TitleProps = {
+        color: value?.length || isFocused ? "primary" : "gray50",
+        style: {
+            marginBottom: spaces.content / 2
+        }
     };
 
     let input: TextStyle = {
@@ -99,7 +106,7 @@ const textInputStyler = ({
     };
 
     if(Platform.OS === "ios") {
-        title.marginTop = spaces.content / 2;
+        titleProps.style.marginTop = spaces.content / 2;
         input.height = 24;
         input.marginBottom = spaces.content / 1.5;
     }
@@ -118,8 +125,8 @@ const textInputStyler = ({
     }
 
     return {
+        titleProps,
         container,
-        title,
         input,
         clear
     };
@@ -146,14 +153,14 @@ const ClearButton = ({
 
 const TextInput: FC<ITextInputProps> = ({
     clearEnabled = false,
+    onFocus: onFocusProp,
+    onBlur: onBlurProp,
     isRequired = false,
     multiline = false,
     disabled = false,
     title = "Title",
     onChangeText,
     initialValue,
-    onFocus,
-    onBlur,
     style,
     ...props
 }) => {
@@ -178,7 +185,7 @@ const TextInput: FC<ITextInputProps> = ({
     const finalTitle = isRequired ? "* " + title : title;
 
     const {
-        title: titleStyle,
+        titleProps,
         container,
         input,
         clear
@@ -215,6 +222,16 @@ const TextInput: FC<ITextInputProps> = ({
         />;
     };
 
+    const onFocus = () => {
+        setIsFocused(true);
+        if(onFocusProp) onFocusProp();
+    };
+
+    const onBlur = () => {
+        setIsFocused(false);
+        if(onBlurProp) onBlurProp();
+    };
+
     return <TouchableOpacity
         onPress={() => inputRef.current?.focus()}
         disabled={disabled}
@@ -231,9 +248,10 @@ const TextInput: FC<ITextInputProps> = ({
             <Text
                 variant="header9"
                 numberOfLines={1}
+                color={titleProps.color}
                 style={[
                     styles.title,
-                    titleStyle
+                    titleProps.style
                 ]}
             >
                 {finalTitle}
@@ -242,15 +260,9 @@ const TextInput: FC<ITextInputProps> = ({
                 {...props}
                 value={value}
                 multiline={multiline}
-                onChangeText={e => setValue(e)}
-                onFocus={() => {
-                    setIsFocused(true);
-                    if(onFocus) onFocus();
-                }}
-                onBlur={() => {
-                    setIsFocused(false);
-                    if(onBlur) onBlur();
-                }}
+                onChangeText={setValue}
+                onFocus={onFocus}
+                onBlur={onBlur}
                 ref={inputRef}
                 underlineColorAndroid="rgba(255,255,255,0)"
                 editable={!disabled}

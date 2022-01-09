@@ -1,4 +1,7 @@
-import React from "react";
+import React, {
+    useEffect,
+    useState
+} from "react";
 import {
     StyleSheet,
     View
@@ -9,7 +12,8 @@ import {
     useNCoreTheme,
     TextInput,
     Button,
-    Text
+    Text,
+    RadioButton
 } from "ncore-mobile";
 import {
     tr
@@ -27,6 +31,17 @@ const App = () => {
         localize
     } = useNCoreLocale();
 
+    const [loading, setLoading] = useState(false);
+
+    useEffect(() => {
+        if(loading) {
+            setTimeout(() => {
+                if(activeTheme === "light") switchTheme("dark");
+                setLoading(false);
+            }, 3000);
+        }
+    }, [loading, activeTheme, switchTheme]);
+
     return <View
         style={[
             styles.container,
@@ -39,12 +54,25 @@ const App = () => {
         <Button
             title="Switch Theme"
             onPress={() => {
-                switchTheme(activeTheme === "dark" ? "light" : "dark");
+                setLoading(true);
             }}
-            color="primary"
-            variant="filled"
-            size="medium"
+            loading={loading}
             icon={SvgTest}
+        />
+        <RadioButton
+            selected={false}
+            title="Merhaba dünya."
+            spreadBehaviour="free"
+        />
+        <RadioButton
+            selected={true}
+            title="Lorem."
+            spreadBehaviour="stretch"
+        />
+        <RadioButton
+            selected={false}
+            title="Merhaba dünyaya geldim bir anda bir zamanda."
+            spreadBehaviour="baseline"
         />
         <TextInput
             title="Test"

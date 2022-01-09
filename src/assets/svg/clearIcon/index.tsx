@@ -1,7 +1,7 @@
 import React from "react";
 import {
     INCoreIconProps 
-} from "ncore-mobile";
+} from "../../../core/types";
 import Svg, {
     Path 
 } from "react-native-svg";

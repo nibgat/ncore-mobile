@@ -14,9 +14,9 @@ import {
 
 interface ITextProps extends NativeTextProps {
     variant?: keyof NCore.Typography;
-    children?: ReactNode;
-    color?: keyof NCore.Colors;
     style?: StyleProp<TextStyle>;
+    color?: keyof NCore.Colors;
+    children?: ReactNode;
 };
 
 const Text: FC<ITextProps> = ({
@@ -33,11 +33,11 @@ const Text: FC<ITextProps> = ({
 
     return <NativeText
         style={[
+            style,
             {
                 ...typography[variant],
-                color: color ? color : colors.body
-            },
-            style
+                color: color ? colors[color] : colors.body
+            }
         ]}
         {...props}
     >
