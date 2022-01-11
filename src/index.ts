@@ -11,6 +11,7 @@ export type {
 } from "./core/types";
 
 export {
+    PageContainer,
     RadioButton,
     TextInput,
     Button,

@@ -29,6 +29,7 @@ interface ITextInputProps extends Omit<TextInputProps, "value" | "onChangeText" 
     isRequired?: boolean;
     onFocus?: () => void;
     onBlur?: () => void;
+    placeholder: string;
     multiline?: boolean;
     disabled?: boolean;
     style?: ViewStyle;
@@ -57,12 +58,6 @@ type TextInputStylerResult = {
     titleProps: TitleProps;
     container: ViewStyle;
     input: TextStyle;
-    clear: ViewStyle;
-};
-
-type ClearButtonParams = {
-    colors: NCore.Colors;
-    onPress: () => void;
     clear: ViewStyle;
 };
 
@@ -132,25 +127,6 @@ const textInputStyler = ({
     };
 };
 
-const ClearButton = ({
-    onPress,
-    colors,
-    clear
-}: ClearButtonParams) => {
-    return <TouchableOpacity
-        onPress={onPress}
-        style={[
-            styles.clearButton,
-            clear
-        ]}
-    >
-        <ClearIcon
-            color={colors.primary}
-            size={24}
-        />
-    </TouchableOpacity>;
-};
-
 const TextInput: FC<ITextInputProps> = ({
     clearEnabled = false,
     onFocus: onFocusProp,
@@ -214,12 +190,19 @@ const TextInput: FC<ITextInputProps> = ({
         if(value?.length === 0) {
             return null;
         }
-    
-        return <ClearButton
+
+        return <TouchableOpacity
             onPress={() => setValue("")}
-            colors={colors}
-            clear={clear}
-        />;
+            style={[
+                styles.clearButton,
+                clear
+            ]}
+        >
+            <ClearIcon
+                color={colors.hideBody}
+                size={24}
+            />
+        </TouchableOpacity>;
     };
 
     const onFocus = () => {

@@ -16,7 +16,6 @@ interface ITextProps extends NativeTextProps {
     variant?: keyof NCore.Typography;
     style?: StyleProp<TextStyle>;
     color?: keyof NCore.Colors;
-    children?: ReactNode;
 };
 
 const Text: FC<ITextProps> = ({

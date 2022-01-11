@@ -13,3 +13,7 @@ export {
 export {
     default as RadioButton
 } from "./radioButton";
+
+export {
+    default as PageContainer
+} from "./pageContainer";

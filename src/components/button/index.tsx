@@ -173,12 +173,12 @@ const buttonStyler = ({
 
 const Button: FC<IButtonProps> = ({
     spreadBehaviour = "baseline",
+    icon: IconComponentProp,
     variant = "filled",
     color = "primary",
     disabled = false,
     size = "medium",
     titleStyle,
-    icon: Icon,
     textColor,
     iconColor,
     loading,
@@ -229,11 +229,11 @@ const Button: FC<IButtonProps> = ({
             return null;
         }
 
-        if(!Icon) {
+        if(!IconComponentProp) {
             return null;
         }
 
-        return <Icon
+        return <IconComponentProp
             {...iconProps}
         />;
     };
@@ -247,7 +247,7 @@ const Button: FC<IButtonProps> = ({
             ...titleProps.style
         };
 
-        if(Icon || loading) {
+        if(IconComponentProp || loading) {
             textStyle.marginLeft = spaces.content;
         }
 
