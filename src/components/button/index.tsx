@@ -3,7 +3,6 @@ import React, {
 } from "react";
 import {
     ActivityIndicatorProps,
-    TouchableOpacityProps,
     ActivityIndicator,
     TouchableOpacity,
     ViewStyle,
@@ -24,7 +23,7 @@ type ButtonSpreadBehaviour = "baseline" | "stretch" | "free";
 type ButtonVariant = "filled" | "outline" | "ghost";
 type ButtonSize = "small" | "medium" | "large";
 
-interface IButtonProps extends TouchableOpacityProps {
+interface IButtonProps {
     spreadBehaviour?: ButtonSpreadBehaviour;
     titleStyle?: StyleProp<TextStyle>;
     iconColor?: keyof NCore.Colors;
@@ -184,8 +183,7 @@ const Button: FC<IButtonProps> = ({
     loading,
     onPress,
     title,
-    style,
-    ...props
+    style
 }) => {
     const {
         disabled: designTokensDisabled,
@@ -271,7 +269,6 @@ const Button: FC<IButtonProps> = ({
             style,
             container
         ]}
-        {...props}
     >
         {renderLoading()}
         {renderIcon()}

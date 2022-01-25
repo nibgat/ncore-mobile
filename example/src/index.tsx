@@ -10,6 +10,7 @@ import {
     RadioButton,
     TextInput,
     Button,
+    Chip,
     Text
 } from "ncore-mobile";
 import {
@@ -48,6 +49,10 @@ const App = () => {
             }}
             loading={loading}
             icon={SvgTest}
+        />
+        <Chip
+            onPress={() => {}}
+            selected={true}
         />
         <RadioButton
             selected={index === 0}

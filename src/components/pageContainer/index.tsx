@@ -4,7 +4,6 @@ import React, {
 import {
     ScrollView,
     ViewStyle,
-    ViewProps,
     View
 } from "react-native";
 import styles from "./stylesheet";
@@ -12,7 +11,7 @@ import {
     useNCoreTheme
 } from "../../core/context";
 
-interface IPageContainerProps extends ViewProps {
+interface IPageContainerProps {
     contentContainerStyle?: ViewStyle;
     scrollable?: boolean;
     style?: ViewStyle;
@@ -22,8 +21,7 @@ const PageContainer: FC<IPageContainerProps> = ({
     contentContainerStyle,
     scrollable = true,
     children,
-    style,
-    ...props
+    style
 }) => {
     const {
         colors,
@@ -32,7 +30,6 @@ const PageContainer: FC<IPageContainerProps> = ({
 
     const renderWithScroll = () => {
         return <ScrollView
-            {...props}
             style={[
                 styles.container,
                 {
@@ -56,7 +53,6 @@ const PageContainer: FC<IPageContainerProps> = ({
 
     const renderWithoutScroll = () => {
         return <View
-            {...props}
             style={[
                 styles.container,
                 {

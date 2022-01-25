@@ -2,7 +2,6 @@ import React, {
     FC
 } from "react";
 import {
-    TouchableOpacityProps,
     TouchableOpacity,
     ViewStyle
 } from "react-native";
@@ -22,7 +21,7 @@ import {
 
 type RadioButtonSpreadBehaviour = "baseline" | "stretch" | "free";
 
-interface IRadioButtonProps extends TouchableOpacityProps {
+interface IRadioButtonProps {
     spreadBehaviour?: RadioButtonSpreadBehaviour;
     titleType?: keyof NCore.Typography;
     uncheckedIcon?: NCoreIcon;
@@ -97,8 +96,7 @@ const RadioButton: FC<IRadioButtonProps> = ({
     disabled = false,
     selected = false,
     title,
-    style,
-    ...props
+    style
 }) => {
     const {
         disabled: designTokensDisabled,
@@ -152,7 +150,6 @@ const RadioButton: FC<IRadioButtonProps> = ({
         ]}
         disabled={disabled}
         onPress={onChange}
-        {...props}
     >
         {selected ? renderChecked() : renderUnchecked()}
         {

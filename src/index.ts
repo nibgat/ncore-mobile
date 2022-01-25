@@ -15,6 +15,7 @@ export {
     RadioButton,
     TextInput,
     Button,
+    Chip,
     Text
 } from "./components";
 

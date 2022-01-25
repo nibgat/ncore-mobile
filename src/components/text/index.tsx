@@ -1,9 +1,7 @@
 import React, {
-    ReactNode,
     FC
 } from  "react";
 import {
-    TextProps as NativeTextProps,
     Text as NativeText,
     TextStyle,
     StyleProp
@@ -12,7 +10,7 @@ import {
     useNCoreTheme 
 } from "../../core/context";
 
-interface ITextProps extends NativeTextProps {
+interface ITextProps {
     variant?: keyof NCore.Typography;
     style?: StyleProp<TextStyle>;
     color?: keyof NCore.Colors;
@@ -22,8 +20,7 @@ const Text: FC<ITextProps> = ({
     variant = "body",
     children,
     color,
-    style,
-    ...props
+    style
 }) => {
     const {
         typography,
@@ -38,7 +35,6 @@ const Text: FC<ITextProps> = ({
                 color: color ? colors[color] : colors.body
             }
         ]}
-        {...props}
     >
         {children}
     </NativeText>;
