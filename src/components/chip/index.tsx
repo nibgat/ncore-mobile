@@ -68,8 +68,7 @@ const chipStyler = ({
         ...style,
         paddingHorizontal: spaces.content * 1.5,
         paddingVertical: spaces.content / 4,
-        backgroundColor: colors.layer2,
-        opacity: 1
+        backgroundColor: colors.layer2
     };
 
     let titleProps: TitleProps = {
@@ -128,7 +127,7 @@ const Chip: FC<IChipProps> = ({
     style
 }) => {
     const {
-        disabled: disabledStyle,
+        disabled: designTokensDisabled,
         colors,
         spaces
     } = useNCoreTheme();
@@ -139,7 +138,7 @@ const Chip: FC<IChipProps> = ({
         container,
         iconProps
     } = chipStyler({
-        disabledStyle,
+        disabledStyle: designTokensDisabled,
         titleColor,
         selected,
         disabled,
@@ -152,6 +151,7 @@ const Chip: FC<IChipProps> = ({
     const renderTitle = () => {
         return <Text
             color={titleProps.color}
+            variant="button"
             style={[
                 titleProps.style
             ]}

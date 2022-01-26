@@ -21,3 +21,7 @@ export {
 export {
     default as Chip
 } from "./chip";
+
+export {
+    default as Switch
+} from "./switch";

@@ -10,6 +10,7 @@ import {
     RadioButton,
     TextInput,
     Button,
+    Switch,
     Chip,
     Text
 } from "ncore-mobile";
@@ -30,6 +31,8 @@ const App = () => {
 
     const [loading, setLoading] = useState(false);
     const [index, setIndex] = useState(0);
+    const [isSwitchActive, setIsSwitchActive] = useState(false);
+    const [isChipSelected, setIsChipSelected] = useState(false);
 
     useEffect(() => {
         if(loading) {
@@ -50,9 +53,16 @@ const App = () => {
             loading={loading}
             icon={SvgTest}
         />
+        <Switch
+            isActive={isSwitchActive}
+            onPress={() => setIsSwitchActive(!isSwitchActive)}
+            title="Merhaba dünya"
+            spreadBehaviour="baseline"
+            disabled={true}
+        />
         <Chip
-            onPress={() => {}}
-            selected={true}
+            onPress={() => setIsChipSelected(!isChipSelected)}
+            selected={isChipSelected}
         />
         <RadioButton
             selected={index === 0}
