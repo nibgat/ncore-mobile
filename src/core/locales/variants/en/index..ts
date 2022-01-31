@@ -10,7 +10,9 @@ const en = {
         "coreMultiSelectBoxTitle": "Category selection tool",
         "coreMultiSelectBoxValidationEnterContent": "Enter value",
         "corePagesSelectPageValidationMinSelectRequired": "At least one selection is mandatory.",
-        "corePagesSelectPageValidationNoMoreSelectable": "You cannot choose any more."
+        "corePagesSelectPageValidationNoMoreSelectable": "You cannot choose any more.",
+        "coreDialogSecondaryButtonTitle": "Cancel",
+        "coreDialogPrimaryButtonTitle": "Ok"
     }
 };
 export default en;

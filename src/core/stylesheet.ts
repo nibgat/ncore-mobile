@@ -17,9 +17,3 @@ export const bottomSheetStyle = StyleSheet.create({
         borderTopLeftRadius: 50
     }
 });
-
-export default StyleSheet.create({
-    container: {
-        flex: 1
-    }
-});

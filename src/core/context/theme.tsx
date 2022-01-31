@@ -2,8 +2,8 @@ import React, {
     createContext,
     useReducer,
     useEffect,
-    ReactNode,
-    Dispatch
+    Dispatch,
+    FC
 } from "react";
 import {
     ThemeStoreInitial,
@@ -19,18 +19,17 @@ import {
 export const ThemeContext = createContext<ThemeStore>(ThemeStoreInitial);
 
 type ThemeProvider = {
-    children: ReactNode;
     initialThemeKey?: NCore.ThemeKey;
     themes?: Array<NCore.Theme>;
     designTokens?: NCore.DesignTokens;
 };
 
-const ThemeProvider = ({
+const ThemeProvider: FC<ThemeProvider> = ({
     children,
     initialThemeKey = "light",
     themes,
     designTokens
-}: ThemeProvider) => {
+}) => {
     const [theme, setTheme]: [ThemeStore, Dispatch<ThemeStoreReducer>] = useReducer(
         (state: ThemeStore, newValue: ThemeStoreReducer) => ({
             ...state, ...newValue

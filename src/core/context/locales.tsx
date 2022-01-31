@@ -2,9 +2,9 @@ import React, {
     createContext,
     useCallback,
     useReducer,
-    ReactNode,
     useEffect,
-    Dispatch
+    Dispatch,
+    FC
 } from "react";
 import {
     LocalesStoreInitial,
@@ -18,7 +18,6 @@ import {
 export const LocalesContext = createContext<LocalesStore>(LocalesStoreInitial);
 
 type LocalesProvider = {
-    children: ReactNode;
     locales?: Array<LocaleConfig>;
     initialLanguage?: string;
 };
@@ -50,11 +49,11 @@ const prepareLocaleData = (localeCode: string, locales: Array<LocaleConfig> | un
     };
 };
 
-const LocalesProvider = ({
+const LocalesProvider: FC<LocalesProvider> = ({
     children,
     locales,
     initialLanguage = "en"
-}: LocalesProvider) => {
+}) => {
     const [contextValue, setContextValue]: [LocalesStore, Dispatch<Partial<LocalesStore>>] = useReducer(
         (state: LocalesStore, newValue: Partial<LocalesStore>) => ({
             ...state, ...newValue

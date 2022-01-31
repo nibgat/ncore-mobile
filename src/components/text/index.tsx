@@ -3,6 +3,7 @@ import React, {
 } from  "react";
 import {
     Text as NativeText,
+    TextProps,
     TextStyle,
     StyleProp
 } from "react-native";
@@ -10,7 +11,7 @@ import {
     useNCoreTheme 
 } from "../../core/context";
 
-interface ITextProps {
+interface ITextProps extends TextProps {
     variant?: keyof NCore.Typography;
     style?: StyleProp<TextStyle>;
     color?: keyof NCore.Colors;
@@ -20,7 +21,8 @@ const Text: FC<ITextProps> = ({
     variant = "body",
     children,
     color,
-    style
+    style,
+    ...props
 }) => {
     const {
         typography,
@@ -28,6 +30,7 @@ const Text: FC<ITextProps> = ({
     } = useNCoreTheme();
 
     return <NativeText
+        {...props}
         style={[
             style,
             {

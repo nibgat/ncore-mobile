@@ -1,13 +1,11 @@
 import React, {
     useContext,
-    ReactNode
+    useState,
+    FC
 } from "react";
 import ModalProvider, {
     ModalContext
 } from "./modal";
-import SettingsProvider, {
-    SettingsContext
-} from "./settings";
 import BottomSheetProvider, {
     BottomSheetContext
 } from "./bottomSheet";
@@ -19,28 +17,31 @@ import ThemeProvider, {
 } from "./theme";
 import {
     useNCoreBottomSheetReturnType,
-    useNCoreSettingsReturnType,
     useNCoreLocalesReturnType,
+    useNCoreDialogReturnType,
     useNCoreThemeReturnType,
     useNCoreModalReturnType,
-    LocaleConfig
+    LocaleConfig,
+    DialogKey
 } from "../constants";
+import {
+    Dialog
+} from "../../components";
 
 type NCoreContext = {
-    children: ReactNode;
     initialThemeKey?: NCore.ThemeKey;
     themes?: Array<NCore.Theme>;
     designTokens?: NCore.DesignTokens;
     locales?: Array<LocaleConfig>;
 };
 
-const NCoreContext = ({
+const NCoreContext: FC<NCoreContext> = ({
     children,
     initialThemeKey,
     themes,
     designTokens,
     locales
-}: NCoreContext) => {
+}) => {
     return <ThemeProvider
         initialThemeKey={initialThemeKey}
         themes={themes}
@@ -51,9 +52,7 @@ const NCoreContext = ({
         >
             <ModalProvider>
                 <BottomSheetProvider>
-                    <SettingsProvider>
-                        {children}
-                    </SettingsProvider>
+                    {children}
                 </BottomSheetProvider>
             </ModalProvider>
         </LocalesProvider>
@@ -80,6 +79,68 @@ export const useNCoreLocale = (): useNCoreLocalesReturnType => {
         isRTL
     };
 };
-export const useNCoreSettings = (): useNCoreSettingsReturnType => useContext(SettingsContext);
+export const useNCoreDialog = (): useNCoreDialogReturnType => {
+    const [dialog, setDialog] = useState<{ data: DialogKey[] }>({
+        data: []
+    });
+    const {
+        closeModal,
+        openModal
+    } = useContext(ModalContext);
+
+    return {
+        openDialog: ({
+            dialogKey,
+            bottomComponent,
+            cancelButtonProps,
+            children,
+            confirmButtonProps,
+            content,
+            headerComponent,
+            contentContainerStyle,
+            dismissOnTouchBackdrop = true,
+            onDismiss,
+            title,
+            variant
+        }) => {
+            let _data = JSON.parse(JSON.stringify(dialog.data));
+            _data.unshift(dialogKey);
+            setDialog({
+                data: _data
+            });
+            openModal({
+                modalKey: dialogKey,
+                children: <Dialog
+                    children={children}
+                    dialogKey={dialogKey}
+                    bottomComponent={bottomComponent}
+                    cancelButtonProps={cancelButtonProps}
+                    confirmButtonProps={confirmButtonProps}
+                    content={content}
+                    headerComponent={headerComponent}
+                    title={title}
+                    variant={variant}
+                />,
+                contentContainerStyle: contentContainerStyle,
+                dismissOnTouchBackdrop: dismissOnTouchBackdrop,
+                onDismiss: onDismiss
+            });
+        },
+        closeAllDialogs: () => {
+            dialog.data.forEach((item) => {
+                setDialog({
+                    data: []
+                });
+                closeModal(item);
+            });
+        },
+        closeDialog: (dialogKey) => {
+            setDialog({
+                data: JSON.parse(JSON.stringify(dialog.data)).filter((p_item: DialogKey) => p_item !== dialogKey)
+            });
+            closeModal(dialogKey);
+        }
+    };
+};
 
 export default NCoreContext;

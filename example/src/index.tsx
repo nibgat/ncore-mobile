@@ -12,12 +12,16 @@ import {
     Button,
     Switch,
     Chip,
-    Text
+    Text,
+    useNCoreDialog
 } from "ncore-mobile";
 import {
     tr
 } from "./locales";
 import SvgTest from "./assets/svg/Test";
+import {
+    useNCoreModal 
+} from "ncore-mobile";
 
 const App = () => {
     const {
@@ -28,6 +32,15 @@ const App = () => {
     const {
         localize
     } = useNCoreLocale();
+
+    const {
+        openModal
+    } = useNCoreModal();
+
+    const {
+        closeDialog,
+        openDialog
+    } = useNCoreDialog();
 
     const [loading, setLoading] = useState(false);
     const [index, setIndex] = useState(0);
@@ -52,6 +65,35 @@ const App = () => {
             }}
             loading={loading}
             icon={SvgTest}
+        />
+        <Button
+            title="Modal Open"
+            onPress={() => {
+                openModal({
+                    modalKey: "test",
+                    children: <Text>Test</Text>
+                });
+            }}
+        />
+        <Button
+            title="Dialog Open"
+            onPress={() => {
+                openDialog({
+                    dialogKey: "test2",
+                    title: "Hi ?",
+                    content: "Selam",
+                    dismissOnTouchBackdrop: false,
+                    contentContainerStyle: {
+                        justifyContent: "center",
+                        alignItems: "center"
+                    },
+                    confirmButtonProps: {
+                        onPress: (dialogKey) => {
+                            closeDialog(dialogKey);
+                        }
+                    }
+                });
+            }}
         />
         <Switch
             isActive={isSwitchActive}

@@ -1,10 +1,8 @@
 import React, {
     createContext,
-    useReducer
+    useReducer,
+    FC
 } from "react";
-import {
-    ProviderProps
-} from "./types";
 import {
     BottomSheetStoreInitial,
     BottomSheetStore
@@ -12,9 +10,9 @@ import {
 
 export const BottomSheetContext = createContext<BottomSheetStore>(BottomSheetStoreInitial);
 
-const BottomSheetProvider = ({
+const BottomSheetProvider: FC = ({
     children
-}: ProviderProps) => {
+}) => {
     const [bottomSheet] = useReducer(
         (state: BottomSheetStore, newValue: BottomSheetStore) => ({
             ...state, ...newValue

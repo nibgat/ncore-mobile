@@ -1,6 +1,6 @@
 export {
     useNCoreBottomSheet,
-    useNCoreSettings,
+    useNCoreDialog,
     useNCoreLocale,
     useNCoreModal,
     useNCoreTheme

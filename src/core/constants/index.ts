@@ -1,9 +1,4 @@
 export {
-    default as SettingsStoreInitial,
-    useNCoreSettingsReturnType,
-    SettingsStore 
-} from "./settings";
-export {
     default as LocalesStoreInitial,
     useNCoreLocalesReturnType,
     LocaleConfig,
@@ -12,8 +7,18 @@ export {
 export {
     default as ModalStoreInitial,
     useNCoreModalReturnType,
-    ModalStore 
+    ModalStoreReducer,
+    ModalStore,
+    ModalData,
+    ModalKey
 } from "./modal";
+export {
+    useNCoreDialogReturnType,
+    DialogVariant,
+    DialogButton,
+    IDialogProps,
+    DialogKey
+} from "./dialog";
 export {
     default as BottomSheetStoreInitial,
     useNCoreBottomSheetReturnType,

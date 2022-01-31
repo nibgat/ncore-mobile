@@ -119,6 +119,8 @@ declare global {
             coreMultiSelectBoxValidationEnterContent: string;
             corePagesSelectPageValidationMinSelectRequired: string;
             corePagesSelectPageValidationNoMoreSelectable: string;
+            coreDialogSecondaryButtonTitle: string;
+            coreDialogPrimaryButtonTitle: string;
         }
     }
 }

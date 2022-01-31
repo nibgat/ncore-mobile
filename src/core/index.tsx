@@ -1,23 +1,19 @@
 import React, {
-    ReactNode,
+    Fragment,
+    FC
     /*
     useState,
     useRef
     */
 } from "react";
 import {
-    // ActivityIndicator,
-    SafeAreaView
+// ActivityIndicator,
 } from "react-native";
 import {
     LocaleConfig
 } from "./constants";
 import NCoreContext, {
     useNCoreBottomSheet,
-    useNCoreSettings,
-    useNCoreTheme,
-    // useNCoreLocales,
-    useNCoreModal
 } from "./context";
 /*
 import {
@@ -27,9 +23,6 @@ import {
     Modal
 } from "..";
 */
-import styles, {
-// bottomSheetStyle,
-} from "./stylesheet";
 /*
 import {
     Modalize
@@ -40,19 +33,17 @@ import getLocales from "./locales";
 import "./types";
 
 type NCoreProvider = {
-    children: ReactNode;
     themes?: Array<NCore.Theme>;
     designTokens?: NCore.DesignTokens;
     locales?: Array<LocaleConfig>
 };
 
 type SetDefaults = {
-    children: ReactNode;
 };
 
-const SetDefaults = ({
+const SetDefaults: FC<SetDefaults> = ({
     children
-}: SetDefaults) => {
+}) => {
     // const modalizeRef = useRef(null);
 
     /*
@@ -68,49 +59,12 @@ const SetDefaults = ({
     */
 
     const {
-        // ready
-    } = useNCoreSettings();
-
-    const {
         // closeBottomSheet
     } = useNCoreBottomSheet();
 
-    const {
-        
-    } = useNCoreModal();
-
-    const {
-        colors,
-        // radiuses,
-        // spaces
-    } = useNCoreTheme();
-
-    return <SafeAreaView
-        style={[
-            styles.container,
-            {
-                backgroundColor: colors?.layer1
-            }
-        ]}
-    >
+    return <Fragment>
         {children}
         {/*
-        {
-            ready ?
-                null
-                :
-                <PageContainer
-                    scrollable={false}
-                    style={[
-                        styles_main.loadingContainer
-                    ]}
-                >
-                    <ActivityIndicator
-                        color={colors.primary}
-                        size="large"
-                    />
-                </PageContainer>
-        }
         <Modalize
             panGestureEnabled={true}
             tapGestureEnabled={true}
@@ -134,50 +88,16 @@ const SetDefaults = ({
                 {bottomSheet.data}
             </PageContainer>
         </Modalize>
-        {
-            modal && modal.data && modal.data.length ?
-                modal.data.map((item: any, index: number) => {
-                    return <Modal
-                        key={"modal-" + index}
-                        {...item.modalProps}
-                        onDismiss={item.onDismiss}
-                        type={item.type}
-                        index={index}
-                    >
-                        {
-                            item.type === "custom" ?
-                                item.children
-                                :
-                                <Dialog
-                                    title={item.title}
-                                    autoCloseOnCancel={item.autoCloseOnCancel}
-                                    autoCloseOnConfirm={item.autoCloseOnConfirm}
-                                    headerComponent={item.headerComponent}
-                                    buttons={item.buttons}
-                                    bottomComponent={item.bottomComponent}
-                                    content={item.content}
-                                    type={item.dialogType}
-                                    index={index}
-                                    {...item.dialogProps}
-                                >
-                                    {item.children}
-                                </Dialog>
-                        }
-                    </Modal>;
-                })
-                :
-                null
-        }
         */}
-    </SafeAreaView>;
+    </Fragment>;
 };
 
-const NCoreProvider = ({
+const NCoreProvider: FC<NCoreProvider> = ({
     children,
     themes,
     designTokens,
     locales
-}: NCoreProvider) => {
+}) => {
     return (
         <NCoreContext
             themes={themes}
