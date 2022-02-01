@@ -83,6 +83,7 @@ export const useNCoreDialog = (): useNCoreDialogReturnType => {
     const [dialog, setDialog] = useState<{ data: DialogKey[] }>({
         data: []
     });
+
     const {
         closeModal,
         openModal
@@ -92,36 +93,43 @@ export const useNCoreDialog = (): useNCoreDialogReturnType => {
         openDialog: ({
             dialogKey,
             bottomComponent,
-            cancelButtonProps,
+            secondaryButtonProps,
             children,
-            confirmButtonProps,
+            primaryButtonProps,
             content,
             headerComponent,
             contentContainerStyle,
-            dismissOnTouchBackdrop = true,
+            dismissOnTouchBackdrop = false,
             onDismiss,
             title,
             variant
         }) => {
-            let _data = JSON.parse(JSON.stringify(dialog.data));
-            _data.unshift(dialogKey);
+            if(variant === "info") dismissOnTouchBackdrop = true; 
+
+            let newData = JSON.parse(JSON.stringify(dialog.data));
+            newData.unshift(dialogKey);
             setDialog({
-                data: _data
+                data: newData
             });
+
             openModal({
                 modalKey: dialogKey,
                 children: <Dialog
                     children={children}
                     dialogKey={dialogKey}
                     bottomComponent={bottomComponent}
-                    cancelButtonProps={cancelButtonProps}
-                    confirmButtonProps={confirmButtonProps}
+                    secondaryButtonProps={secondaryButtonProps}
+                    primaryButtonProps={primaryButtonProps}
                     content={content}
                     headerComponent={headerComponent}
                     title={title}
                     variant={variant}
                 />,
-                contentContainerStyle: contentContainerStyle,
+                contentContainerStyle: {
+                    ...contentContainerStyle,
+                    justifyContent: "center",
+                    alignItems: "center"
+                },
                 dismissOnTouchBackdrop: dismissOnTouchBackdrop,
                 onDismiss: onDismiss
             });

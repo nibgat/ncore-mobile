@@ -83,13 +83,16 @@ const App = () => {
                     title: "Hi ?",
                     content: "Selam",
                     dismissOnTouchBackdrop: false,
-                    contentContainerStyle: {
-                        justifyContent: "center",
-                        alignItems: "center"
-                    },
-                    confirmButtonProps: {
-                        onPress: (dialogKey) => {
-                            closeDialog(dialogKey);
+                    primaryButtonProps: {
+                        onPress: ({
+                            setLoading: setConfirmLoading,
+                            dialogKey
+                        }) => {
+                            setConfirmLoading(true);
+                            setTimeout(() => {
+                                setConfirmLoading(false);
+                                closeDialog(dialogKey);
+                            }, 2000);
                         }
                     }
                 });

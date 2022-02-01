@@ -1,19 +1,17 @@
 import {
-    ReactNode
+    ReactNode,
+    Dispatch
 } from "react";
 import {
     ViewStyle
 } from "react-native";
-import {
-    NCoreIcon 
-} from "../types";
 
 export interface IDialogProps {
     variant?: DialogVariant;
     title?: string;
     content?: string;
-    confirmButtonProps?: DialogButton;
-    cancelButtonProps?: DialogButton;
+    primaryButtonProps?: IPrimaryDialogButton;
+    secondaryButtonProps?: ISecondaryDialogButton;
     headerComponent?: ReactNode;
     bottomComponent?: ReactNode;
     dialogKey: DialogKey;
@@ -22,12 +20,23 @@ export interface IDialogProps {
 export type DialogKey = string | number;
 export type DialogVariant = "yes-no" | "ok" | "info";
 
-export type DialogButton = {
-    title?: string;
-    onPress: (dialogKey: DialogKey) => void;
-    color?: keyof NCore.Colors;
-    icon?: NCoreIcon;
+type DialogButtonWithLoadingCallback = {
+    dialogKey: DialogKey;
+    setLoading: Dispatch<boolean>
 };
+
+type DialogButton = {
+    title?: string;
+    hideOnPress?: boolean;
+};
+
+export interface IPrimaryDialogButton extends DialogButton {
+    onPress: (props: DialogButtonWithLoadingCallback) => void;
+};
+
+export interface ISecondaryDialogButton extends DialogButton {
+    onPress: (props: { dialogKey: DialogKey }) => void;
+}
 
 interface IDialogPropsForModal extends IDialogProps {
     dismissOnTouchBackdrop?: boolean;

@@ -1,4 +1,5 @@
 import React, {
+    useState,
     FC
 } from "react";
 import {
@@ -8,7 +9,8 @@ import {
 import styles from "./stylesheet";
 import {
     useNCoreLocale,
-    useNCoreTheme,
+    useNCoreDialog,
+    useNCoreTheme
 } from "../../core/context";
 import Button from "../button";
 import Text from "../text";
@@ -72,8 +74,8 @@ const dialogStyler = ({
 const Dialog: FC<IDialogProps> = ({
     variant,
     dialogKey,
-    confirmButtonProps,
-    cancelButtonProps,
+    primaryButtonProps,
+    secondaryButtonProps,
     headerComponent,
     bottomComponent,
     children,
@@ -89,6 +91,12 @@ const Dialog: FC<IDialogProps> = ({
     const {
         localize
     } = useNCoreLocale();
+
+    const {
+        closeDialog
+    } = useNCoreDialog();
+
+    const [primaryButtonLoading, setPrimaryButtonLoading] = useState(false);
 
     const {
         primaryButton: primaryButtonStyle,
@@ -143,11 +151,13 @@ const Dialog: FC<IDialogProps> = ({
         }
 
         return <Button
-            title={localize("coreDialogSecondaryButtonTitle")}
-            variant="ghost"
-            {...cancelButtonProps}
+            title={secondaryButtonProps?.title || localize("coreDialogSecondaryButtonTitle")}
+            color="layer2"
             onPress={() => {
-                if(cancelButtonProps?.onPress) cancelButtonProps.onPress(dialogKey);
+                if(secondaryButtonProps?.onPress) secondaryButtonProps.onPress({
+                    dialogKey
+                });
+                if(secondaryButtonProps?.hideOnPress) closeDialog(dialogKey);
             }}
         />;
     };
@@ -155,9 +165,13 @@ const Dialog: FC<IDialogProps> = ({
     const primaryButton = () => {
         return <Button
             title={localize("coreDialogPrimaryButtonTitle")}
-            {...confirmButtonProps}
+            loading={primaryButtonLoading}
             onPress={() => {
-                if(confirmButtonProps?.onPress) confirmButtonProps.onPress(dialogKey);
+                if(primaryButtonProps?.onPress) primaryButtonProps.onPress({
+                    setLoading: setPrimaryButtonLoading,
+                    dialogKey
+                });
+                if(primaryButtonProps?.hideOnPress) closeDialog(dialogKey);
             }}
             style={primaryButtonStyle}
         />;

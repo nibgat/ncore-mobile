@@ -14,8 +14,9 @@ export {
 } from "./modal";
 export {
     useNCoreDialogReturnType,
+    ISecondaryDialogButton,
+    IPrimaryDialogButton,
     DialogVariant,
-    DialogButton,
     IDialogProps,
     DialogKey
 } from "./dialog";
