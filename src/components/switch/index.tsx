@@ -96,6 +96,9 @@ const switchStyler = ({
             ...container,
             ...disabledStyle
         };
+        indicator = {
+            backgroundColor: colors.layer3
+        };
     }
 
     if(title) {
