@@ -118,6 +118,10 @@
         "error",
         4
       ],
+      "eol-last": [
+        "error",
+        "always"
+      ],
       "quotes": [
         "error",
         "double"
@@ -146,6 +150,7 @@
   },
   "dependencies": {
     "react-native-modalize": "2.0.12",
+    "react-native-portalize": "^1.0.7",
     "react-native-svg": "12.1.1"
   }
 }

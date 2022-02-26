@@ -11,17 +11,14 @@ import {
     TextInput,
     Button,
     Switch,
+    Dialog,
     Chip,
-    Text,
-    useNCoreDialog
+    Text
 } from "ncore-mobile";
 import {
     tr
 } from "./locales";
 import SvgTest from "./assets/svg/Test";
-import {
-    useNCoreModal 
-} from "ncore-mobile";
 
 const App = () => {
     const {
@@ -33,19 +30,12 @@ const App = () => {
         localize
     } = useNCoreLocale();
 
-    const {
-        openModal
-    } = useNCoreModal();
-
-    const {
-        closeDialog,
-        openDialog
-    } = useNCoreDialog();
-
     const [loading, setLoading] = useState(false);
     const [index, setIndex] = useState(0);
     const [isSwitchActive, setIsSwitchActive] = useState(false);
     const [isChipSelected, setIsChipSelected] = useState(false);
+    const [isVisibleDialog, setIsVisibleDialog] = useState(false);
+    const [dialogLoading, setDialogLoading] = useState(false);
 
     useEffect(() => {
         if(loading) {
@@ -65,38 +55,6 @@ const App = () => {
             }}
             loading={loading}
             icon={SvgTest}
-        />
-        <Button
-            title="Modal Open"
-            onPress={() => {
-                openModal({
-                    modalKey: "test",
-                    children: <Text>Test</Text>
-                });
-            }}
-        />
-        <Button
-            title="Dialog Open"
-            onPress={() => {
-                openDialog({
-                    dialogKey: "test2",
-                    title: "Hi ?",
-                    content: "Selam",
-                    dismissOnTouchBackdrop: false,
-                    primaryButtonProps: {
-                        onPress: ({
-                            setLoading: setConfirmLoading,
-                            dialogKey
-                        }) => {
-                            setConfirmLoading(true);
-                            setTimeout(() => {
-                                setConfirmLoading(false);
-                                closeDialog(dialogKey);
-                            }, 2000);
-                        }
-                    }
-                });
-            }}
         />
         <Switch
             isActive={isSwitchActive}
@@ -132,6 +90,34 @@ const App = () => {
             initialValue="Merhaba"
             clearEnabled={true}
             placeholder="Lütfen bir metin girin."
+        />
+        <Button
+            title="Open Dialog"
+            onPress={() => {
+                setIsVisibleDialog(true);
+            }}
+        />
+        <Dialog
+            isVisible={isVisibleDialog}
+            title="Merhaba!"
+            content="Bunu yapmak istediğinize emin misiniz ?"
+            onOverlayPress={() => {
+                setIsVisibleDialog(false);
+            }}
+            variant="yes-no"
+            primaryButtonProps={{
+                title: "Tamam",
+                loading: dialogLoading,
+                onPress: () => {
+                    setIsVisibleDialog(false);
+                }
+            }}
+            secondaryButtonProps={{
+                title: "Test It",
+                onPress: () => {
+                    setDialogLoading(!dialogLoading);
+                }
+            }}
         />
     </PageContainer>;
 };

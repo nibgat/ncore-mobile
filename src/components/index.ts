@@ -27,9 +27,5 @@ export {
 } from "./switch";
 
 export {
-    default as Modal
-} from "./modal";
-
-export {
     default as Dialog
 } from "./dialog";

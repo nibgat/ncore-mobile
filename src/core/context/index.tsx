@@ -1,11 +1,7 @@
 import React, {
     useContext,
-    useState,
     FC
 } from "react";
-import ModalProvider, {
-    ModalContext
-} from "./modal";
 import BottomSheetProvider, {
     BottomSheetContext
 } from "./bottomSheet";
@@ -18,15 +14,12 @@ import ThemeProvider, {
 import {
     useNCoreBottomSheetReturnType,
     useNCoreLocalesReturnType,
-    useNCoreDialogReturnType,
     useNCoreThemeReturnType,
-    useNCoreModalReturnType,
-    LocaleConfig,
-    DialogKey
+    LocaleConfig
 } from "../constants";
 import {
-    Dialog
-} from "../../components";
+    Host 
+} from "react-native-portalize";
 
 type NCoreContext = {
     initialThemeKey?: NCore.ThemeKey;
@@ -50,17 +43,16 @@ const NCoreContext: FC<NCoreContext> = ({
         <LocalesProvider
             locales={locales}
         >
-            <ModalProvider>
+            <Host>
                 <BottomSheetProvider>
                     {children}
                 </BottomSheetProvider>
-            </ModalProvider>
+            </Host>
         </LocalesProvider>
     </ThemeProvider>;
 };
 
 export const useNCoreTheme = (): useNCoreThemeReturnType => useContext(ThemeContext);
-export const useNCoreModal = (): useNCoreModalReturnType => useContext(ModalContext);
 export const useNCoreBottomSheet = (): useNCoreBottomSheetReturnType => useContext(BottomSheetContext);
 export const useNCoreLocale = (): useNCoreLocalesReturnType => {
     const {
@@ -77,77 +69,6 @@ export const useNCoreLocale = (): useNCoreLocalesReturnType => {
         activeLocale,
         switchLocale,
         isRTL
-    };
-};
-export const useNCoreDialog = (): useNCoreDialogReturnType => {
-    const [dialog, setDialog] = useState<{ data: DialogKey[] }>({
-        data: []
-    });
-
-    const {
-        closeModal,
-        openModal
-    } = useContext(ModalContext);
-
-    return {
-        openDialog: ({
-            dialogKey,
-            bottomComponent,
-            secondaryButtonProps,
-            children,
-            primaryButtonProps,
-            content,
-            headerComponent,
-            contentContainerStyle,
-            dismissOnTouchBackdrop = false,
-            onDismiss,
-            title,
-            variant
-        }) => {
-            if(variant === "info") dismissOnTouchBackdrop = true; 
-
-            let newData = JSON.parse(JSON.stringify(dialog.data));
-            newData.unshift(dialogKey);
-            setDialog({
-                data: newData
-            });
-
-            openModal({
-                modalKey: dialogKey,
-                children: <Dialog
-                    children={children}
-                    dialogKey={dialogKey}
-                    bottomComponent={bottomComponent}
-                    secondaryButtonProps={secondaryButtonProps}
-                    primaryButtonProps={primaryButtonProps}
-                    content={content}
-                    headerComponent={headerComponent}
-                    title={title}
-                    variant={variant}
-                />,
-                contentContainerStyle: {
-                    ...contentContainerStyle,
-                    justifyContent: "center",
-                    alignItems: "center"
-                },
-                dismissOnTouchBackdrop: dismissOnTouchBackdrop,
-                onDismiss: onDismiss
-            });
-        },
-        closeAllDialogs: () => {
-            dialog.data.forEach((item) => {
-                setDialog({
-                    data: []
-                });
-                closeModal(item);
-            });
-        },
-        closeDialog: (dialogKey) => {
-            setDialog({
-                data: JSON.parse(JSON.stringify(dialog.data)).filter((p_item: DialogKey) => p_item !== dialogKey)
-            });
-            closeModal(dialogKey);
-        }
     };
 };
 

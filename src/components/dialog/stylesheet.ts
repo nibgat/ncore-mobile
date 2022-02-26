@@ -21,5 +21,12 @@ export default StyleSheet.create({
         justifyContent: "flex-end",
         alignSelf: "stretch",
         flexDirection: "row"
+    },
+    overlay: {
+        justifyContent: "center",
+        alignItems: "center"
+    },
+    overlayTouchableArea: {
+        flex: 1
     }
 });

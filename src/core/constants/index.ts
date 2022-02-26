@@ -5,20 +5,8 @@ export {
     LocalesStore 
 } from "./locales";
 export {
-    default as ModalStoreInitial,
-    useNCoreModalReturnType,
-    ModalStoreReducer,
-    ModalStore,
-    ModalData,
-    ModalKey
-} from "./modal";
-export {
-    useNCoreDialogReturnType,
-    ISecondaryDialogButton,
-    IPrimaryDialogButton,
     DialogVariant,
-    IDialogProps,
-    DialogKey
+    IDialogProps
 } from "./dialog";
 export {
     default as BottomSheetStoreInitial,

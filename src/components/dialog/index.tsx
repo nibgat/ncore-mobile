@@ -1,15 +1,15 @@
 import React, {
-    useState,
     FC
 } from "react";
 import {
+    TouchableOpacity,
+    StyleSheet,
     ViewStyle,
     View
 } from "react-native";
 import styles from "./stylesheet";
 import {
     useNCoreLocale,
-    useNCoreDialog,
     useNCoreTheme
 } from "../../core/context";
 import Button from "../button";
@@ -17,6 +17,9 @@ import Text from "../text";
 import {
     IDialogProps
 } from "../../core/constants";
+import {
+    Portal
+} from "react-native-portalize";
 
 type DialogStylerParams = {
     radiuses: NCore.RadiusesTokens;
@@ -73,7 +76,8 @@ const dialogStyler = ({
 
 const Dialog: FC<IDialogProps> = ({
     variant,
-    dialogKey,
+    isVisible = false,
+    onOverlayPress,
     primaryButtonProps,
     secondaryButtonProps,
     headerComponent,
@@ -91,12 +95,6 @@ const Dialog: FC<IDialogProps> = ({
     const {
         localize
     } = useNCoreLocale();
-
-    const {
-        closeDialog
-    } = useNCoreDialog();
-
-    const [primaryButtonLoading, setPrimaryButtonLoading] = useState(false);
 
     const {
         primaryButton: primaryButtonStyle,
@@ -152,12 +150,11 @@ const Dialog: FC<IDialogProps> = ({
 
         return <Button
             title={secondaryButtonProps?.title || localize("coreDialogSecondaryButtonTitle")}
+            loading={secondaryButtonProps?.loading}
             color="layer2"
+            textColor="body"
             onPress={() => {
-                if(secondaryButtonProps?.onPress) secondaryButtonProps.onPress({
-                    dialogKey
-                });
-                if(secondaryButtonProps?.hideOnPress) closeDialog(dialogKey);
+                if(secondaryButtonProps?.onPress) secondaryButtonProps.onPress();
             }}
         />;
     };
@@ -165,36 +162,60 @@ const Dialog: FC<IDialogProps> = ({
     const primaryButton = () => {
         return <Button
             title={localize("coreDialogPrimaryButtonTitle")}
-            loading={primaryButtonLoading}
+            loading={primaryButtonProps?.loading}
             onPress={() => {
-                if(primaryButtonProps?.onPress) primaryButtonProps.onPress({
-                    setLoading: setPrimaryButtonLoading,
-                    dialogKey
-                });
-                if(primaryButtonProps?.hideOnPress) closeDialog(dialogKey);
+                if(primaryButtonProps?.onPress) primaryButtonProps?.onPress();
             }}
             style={primaryButtonStyle}
         />;
     };
 
-    return <View
-        style={[
-            styles.container,
-            container
-        ]}
-    >
-        {renderHeader()}
-        <View
-            style={[
-                styles.content,
-                contentStyle
-            ]}
-        >
-            {children || <Text>
-                {content}
-            </Text>}
-        </View>
-        {renderBottom()}
-    </View>;
+    return <Portal>
+        {
+            isVisible ?
+                <View
+                    style={[
+                        styles.overlay,
+                        StyleSheet.absoluteFill,
+                        {
+                            backgroundColor: colors.modalBackground,
+                            padding: spaces.container
+                        }
+                    ]}
+                >
+                    <TouchableOpacity
+                        style={[
+                            StyleSheet.absoluteFill
+                        ]}
+                        onPress={() => {
+                            if(onOverlayPress) onOverlayPress();
+                        }}
+                    >
+                        <View style={styles.overlayTouchableArea}/>
+                    </TouchableOpacity>
+                    <View
+                        style={[
+                            styles.container,
+                            container
+                        ]}
+                    >
+                        {renderHeader()}
+                        <View
+                            style={[
+                                styles.content,
+                                contentStyle
+                            ]}
+                        >
+                            {children || <Text>
+                                {content}
+                            </Text>}
+                        </View>
+                        {renderBottom()}
+                    </View>
+                </View>
+                :
+                null
+        }
+    </Portal>;
 };
 export default Dialog;

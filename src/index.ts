@@ -14,6 +14,7 @@ export {
     PageContainer,
     RadioButton,
     TextInput,
+    Dialog,
     Button,
     Switch,
     Chip,

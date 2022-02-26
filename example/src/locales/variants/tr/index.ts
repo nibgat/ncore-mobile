@@ -10,7 +10,9 @@ const tr = {
         "coreMultiSelectBoxTitle": "Kategori seçim aracı",
         "coreMultiSelectBoxValidationEnterContent": "Değer giriniz",
         "corePagesSelectPageValidationMinSelectRequired": "En az bir seçim zorunludur",
-        "corePagesSelectPageValidationNoMoreSelectable": "Daha fazla seçemezsiniz"
+        "corePagesSelectPageValidationNoMoreSelectable": "Daha fazla seçemezsiniz",
+        "coreDialogSecondaryButtonTitle": "İptal",
+        "coreDialogPrimaryButtonTitle": "Tamam"
     }
 };
 export default tr;
