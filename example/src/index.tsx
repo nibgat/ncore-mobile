@@ -36,6 +36,7 @@ const App = () => {
     const [isChipSelected, setIsChipSelected] = useState(false);
     const [isVisibleDialog, setIsVisibleDialog] = useState(false);
     const [dialogLoading, setDialogLoading] = useState(false);
+    const [bigButtonLoading, setBigButtonLoading] = useState(false);
 
     useEffect(() => {
         if(loading) {
@@ -119,6 +120,18 @@ const App = () => {
             spreadBehaviour="stretch"
             onPress={() => {
                 setIsVisibleDialog(true);
+            }}
+            style={{
+                marginBottom: 20
+            }}
+        />
+        <Button
+            title="Loading Test"
+            size="large"
+            spreadBehaviour="stretch"
+            loading={bigButtonLoading}
+            onPress={() => {
+                setBigButtonLoading(true);
             }}
             style={{
                 marginBottom: 20

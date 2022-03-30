@@ -9,6 +9,7 @@ export default StyleSheet.create({
         alignItems: "center"
     },
     loading: {
-        position: "absolute"
+        maxHeight: 20,
+        width: 20
     }
 });

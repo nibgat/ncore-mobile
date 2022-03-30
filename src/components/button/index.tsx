@@ -50,7 +50,6 @@ type ButtonStylerParams = {
     disabledStyle: ViewStyle;
     variant: ButtonVariant;
     colors: NCore.Colors;
-    loading?: boolean;
     disabled: boolean;
     size: ButtonSize;
 };
@@ -130,7 +129,6 @@ const buttonStyler = ({
     radiuses,
     disabled,
     borders,
-    loading,
     variant,
     colors,
     color,
@@ -150,10 +148,6 @@ const buttonStyler = ({
         color: titleColor,
         variant: SIZE_TO_STYLE_MAPPING[size].title.size
     };
-
-    if(loading) {
-        container.paddingLeft = 40;
-    }
 
     if(!textColor) {
         if(variant !== "filled") {
@@ -229,7 +223,6 @@ const Button: FC<IButtonProps> = ({
         disabled,
         radiuses,
         borders,
-        loading,
         variant,
         colors,
         color,
@@ -244,10 +237,7 @@ const Button: FC<IButtonProps> = ({
         return <ActivityIndicator
             {...loadingProps}
             style={[
-                styles.loading,
-                {
-                    left: spaces.container
-                }
+                styles.loading
             ]}
         />;
     };
@@ -283,7 +273,7 @@ const Button: FC<IButtonProps> = ({
             color={titleProps.color}
             style={[
                 titleStyle,
-                textStyle
+                textStyle,
             ]}
         >
             {title}
