@@ -7,7 +7,8 @@ import {
     TouchableOpacity,
     ViewStyle,
     TextStyle,
-    StyleProp
+    StyleProp,
+    View
 } from "react-native";
 import styles from "./stylesheet";
 import Text from "../text";
@@ -49,30 +50,47 @@ type ButtonStylerParams = {
     disabledStyle: ViewStyle;
     variant: ButtonVariant;
     colors: NCore.Colors;
+    loading?: boolean;
     disabled: boolean;
     size: ButtonSize;
 };
 
 type TitleProps = {
     color: keyof NCore.Colors;
-    style: TextStyle;
+    variant: keyof NCore.Typography;
 };
 
 type ButtonStylerResult = {
     loadingProps: ActivityIndicatorProps;
-    iconProps: INCoreIconProps,
+    iconProps: INCoreIconProps;
     titleProps: TitleProps;
     container: ViewStyle;
 };
 
-const SIZE_TO_STYLE_MAPPING = {
+type ButtonStyle = {
+    container: ViewStyle;
+    title: {
+        size: keyof NCore.Typography;
+    };
+    icon: {
+        size: number;
+    };
+};
+
+type ButtonStyleMappingType = {
+    small: ButtonStyle;
+    medium: ButtonStyle;
+    large: ButtonStyle;
+};
+
+const SIZE_TO_STYLE_MAPPING: ButtonStyleMappingType = {
     "small": {
         container: {
             paddingHorizontal: 20,
-            paddingVertical: 4
+            paddingVertical: 8
         },
         title: {
-            fontSize: 12
+            size: "buttonSm"
         },
         icon: {
             size: 14
@@ -80,11 +98,11 @@ const SIZE_TO_STYLE_MAPPING = {
     },
     "medium": {
         container: {
-            paddingHorizontal: 24,
-            paddingVertical: 8
+            paddingHorizontal: 20,
+            paddingVertical: 12
         },
         title: {
-            fontSize: 16
+            size: "buttonMd"
         },
         icon: {
             size: 18
@@ -92,11 +110,11 @@ const SIZE_TO_STYLE_MAPPING = {
     },
     "large": {
         container: {
-            paddingHorizontal: 28,
-            paddingVertical: 12
+            paddingHorizontal: 20,
+            paddingVertical: 16
         },
         title: {
-            fontSize: 20
+            size: "buttonLg"
         },
         icon: {
             size: 22
@@ -112,6 +130,7 @@ const buttonStyler = ({
     radiuses,
     disabled,
     borders,
+    loading,
     variant,
     colors,
     color,
@@ -129,8 +148,12 @@ const buttonStyler = ({
 
     let titleProps: TitleProps = {
         color: titleColor,
-        style: SIZE_TO_STYLE_MAPPING[size].title
+        variant: SIZE_TO_STYLE_MAPPING[size].title.size
     };
+
+    if(loading) {
+        container.paddingLeft = 40;
+    }
 
     if(!textColor) {
         if(variant !== "filled") {
@@ -206,6 +229,7 @@ const Button: FC<IButtonProps> = ({
         disabled,
         radiuses,
         borders,
+        loading,
         variant,
         colors,
         color,
@@ -219,6 +243,12 @@ const Button: FC<IButtonProps> = ({
 
         return <ActivityIndicator
             {...loadingProps}
+            style={[
+                styles.loading,
+                {
+                    left: spaces.container
+                }
+            ]}
         />;
     };
 
@@ -241,8 +271,7 @@ const Button: FC<IButtonProps> = ({
             return null;
         }
 
-        let textStyle = {
-            ...titleProps.style
+        let textStyle: TextStyle = {
         };
 
         if(IconComponentProp || loading) {
@@ -250,7 +279,7 @@ const Button: FC<IButtonProps> = ({
         }
 
         return <Text
-            variant="button"
+            variant={titleProps.variant}
             color={titleProps.color}
             style={[
                 titleStyle,

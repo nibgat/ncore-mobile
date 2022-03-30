@@ -1,8 +1,11 @@
 import {
     ReactNode
 } from "react";
+import {
+    PortalizedComponentProps 
+} from "../types";
 
-export interface IDialogProps {
+export interface IDialogProps extends PortalizedComponentProps {
     variant?: DialogVariant;
     title?: string;
     content?: string;
@@ -11,7 +14,6 @@ export interface IDialogProps {
     secondaryButtonProps?: DialogButton;
     headerComponent?: ReactNode;
     bottomComponent?: ReactNode;
-    isVisible?: boolean;
 };
 
 export type DialogVariant = "yes-no" | "ok" | "info";

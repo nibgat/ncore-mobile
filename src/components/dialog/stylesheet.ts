@@ -14,12 +14,10 @@ export default StyleSheet.create({
         width: "100%"
     },
     bottomContainer: {
-        paddingBottom: 0,
         width: "100%"
     },
     bottomContentContainer: {
         justifyContent: "flex-end",
-        alignSelf: "stretch",
         flexDirection: "row"
     },
     overlay: {

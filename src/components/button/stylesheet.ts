@@ -7,5 +7,8 @@ export default StyleSheet.create({
         justifyContent: "center",
         flexDirection: "row",
         alignItems: "center"
+    },
+    loading: {
+        position: "absolute"
     }
 });

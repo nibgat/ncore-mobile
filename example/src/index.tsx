@@ -93,8 +93,35 @@ const App = () => {
         />
         <Button
             title="Open Dialog"
+            size="small"
+            spreadBehaviour="stretch"
             onPress={() => {
                 setIsVisibleDialog(true);
+            }}
+            style={{
+                marginBottom: 20
+            }}
+        />
+        <Button
+            title="Open Dialog"
+            size="medium"
+            spreadBehaviour="stretch"
+            onPress={() => {
+                setIsVisibleDialog(true);
+            }}
+            style={{
+                marginBottom: 20
+            }}
+        />
+        <Button
+            title="Open Dialog"
+            size="large"
+            spreadBehaviour="stretch"
+            onPress={() => {
+                setIsVisibleDialog(true);
+            }}
+            style={{
+                marginBottom: 20
             }}
         />
         <Dialog

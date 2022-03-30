@@ -5,6 +5,10 @@ import {
     SvgProps
 } from "react-native-svg";
 
+export type PortalizedComponentProps = {
+    isVisible: boolean
+};
+
 export interface INCoreIconProps extends SvgProps {
     color: string;
     size: number;
@@ -34,7 +38,9 @@ declare global {
             header9?: TypograpghyVariant;
             body?: TypograpghyVariant;
             caption?: TypograpghyVariant;
-            button?: TypograpghyVariant;
+            buttonSm?: TypograpghyVariant;
+            buttonMd?: TypograpghyVariant;
+            buttonLg?: TypograpghyVariant;
             overline?: TypograpghyVariant;
         }
 

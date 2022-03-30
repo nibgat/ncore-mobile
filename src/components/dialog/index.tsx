@@ -170,52 +170,51 @@ const Dialog: FC<IDialogProps> = ({
         />;
     };
 
+    if(!isVisible) {
+        return null;
+    }
+
     return <Portal>
-        {
-            isVisible ?
+        <View
+            style={[
+                styles.overlay,
+                StyleSheet.absoluteFill,
+                {
+                    backgroundColor: colors.modalBackground,
+                    padding: spaces.container
+                }
+            ]}
+        >
+            <TouchableOpacity
+                style={[
+                    StyleSheet.absoluteFill
+                ]}
+                onPress={() => {
+                    if(onOverlayPress) onOverlayPress();
+                }}
+            >
+                <View style={styles.overlayTouchableArea}/>
+            </TouchableOpacity>
+            <View
+                style={[
+                    styles.container,
+                    container
+                ]}
+            >
+                {renderHeader()}
                 <View
                     style={[
-                        styles.overlay,
-                        StyleSheet.absoluteFill,
-                        {
-                            backgroundColor: colors.modalBackground,
-                            padding: spaces.container
-                        }
+                        styles.content,
+                        contentStyle
                     ]}
                 >
-                    <TouchableOpacity
-                        style={[
-                            StyleSheet.absoluteFill
-                        ]}
-                        onPress={() => {
-                            if(onOverlayPress) onOverlayPress();
-                        }}
-                    >
-                        <View style={styles.overlayTouchableArea}/>
-                    </TouchableOpacity>
-                    <View
-                        style={[
-                            styles.container,
-                            container
-                        ]}
-                    >
-                        {renderHeader()}
-                        <View
-                            style={[
-                                styles.content,
-                                contentStyle
-                            ]}
-                        >
-                            {children || <Text>
-                                {content}
-                            </Text>}
-                        </View>
-                        {renderBottom()}
-                    </View>
+                    {children || <Text>
+                        {content}
+                    </Text>}
                 </View>
-                :
-                null
-        }
+                {renderBottom()}
+            </View>
+        </View>
     </Portal>;
 };
 export default Dialog;

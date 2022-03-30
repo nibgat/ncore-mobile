@@ -2,6 +2,7 @@ import React, {
     createContext,
     useReducer,
     useEffect,
+    useState,
     Dispatch,
     FC
 } from "react";
@@ -40,20 +41,28 @@ const ThemeProvider: FC<ThemeProvider> = ({
             activeTheme: initialThemeKey
         })
     );
+    const [isInitialSwitchTheme, setIsInitialSwitchTheme] = useState(false);
+
+    useEffect(() => {
+        if(!isInitialSwitchTheme) {
+            theme.switchTheme(initialThemeKey);
+            setIsInitialSwitchTheme(true);
+        }
+    }, [isInitialSwitchTheme, initialThemeKey, theme]);
 
     useEffect(() => {
         setTheme({
             switchTheme: (themeKey: NCore.ThemeKey) => {
                 const currentProjectTheme = themes?.find(e => e.key === themeKey);
-        
+
                 if(themeKey !== "light" && themeKey !== "dark" && !(currentProjectTheme)) {
                     throw Error(`Can not find a theme for the given themeKey: ${themeKey}`);
                 }
-        
+
                 const _typography = mergeGivenTypographyWithNCore(themeKey, currentProjectTheme?.typography);
                 const _colors = mergeGivenColorsWithNCore(themeKey, currentProjectTheme?.colors);
                 const _designTokens = mergeGivenDesignTokensWithNCore(designTokens);
-        
+
                 setTheme({
                     activeTheme: themeKey,
                     typography: _typography,
