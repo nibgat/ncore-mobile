@@ -38,9 +38,9 @@ declare global {
             header9?: TypograpghyVariant;
             body?: TypograpghyVariant;
             caption?: TypograpghyVariant;
-            buttonSm?: TypograpghyVariant;
-            buttonMd?: TypograpghyVariant;
-            buttonLg?: TypograpghyVariant;
+            buttonSmall?: TypograpghyVariant;
+            buttonMedium?: TypograpghyVariant;
+            buttonLarge?: TypograpghyVariant;
             overline?: TypograpghyVariant;
         }
 

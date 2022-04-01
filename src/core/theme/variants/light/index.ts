@@ -99,21 +99,21 @@ export const typography: Required<NCore.Typography> = {
         lineHeight: 14.4,
         fontSize: 10
     },
-    buttonSm: {
+    buttonSmall: {
         fontFamily: "Montserrat-SemiBold",
         fontWeight: "600",
         letterSpacing: 0.5,
         lineHeight: 20.72,
         fontSize: 12
     },
-    buttonMd: {
+    buttonMedium: {
         fontFamily: "Montserrat-SemiBold",
         fontWeight: "600",
         letterSpacing: 0.5,
         lineHeight: 22.72,
         fontSize: 14
     },
-    buttonLg: {
+    buttonLarge: {
         fontFamily: "Montserrat-SemiBold",
         fontWeight: "600",
         letterSpacing: 0.5,

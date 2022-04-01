@@ -8,8 +8,10 @@ export default StyleSheet.create({
         flexDirection: "row",
         alignItems: "center"
     },
+    loadingContainer: {
+        position: "relative"
+    },
     loading: {
-        maxHeight: 20,
-        width: 20
+        alignSelf: "center"
     }
 });

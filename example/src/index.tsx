@@ -23,7 +23,8 @@ import SvgTest from "./assets/svg/Test";
 const App = () => {
     const {
         activeTheme,
-        switchTheme
+        switchTheme,
+        spaces
     } = useNCoreTheme();
 
     const {
@@ -48,7 +49,14 @@ const App = () => {
     }, [loading, activeTheme, switchTheme]);
 
     return <PageContainer>
-        <Text variant="body">Hello NİBGAT®. Your selected theme is {activeTheme}. Your text is "{localize("corePagesSelectPageValidationNoMoreSelectable")}" and your localize is "{localize("language")}"</Text>
+        <Text
+            variant="body"
+            style={{
+                marginBottom: spaces.container
+            }}
+        >
+            Hello NİBGAT®. Your selected theme is {activeTheme}. Your text is "{localize("corePagesSelectPageValidationNoMoreSelectable")}" and your localize is "{localize("language")}"
+        </Text>
         <Button
             title="Switch Theme"
             onPress={() => {
@@ -67,30 +75,45 @@ const App = () => {
         <Chip
             onPress={() => setIsChipSelected(!isChipSelected)}
             selected={isChipSelected}
+            style={{
+                marginBottom: spaces.container
+            }}
         />
         <RadioButton
             selected={index === 0}
             title="Merhaba dünya."
             spreadBehaviour="free"
             onChange={() => setIndex(0)}
+            style={{
+                marginBottom: spaces.content
+            }}
         />
         <RadioButton
             selected={index === 1}
             title="Lorem."
             spreadBehaviour="stretch"
             onChange={() => setIndex(1)}
+            style={{
+                marginBottom: spaces.content
+            }}
         />
         <RadioButton
             selected={index === 2}
             title="Merhaba dünyaya geldim bir anda bir zamanda."
             spreadBehaviour="baseline"
             onChange={() => setIndex(2)}
+            style={{
+                marginBottom: spaces.container
+            }}
         />
         <TextInput
             title="Test"
             initialValue="Merhaba"
             clearEnabled={true}
             placeholder="Lütfen bir metin girin."
+            style={{
+                marginBottom: spaces.container
+            }}
         />
         <Button
             title="Open Dialog"
@@ -100,7 +123,7 @@ const App = () => {
                 setIsVisibleDialog(true);
             }}
             style={{
-                marginBottom: 20
+                marginBottom: spaces.container
             }}
         />
         <Button
@@ -111,7 +134,7 @@ const App = () => {
                 setIsVisibleDialog(true);
             }}
             style={{
-                marginBottom: 20
+                marginBottom: spaces.container
             }}
         />
         <Button
@@ -122,7 +145,7 @@ const App = () => {
                 setIsVisibleDialog(true);
             }}
             style={{
-                marginBottom: 20
+                marginBottom: spaces.container
             }}
         />
         <Button
@@ -134,7 +157,7 @@ const App = () => {
                 setBigButtonLoading(true);
             }}
             style={{
-                marginBottom: 20
+                marginBottom: spaces.container
             }}
         />
         <Dialog

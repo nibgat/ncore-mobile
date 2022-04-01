@@ -59,8 +59,12 @@ type TitleProps = {
     variant: keyof NCore.Typography;
 };
 
+type LoadingProps = ActivityIndicatorProps & {
+    containerSize: keyof NCore.Typography;
+};
+
 type ButtonStylerResult = {
-    loadingProps: ActivityIndicatorProps;
+    loadingProps: LoadingProps;
     iconProps: INCoreIconProps;
     titleProps: TitleProps;
     container: ViewStyle;
@@ -71,6 +75,9 @@ type ButtonStyle = {
     title: {
         size: keyof NCore.Typography;
     };
+    loading: {
+        containerSize: keyof NCore.Typography;
+    },
     icon: {
         size: number;
     };
@@ -89,7 +96,10 @@ const SIZE_TO_STYLE_MAPPING: ButtonStyleMappingType = {
             paddingVertical: 8
         },
         title: {
-            size: "buttonSm"
+            size: "buttonSmall"
+        },
+        loading: {
+            containerSize: "buttonSmall"
         },
         icon: {
             size: 14
@@ -101,7 +111,10 @@ const SIZE_TO_STYLE_MAPPING: ButtonStyleMappingType = {
             paddingVertical: 12
         },
         title: {
-            size: "buttonMd"
+            size: "buttonMedium"
+        },
+        loading: {
+            containerSize: "buttonMedium"
         },
         icon: {
             size: 18
@@ -113,7 +126,10 @@ const SIZE_TO_STYLE_MAPPING: ButtonStyleMappingType = {
             paddingVertical: 16
         },
         title: {
-            size: "buttonLg"
+            size: "buttonLarge"
+        },
+        loading: {
+            containerSize: "buttonLarge"
         },
         icon: {
             size: 22
@@ -174,7 +190,8 @@ const buttonStyler = ({
         color: iconColor ? colors[iconColor] : colors[titleColor]
     };
 
-    let loadingProps: ActivityIndicatorProps = {
+    let loadingProps: LoadingProps = {
+        containerSize: SIZE_TO_STYLE_MAPPING[size].loading.containerSize,
         color: colors[titleColor],
         size: "small"
     };
@@ -204,6 +221,7 @@ const Button: FC<IButtonProps> = ({
 }) => {
     const {
         disabled: designTokensDisabled,
+        typography,
         radiuses,
         borders,
         spaces,
@@ -234,12 +252,25 @@ const Button: FC<IButtonProps> = ({
             return null;
         }
 
-        return <ActivityIndicator
-            {...loadingProps}
+        const loadingSize = typography[loadingProps.containerSize]?.fontSize || 16;
+
+        return <View
             style={[
-                styles.loading
+                styles.loadingContainer,
+                {
+                    height: loadingSize,
+                    width: loadingSize
+                }
             ]}
-        />;
+        >
+            <ActivityIndicator
+                color={loadingProps.color}
+                size={loadingProps.size}
+                style={[
+                    styles.loading
+                ]}
+            />
+        </View>;
     };
 
     const renderIcon = () => {
