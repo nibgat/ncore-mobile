@@ -2,6 +2,9 @@ import {
     ReactNode
 } from "react";
 import {
+    ButtonDisplayBehaviourWhileLoading 
+} from "src/components/button";
+import {
     PortalizedComponentProps 
 } from "../types";
 
@@ -21,5 +24,6 @@ export type DialogVariant = "yes-no" | "ok" | "info";
 type DialogButton = {
     title?: string;
     onPress?: () => void;
+    displayBehaviourWhileLoading?: ButtonDisplayBehaviourWhileLoading;
     loading?: boolean;
 };

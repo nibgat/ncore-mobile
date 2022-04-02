@@ -20,11 +20,13 @@ import {
     NCoreIcon 
 } from "../../core/types";
 
+export type ButtonDisplayBehaviourWhileLoading = "none" | "disabled";
 type ButtonSpreadBehaviour = "baseline" | "stretch" | "free";
 type ButtonVariant = "filled" | "outline" | "ghost";
 type ButtonSize = "small" | "medium" | "large";
 
 interface IButtonProps {
+    displayBehaviourWhileLoading?: ButtonDisplayBehaviourWhileLoading;
     spreadBehaviour?: ButtonSpreadBehaviour;
     titleStyle?: StyleProp<TextStyle>;
     iconColor?: keyof NCore.Colors;
@@ -41,6 +43,7 @@ interface IButtonProps {
 };
 
 type ButtonStylerParams = {
+    displayBehaviourWhileLoading: ButtonDisplayBehaviourWhileLoading;
     spreadBehaviour: ButtonSpreadBehaviour;
     radiuses: NCore.RadiusesTokens;
     textColor?: keyof NCore.Colors;
@@ -51,6 +54,7 @@ type ButtonStylerParams = {
     variant: ButtonVariant;
     colors: NCore.Colors;
     disabled: boolean;
+    loading?: boolean;
     size: ButtonSize;
 };
 
@@ -138,12 +142,14 @@ const SIZE_TO_STYLE_MAPPING: ButtonStyleMappingType = {
 };
 
 const buttonStyler = ({
+    displayBehaviourWhileLoading,
     spreadBehaviour,
     disabledStyle,
     iconColor,
     textColor,
     radiuses,
     disabled,
+    loading,
     borders,
     variant,
     colors,
@@ -164,6 +170,12 @@ const buttonStyler = ({
         color: titleColor,
         variant: SIZE_TO_STYLE_MAPPING[size].title.size
     };
+
+    if(loading) {
+        if(displayBehaviourWhileLoading === "disabled") {
+            container.opacity = 0.5;
+        }
+    }
 
     if(!textColor) {
         if(variant !== "filled") {
@@ -205,6 +217,7 @@ const buttonStyler = ({
 };
 
 const Button: FC<IButtonProps> = ({
+    displayBehaviourWhileLoading = "disabled",
     spreadBehaviour = "baseline",
     icon: IconComponentProp,
     variant = "filled",
@@ -235,11 +248,13 @@ const Button: FC<IButtonProps> = ({
         iconProps
     } = buttonStyler({
         disabledStyle: designTokensDisabled,
+        displayBehaviourWhileLoading,
         spreadBehaviour,
         iconColor,
         textColor,
         disabled,
         radiuses,
+        loading,
         borders,
         variant,
         colors,

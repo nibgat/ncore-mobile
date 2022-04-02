@@ -161,11 +161,12 @@ const Dialog: FC<IDialogProps> = ({
 
     const primaryButton = () => {
         return <Button
-            title={localize("coreDialogPrimaryButtonTitle")}
+            title={primaryButtonProps?.title || localize("coreDialogPrimaryButtonTitle")}
             loading={primaryButtonProps?.loading}
             onPress={() => {
                 if(primaryButtonProps?.onPress) primaryButtonProps?.onPress();
             }}
+            displayBehaviourWhileLoading={primaryButtonProps?.displayBehaviourWhileLoading}
             style={primaryButtonStyle}
         />;
     };

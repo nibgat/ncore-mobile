@@ -1,8 +1,6 @@
 export {
     useNCoreBottomSheet,
-    useNCoreDialog,
     useNCoreLocale,
-    useNCoreModal,
     useNCoreTheme
 } from "./core/context";
 

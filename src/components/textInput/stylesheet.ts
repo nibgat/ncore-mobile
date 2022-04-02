@@ -20,7 +20,7 @@ export default StyleSheet.create({
     },
     input: {
         borderColor: "transparent",
-        lineHeight: 14,
+        lineHeight: 16,
         padding: 0,
         margin: 0
     },

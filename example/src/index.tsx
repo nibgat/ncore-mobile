@@ -70,7 +70,7 @@ const App = () => {
             onPress={() => setIsSwitchActive(!isSwitchActive)}
             title="Merhaba dünya"
             spreadBehaviour="baseline"
-            disabled={true}
+            disabled={false}
         />
         <Chip
             onPress={() => setIsChipSelected(!isChipSelected)}
@@ -171,6 +171,7 @@ const App = () => {
             primaryButtonProps={{
                 title: "Tamam",
                 loading: dialogLoading,
+                displayBehaviourWhileLoading: "none",
                 onPress: () => {
                     setIsVisibleDialog(false);
                 }
