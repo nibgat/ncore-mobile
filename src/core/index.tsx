@@ -36,6 +36,7 @@ type NCoreProvider = {
     themes?: Array<NCore.Theme>;
     designTokens?: NCore.DesignTokens;
     locales?: Array<LocaleConfig>
+    initialThemeKey?: NCore.ThemeKey;
 };
 
 type SetDefaults = {
@@ -95,11 +96,13 @@ const SetDefaults: FC<SetDefaults> = ({
 const NCoreProvider: FC<NCoreProvider> = ({
     children,
     themes,
+    initialThemeKey,
     designTokens,
     locales
 }) => {
     return (
         <NCoreContext
+            initialThemeKey={initialThemeKey}
             themes={themes}
             designTokens={designTokens}
             locales={locales}
