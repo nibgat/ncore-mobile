@@ -10,6 +10,7 @@ export type ThemeStore = {
     borders: NCore.BordersTokens;
     radiuses: NCore.RadiusesTokens;
     disabled: NCore.DisabledTokens;
+    isSetInitialHooks: boolean;
 };
 
 export type ThemeStoreReducer = Partial<ThemeStore>;
@@ -18,6 +19,7 @@ export type useNCoreThemeReturnType = ThemeStore;
 const themeStore: ThemeStore = {
     activeTheme: "light",
     switchTheme: () => {},
+    isSetInitialHooks: false,
     typography: lightTheme.typography,
     colors: lightTheme.colors,
     spaces: designTokens.spaces,

@@ -44,7 +44,7 @@ const ThemeProvider: FC<ThemeProvider> = ({
     const [isInitialSwitchTheme, setIsInitialSwitchTheme] = useState(false);
 
     useEffect(() => {
-        if(!isInitialSwitchTheme) {
+        if(!isInitialSwitchTheme && theme.isSetInitialHooks) {
             theme.switchTheme(initialThemeKey);
             setIsInitialSwitchTheme(true);
         }
@@ -72,7 +72,8 @@ const ThemeProvider: FC<ThemeProvider> = ({
                     radiuses: _designTokens.radiuses,
                     disabled: _designTokens.disabled
                 });
-            }
+            },
+            isSetInitialHooks: true
         });
     }, [themes, designTokens]);
 
