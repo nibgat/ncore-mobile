@@ -29,3 +29,8 @@ export {
 export {
     default as Dialog
 } from "./dialog";
+
+export {
+    default as BottomSheet,
+    BottomSheetRef
+} from "./bottomSheet";

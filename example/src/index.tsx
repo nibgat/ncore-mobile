@@ -1,13 +1,16 @@
 import React, {
     useEffect,
-    useState
+    useState,
+    useRef
 } from "react";
 import {
     useNCoreLocale,
+    BottomSheetRef,
     PageContainer,
     NCoreProvider,
     useNCoreTheme,
     RadioButton,
+    BottomSheet,
     TextInput,
     Button,
     Switch,
@@ -28,7 +31,9 @@ const App = () => {
     } = useNCoreTheme();
 
     const {
-        localize
+        localize,
+        activeLocale,
+        switchLocale
     } = useNCoreLocale();
 
     const [loading, setLoading] = useState(false);
@@ -38,6 +43,8 @@ const App = () => {
     const [isVisibleDialog, setIsVisibleDialog] = useState(false);
     const [dialogLoading, setDialogLoading] = useState(false);
     const [bigButtonLoading, setBigButtonLoading] = useState(false);
+
+    const bottomSheetRef = useRef<BottomSheetRef>(null);
 
     useEffect(() => {
         if(loading) {
@@ -73,8 +80,12 @@ const App = () => {
             disabled={false}
         />
         <Chip
-            onPress={() => setIsChipSelected(!isChipSelected)}
+            onPress={() => {
+                setIsChipSelected(!isChipSelected);
+                switchLocale(activeLocale === "en" ? "tr" : "en");
+            }}
             selected={isChipSelected}
+            title={`Is language TR ( Current: ${activeLocale} )`}
             style={{
                 marginBottom: spaces.container
             }}
@@ -111,6 +122,17 @@ const App = () => {
             initialValue="Merhaba"
             clearEnabled={true}
             placeholder="Lütfen bir metin girin."
+            style={{
+                marginBottom: spaces.container
+            }}
+        />
+        <Button
+            title="Open Bottom Sheet"
+            size="small"
+            spreadBehaviour="stretch"
+            onPress={() => {
+                bottomSheetRef.current?.open();
+            }}
             style={{
                 marginBottom: spaces.container
             }}
@@ -183,14 +205,27 @@ const App = () => {
                 }
             }}
         />
+        <BottomSheet
+            ref={bottomSheetRef}
+            closeOnOverlayTap={true}
+        >
+            <Button
+                onPress={() => {
+                    alert("coo");
+                }}
+                title="Deneme"
+            />
+        </BottomSheet>
     </PageContainer>;
 };
 
 const NCoreContext = () => {
     return <NCoreProvider
-        locales={[
-            tr
-        ]}
+        config={{
+            locales: [
+                tr
+            ]
+        }}
     >
         <App/>
     </NCoreProvider>;

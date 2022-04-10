@@ -4,6 +4,9 @@ import {
 import {
     SvgProps
 } from "react-native-svg";
+import {
+    LocaleConfig 
+} from "../constants";
 
 export type PortalizedComponentProps = {
     isVisible: boolean
@@ -15,6 +18,13 @@ export interface INCoreIconProps extends SvgProps {
 };
 
 export type NCoreIcon = FC<INCoreIconProps>;
+
+export type NCoreConfig = {
+    themes?: Array<NCore.Theme>;
+    designTokens?: NCore.DesignTokens;
+    locales?: Array<LocaleConfig>
+    initialThemeKey?: NCore.ThemeKey;
+};
 
 declare global {
     namespace NCore {

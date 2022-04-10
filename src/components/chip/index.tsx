@@ -151,7 +151,7 @@ const Chip: FC<IChipProps> = ({
     const renderTitle = () => {
         return <Text
             color={titleProps.color}
-            variant="button"
+            variant="buttonSmall"
             style={[
                 titleProps.style
             ]}
@@ -191,7 +191,11 @@ const Chip: FC<IChipProps> = ({
     return <TouchableOpacity
         style={[
             styles.container,
-            container
+            container,
+            {
+                paddingHorizontal: spaces.container,
+                paddingVertical: spaces.content
+            }
         ]}
         disabled={!onPress || disabled}
         onPress={!onPress || disabled ? undefined : onPress}

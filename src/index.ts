@@ -9,8 +9,10 @@ export type {
 } from "./core/types";
 
 export {
+    BottomSheetRef,
     PageContainer,
     RadioButton,
+    BottomSheet,
     TextInput,
     Dialog,
     Button,

@@ -14,34 +14,30 @@ import ThemeProvider, {
 import {
     useNCoreBottomSheetReturnType,
     useNCoreLocalesReturnType,
-    useNCoreThemeReturnType,
-    LocaleConfig
+    useNCoreThemeReturnType
 } from "../constants";
 import {
     Host 
 } from "react-native-portalize";
+import {
+    NCoreConfig 
+} from "../types";
 
 type NCoreContext = {
-    initialThemeKey?: NCore.ThemeKey;
-    themes?: Array<NCore.Theme>;
-    designTokens?: NCore.DesignTokens;
-    locales?: Array<LocaleConfig>;
+    config?: NCoreConfig
 };
 
 const NCoreContext: FC<NCoreContext> = ({
     children,
-    initialThemeKey,
-    themes,
-    designTokens,
-    locales
+    config
 }) => {
     return <ThemeProvider
-        initialThemeKey={initialThemeKey}
-        themes={themes}
-        designTokens={designTokens}
+        initialThemeKey={config?.initialThemeKey}
+        themes={config?.themes}
+        designTokens={config?.designTokens}
     >
         <LocalesProvider
-            locales={locales}
+            locales={config?.locales}
         >
             <Host>
                 <BottomSheetProvider>
