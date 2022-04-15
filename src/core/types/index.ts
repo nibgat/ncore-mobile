@@ -13,8 +13,8 @@ export type PortalizedComponentProps = {
 };
 
 export interface INCoreIconProps extends SvgProps {
-    color: string;
-    size: number;
+    color?: string;
+    size?: number;
 };
 
 export type NCoreIcon = FC<INCoreIconProps>;
@@ -68,6 +68,7 @@ declare global {
             accent: string;
             attention: string;
             info: string;
+            seperator: string;
             hideBody: string;
             gray0: string;
             gray10: string;
@@ -128,15 +129,15 @@ declare global {
         interface Translation {
             language: string;
             appTitle: string;
-            coreSelectBoxSelection: string;
-            coreSelectBoxErrorsNonSelect: string;
-            coreSearchBoxValidationEnterContent: string;
-            coreMultiSelectBoxTitle: string;
-            coreMultiSelectBoxValidationEnterContent: string;
-            corePagesSelectPageValidationMinSelectRequired: string;
-            corePagesSelectPageValidationNoMoreSelectable: string;
-            coreDialogSecondaryButtonTitle: string;
-            coreDialogPrimaryButtonTitle: string;
+            nCoreDialogSecondaryButtonTitle: string;
+            nCoreDialogPrimaryButtonTitle: string;
+            nCoreSelectBoxSelectionValue: string;
+            nCoreSelectBoxNonSelectValue: string;
+            nCoreSelectBoxValidationMinSelectRequired: string;
+            nCoreSelectBoxValidationNoMoreSelectable: string;
+            nCoreMultiSelectBoxValidationEnterContent: string;
+            nCoreSelectBoxSelectAll: string;
+            nCoreSelectBoxClearAll: string;
         }
     }
 }

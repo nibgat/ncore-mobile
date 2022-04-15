@@ -23,10 +23,10 @@ type RadioButtonSpreadBehaviour = "baseline" | "stretch" | "free";
 
 interface IRadioButtonProps {
     spreadBehaviour?: RadioButtonSpreadBehaviour;
+    onChange?: (selected: boolean) => void;
     titleType?: keyof NCore.Typography;
     uncheckedIcon?: NCoreIcon;
     checkedIcon?: NCoreIcon;
-    onChange?: () => void;
     disabled?: boolean;
     selected?: boolean;
     style?: ViewStyle;
@@ -139,7 +139,7 @@ const RadioButton: FC<IRadioButtonProps> = ({
     };
 
     const onChange = () => {
-        if(onChangeProp) onChangeProp();
+        if(onChangeProp) onChangeProp(selected);
     };
 
     return <TouchableOpacity

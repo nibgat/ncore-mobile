@@ -11,7 +11,7 @@ import {
     useNCoreTheme 
 } from "../../core/context";
 
-interface ITextProps extends TextProps {
+export interface ITextProps extends TextProps {
     variant?: keyof NCore.Typography;
     style?: StyleProp<TextStyle>;
     color?: keyof NCore.Colors;

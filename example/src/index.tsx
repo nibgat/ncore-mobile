@@ -4,7 +4,7 @@ import React, {
     useRef
 } from "react";
 import {
-    useNCoreLocale,
+    useNCoreLocalization,
     BottomSheetRef,
     PageContainer,
     NCoreProvider,
@@ -12,16 +12,33 @@ import {
     RadioButton,
     BottomSheet,
     TextInput,
+    SelectBox,
     Button,
     Switch,
     Dialog,
     Chip,
-    Text
+    Text,
+    StateCard,
+    CheckBox
 } from "ncore-mobile";
 import {
     tr
 } from "./locales";
 import SvgTest from "./assets/svg/Test";
+
+type Test = {
+    test: string;
+}
+type TestArray = Array<Test>;
+
+const TestData: TestArray = [
+    {
+        test: "pt"
+    },
+    {
+        test: "mets"
+    }
+];
 
 const App = () => {
     const {
@@ -34,7 +51,7 @@ const App = () => {
         localize,
         activeLocale,
         switchLocale
-    } = useNCoreLocale();
+    } = useNCoreLocalization();
 
     const [loading, setLoading] = useState(false);
     const [index, setIndex] = useState(0);
@@ -43,6 +60,7 @@ const App = () => {
     const [isVisibleDialog, setIsVisibleDialog] = useState(false);
     const [dialogLoading, setDialogLoading] = useState(false);
     const [bigButtonLoading, setBigButtonLoading] = useState(false);
+    const [check, setCheck] = useState(false);
 
     const bottomSheetRef = useRef<BottomSheetRef>(null);
 
@@ -62,7 +80,7 @@ const App = () => {
                 marginBottom: spaces.container
             }}
         >
-            Hello NİBGAT®. Your selected theme is {activeTheme}. Your text is "{localize("corePagesSelectPageValidationNoMoreSelectable")}" and your localize is "{localize("language")}"
+                Hello NİBGAT®. Your selected theme is {activeTheme}. Your text is "{localize("nCoreMultiSelectBoxValidationEnterContent")}" and your localize is "{localize("language")}"
         </Text>
         <Button
             title="Switch Theme"
@@ -125,6 +143,27 @@ const App = () => {
             style={{
                 marginBottom: spaces.container
             }}
+        />
+        <CheckBox
+            isActive={check}
+            disabled={true}
+            onChange={() => {
+                setCheck(!check);
+            }}
+        />
+        <SelectBox
+            title="Hello"
+            initialData={TestData}
+            multipleSelect={true}
+            minChoice={1}
+            itemLabelExtractor={(item) => {
+                return item.test;
+            }}
+            style={[
+                {
+                    marginBottom: spaces.container
+                }
+            ]}
         />
         <Button
             title="Open Bottom Sheet"
@@ -209,11 +248,8 @@ const App = () => {
             ref={bottomSheetRef}
             closeOnOverlayTap={true}
         >
-            <Button
-                onPress={() => {
-                    alert("coo");
-                }}
-                title="Deneme"
+            <StateCard
+                title="Test deneme"
             />
         </BottomSheet>
     </PageContainer>;

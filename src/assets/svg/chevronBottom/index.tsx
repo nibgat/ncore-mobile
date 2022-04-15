@@ -1,24 +1,24 @@
 import React from "react";
+import Svg, {
+    Path
+} from "react-native-svg";
 import {
     INCoreIconProps 
 } from "../../../core/types";
-import Svg, {
-    Path 
-} from "react-native-svg";
 import {
     calculateSvgLongSideSize 
 } from "../util";
 
-const ClearIconDefaultSize = {
-    y: 20,
-    x: 20
+const ChevronBottomDefaultSize = {
+    y: 10,
+    x: 18
 };
 
-const LongSide = calculateSvgLongSideSize(ClearIconDefaultSize);
+const LongSide = calculateSvgLongSideSize(ChevronBottomDefaultSize);
 
-const SvgClearIcon = ({
+const SvgChevronBottom = ({
     size = LongSide.value,
-    color,
+    color = "#000",
     ...props
 }: INCoreIconProps) => {
     let x = LongSide.key === "x" ? 0 : size / 4;
@@ -39,9 +39,9 @@ const SvgClearIcon = ({
             x={x}
             y={y}
             scale={size / LongSide.value}
-            d="M10 0c5.53 0 10 4.47 10 10s-4.47 10-10 10S0 15.53 0 10 4.47 0 10 0zm3.59 5L10 8.59 6.41 5 5 6.41 8.59 10 5 13.59 6.41 15 10 11.41 13.59 15 15 13.59 11.41 10 15 6.41 13.59 5z"
+            d="M16.019.2a.697.697 0 0 1 1.129.223.68.68 0 0 1-.15.747L9.09 9a.697.697 0 0 1-.98 0L.204 1.17a.68.68 0 0 1 0-.97.697.697 0 0 1 .979 0L8.6 7.343 16.019.2Z"
             fill={color}
         />
     </Svg>;
 };
-export default SvgClearIcon;
+export default SvgChevronBottom;

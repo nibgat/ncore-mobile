@@ -9,7 +9,7 @@ import {
 } from "react-native";
 import styles from "./stylesheet";
 import {
-    useNCoreLocale,
+    useNCoreLocalization,
     useNCoreTheme
 } from "../../core/context";
 import Button from "../button";
@@ -94,7 +94,7 @@ const Dialog: FC<IDialogProps> = ({
 
     const {
         localize
-    } = useNCoreLocale();
+    } = useNCoreLocalization();
 
     const {
         primaryButton: primaryButtonStyle,
@@ -149,7 +149,7 @@ const Dialog: FC<IDialogProps> = ({
         }
 
         return <Button
-            title={secondaryButtonProps?.title || localize("coreDialogSecondaryButtonTitle")}
+            title={secondaryButtonProps?.title || localize("nCoreDialogSecondaryButtonTitle")}
             loading={secondaryButtonProps?.loading}
             color="layer2"
             textColor="body"
@@ -161,7 +161,7 @@ const Dialog: FC<IDialogProps> = ({
 
     const primaryButton = () => {
         return <Button
-            title={primaryButtonProps?.title || localize("coreDialogPrimaryButtonTitle")}
+            title={primaryButtonProps?.title || localize("nCoreDialogPrimaryButtonTitle")}
             loading={primaryButtonProps?.loading}
             onPress={() => {
                 if(primaryButtonProps?.onPress) primaryButtonProps?.onPress();

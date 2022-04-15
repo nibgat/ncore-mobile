@@ -15,6 +15,9 @@ const styles = StyleSheet.create({
     childrenStyle: {
         borderTopRightRadius: 50,
         borderTopLeftRadius: 50
+    },
+    contentContainerStyle: {
+        flex: 1
     }
 });
 export default styles;

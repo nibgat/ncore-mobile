@@ -4,15 +4,15 @@ const en = {
     "translations": {
         "language": "English",
         "appTitle": "NİBGAT® - Core Mobile",
-        "coreSelectBoxSelection": "Choice",
-        "coreSelectBoxErrorsNonSelect": "No selection",
-        "coreSearchBoxValidationEnterContent": "Enter content",
-        "coreMultiSelectBoxTitle": "Category selection tool",
-        "coreMultiSelectBoxValidationEnterContent": "Enter value",
-        "corePagesSelectPageValidationMinSelectRequired": "At least one selection is mandatory.",
-        "corePagesSelectPageValidationNoMoreSelectable": "You cannot choose any more.",
-        "coreDialogSecondaryButtonTitle": "Cancel",
-        "coreDialogPrimaryButtonTitle": "Ok"
+        "nCoreDialogSecondaryButtonTitle": "Cancel",
+        "nCoreDialogPrimaryButtonTitle": "Ok",
+        "nCoreSelectBoxSelectionValue": "Choice",
+        "nCoreSelectBoxNonSelectValue": "No selection",
+        "nCoreSelectBoxValidationMinSelectRequired": "At least ${0} selection is required.",
+        "nCoreSelectBoxValidationNoMoreSelectable": "You cannot choose any more.",
+        "nCoreMultiSelectBoxValidationEnterContent": "Enter value",
+        "nCoreSelectBoxSelectAll": "Select All",
+        "nCoreSelectBoxClearAll": "Clear All"
     }
 };
 export default en;

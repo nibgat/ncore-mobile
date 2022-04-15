@@ -5,16 +5,33 @@ import {
 import Svg, {
     Rect 
 } from "react-native-svg";
+import {
+    calculateSvgLongSideSize 
+} from "../util";
+
+const RadioUncheckedDefaultSize = {
+    y: 20,
+    x: 20
+};
+
+const LongSide = calculateSvgLongSideSize(RadioUncheckedDefaultSize);
 
 const RadioUnchecked = ({
+    size = LongSide.value,
     color,
-    size,
     ...props
 }: INCoreIconProps) => {
-    return (
-        <Svg width={size} height={size} viewBox="0 0 22 22" fill="none" {...props}>
-            <Rect x={1} y={1} width={20} height={20} rx={10} stroke={color} strokeWidth={2} />
-        </Svg>
-    );
+    const strokeWidth = size / 10;
+
+    const containerSize = size - strokeWidth;
+
+    return <Svg
+        width={size}
+        height={size}
+        fill="none"
+        {...props}
+    >
+        <Rect x={strokeWidth / 2} y={strokeWidth / 2} width={containerSize} height={containerSize} rx={containerSize / 2} stroke={color} strokeWidth={strokeWidth} />
+    </Svg>;
 };  
 export default RadioUnchecked;

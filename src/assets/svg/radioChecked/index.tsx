@@ -5,17 +5,37 @@ import {
 import Svg, {
     Rect 
 } from "react-native-svg";
+import {
+    calculateSvgLongSideSize 
+} from "../util";
+
+const RadioCheckedDefaultSize = {
+    y: 20,
+    x: 20
+};
+
+const LongSide = calculateSvgLongSideSize(RadioCheckedDefaultSize);
 
 const RadioChecked = ({
+    size = LongSide.value,
     color,
-    size,
     ...props
 }: INCoreIconProps) => {
-    return (
-        <Svg width={size} height={size} viewBox="0 0 22 22" fill="none" {...props}>
-            <Rect x={1} y={1} width={20} height={20} rx={10} stroke={color} strokeWidth={2} />
-            <Rect x={6} y={6} width={10} height={10} rx={5} fill={color} />
-        </Svg>
-    );
+    const strokeWidth = size / 10;
+
+    const containerSize = size - strokeWidth;
+    const indicatorSize = size / 2;
+
+    const indicatorLocation = (strokeWidth / 2) + ((containerSize - indicatorSize) / 2);
+
+    return <Svg
+        width={size}
+        height={size}
+        fill="transparent"
+        {...props}
+    >
+        <Rect x={strokeWidth / 2} y={strokeWidth / 2} width={containerSize} height={containerSize} rx={containerSize / 2} stroke={color} strokeWidth={strokeWidth} />
+        <Rect x={indicatorLocation} y={indicatorLocation} width={indicatorSize} height={indicatorSize} rx={indicatorSize / 2} fill={color} />
+    </Svg>;
 };  
 export default RadioChecked;

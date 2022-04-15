@@ -12,6 +12,7 @@ export const colors: Required<NCore.Colors> = {
     "accent":           "#EB4747",
     "attention":        "#EB477E",
     "info":             "#4799EB",
+    "seperator":        "#cccccc",
     "hideBody":         "hsl(0, 0%, 60%)",
     "gray0":            "hsl(0, 0%, 0%)",
     "gray10":           "hsl(0, 0%, 10%)",
@@ -69,10 +70,10 @@ export const typography: Required<NCore.Typography> = {
         fontSize: 18
     },
     header7: {
-        fontFamily: "Montserrat-SemiBold",
-        fontWeight: "600",
+        fontFamily: "Montserrat-Medium",
+        fontWeight: "500",
         lineHeight: 23.4,
-        fontSize: 18
+        fontSize: 16
     },
     header8: {
         fontFamily: "Montserrat-SemiBold",

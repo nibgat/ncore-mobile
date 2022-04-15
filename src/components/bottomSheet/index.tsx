@@ -5,6 +5,10 @@ import React, {
     RefObject,
     useRef
 } from "react";
+import {
+    Dimensions,
+    ViewStyle
+} from "react-native";
 import styles from "./stylesheet";
 import {
     Portal
@@ -13,13 +17,24 @@ import {
     ModalizeProps,
     Modalize
 } from "react-native-modalize";
-import PageContainer from "../pageContainer";
+import PageContainer, {
+    IPageContainerProps 
+} from "../pageContainer";
 import {
     useNCoreTheme 
 } from "../../core/context";
 
+const windowHeight = Dimensions.get("window").height;
+
 interface IBottomSheetProps extends Omit<ModalizeProps, "adjustToContentHeight" | "snapPoint" | "ref"> {
+    pageContainerProps?: IPageContainerProps;
+    pageContainerStyle?: ViewStyle;
+    childrenStyle?: ViewStyle;
+    modalStyle?: ViewStyle;
+    rootStyle?: ViewStyle;
     autoHeight?: boolean;
+    fullScreen?: boolean;
+    snapPoint?: number;
 };
 
 export type BottomSheetRef = {
@@ -27,11 +42,92 @@ export type BottomSheetRef = {
     open: () => void
 };
 
+type BottomSheetStylerParams = {
+    pageContainerStyleProp?: ViewStyle;
+    radiuses: NCore.RadiusesTokens;
+    childrenStyleProp?: ViewStyle;
+    spaces: NCore.SpacesTokens;
+    modalStyleProp?: ViewStyle;
+    rootStyleProp?: ViewStyle;
+    fullScreen?: boolean;
+};
+
+type BottomSheetStylerResult = {
+    contentContainerStyle: ViewStyle;
+    pageContainerStyle: ViewStyle;
+    childrenStyle: ViewStyle;
+    modalStyle: ViewStyle;
+    rootStyle: ViewStyle;
+};
+
+const bottomSheetStyler = ({
+    pageContainerStyleProp,
+    childrenStyleProp,
+    modalStyleProp,
+    rootStyleProp,
+    fullScreen,
+    radiuses,
+    spaces
+}: BottomSheetStylerParams): BottomSheetStylerResult => {
+    const contentContainerStyle = {
+        ...styles.contentContainerStyle
+    };
+
+    const pageContainerStyle = {
+        borderTopRightRadius: radiuses.hard,
+        borderTopLeftRadius: radiuses.hard,
+        paddingVertical: spaces.container,
+        ...pageContainerStyleProp
+    };
+
+    const childrenStyle = {
+        ...styles.childrenStyle,
+        ...childrenStyleProp
+    };
+
+    const modalStyle = {
+        ...styles.modalStyle,
+        ...modalStyleProp
+    };
+
+    const rootStyle = {
+        ...styles.rootStyle,
+        ...rootStyleProp
+    };
+
+    if(fullScreen) {
+        childrenStyle.borderTopLeftRadius = 0;
+        childrenStyle.borderTopRightRadius = 0;
+
+        modalStyle.borderTopLeftRadius = 0;
+        modalStyle.borderTopRightRadius = 0;
+        modalStyle.minHeight = "100%";
+
+        rootStyle.borderTopLeftRadius = 0;
+        rootStyle.borderTopRightRadius = 0;
+
+        pageContainerStyle.borderTopLeftRadius = 0;
+        pageContainerStyle.borderTopRightRadius = 0;
+    }
+
+    return {
+        contentContainerStyle,
+        pageContainerStyle,
+        childrenStyle,
+        modalStyle,
+        rootStyle
+    };
+};
+
 const BottomSheet: RefForwardingComponent<BottomSheetRef, IBottomSheetProps> = ({
-    childrenStyle,
-    modalStyle,
+    pageContainerStyle: pageContainerStyleProp,
+    childrenStyle: childrenStyleProp,
+    modalStyle: modalStyleProp,
+    rootStyle: rootStyleProp,
+    pageContainerProps,
+    snapPoint = 300,
     autoHeight,
-    rootStyle,
+    fullScreen,
     children,
     ...props
 }, ref) => {
@@ -59,6 +155,34 @@ const BottomSheet: RefForwardingComponent<BottomSheetRef, IBottomSheetProps> = (
         []
     );
 
+    const createSnapPoint = () => {
+        if(autoHeight) {
+            return undefined;
+        }
+
+        if(fullScreen) {
+            return windowHeight;
+        }
+
+        return snapPoint;
+    };
+
+    const {
+        contentContainerStyle,
+        pageContainerStyle,
+        childrenStyle,
+        modalStyle,
+        rootStyle
+    } = bottomSheetStyler({
+        pageContainerStyleProp,
+        childrenStyleProp,
+        modalStyleProp,
+        rootStyleProp,
+        fullScreen,
+        radiuses,
+        spaces
+    });
+
     return <Portal>
         <Modalize
             panGestureEnabled={true}
@@ -66,27 +190,19 @@ const BottomSheet: RefForwardingComponent<BottomSheetRef, IBottomSheetProps> = (
             {...props}
             ref={bottomSheetRef}
             adjustToContentHeight={autoHeight ? true : false}
-            snapPoint={autoHeight ? undefined : 300}
+            snapPoint={createSnapPoint()}
             closeOnOverlayTap={true}
-            childrenStyle={[
-                styles.childrenStyle,
-                childrenStyle
-            ]}
-            modalStyle={[
-                styles.modalStyle,
-                modalStyle
-            ]}
-            rootStyle={[
-                styles.rootStyle,
-                rootStyle
-            ]}
+            childrenStyle={childrenStyle}
+            modalTopOffset={fullScreen ? 0 : undefined}
+            modalStyle={modalStyle}
+            rootStyle={rootStyle}
+            scrollViewProps={{
+                contentContainerStyle: contentContainerStyle
+            }}
         >
             <PageContainer
-                style={{
-                    borderTopRightRadius: radiuses.hard,
-                    borderTopLeftRadius: radiuses.hard,
-                    paddingVertical: spaces.container
-                }}
+                {...pageContainerProps}
+                style={pageContainerStyle}
             >
                 {children}
             </PageContainer>

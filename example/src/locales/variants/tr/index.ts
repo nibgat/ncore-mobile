@@ -4,15 +4,17 @@ const tr = {
     "translations": {
         "language": "Türkçe",
         "appTitle": "NİBGAT® - Core Mobile",
-        "coreSelectBoxSelection": "Seçim",
-        "coreSelectBoxErrorsNonSelect": "Seçim yapılmadı",
+        "nCoreSelectBoxSelectionValue": "Seçim",
+        "nCoreSelectBoxNonSelectValue": "Seçim yapılmadı",
         "coreSearchBoxValidationEnterContent": "İçerik giriniz",
         "coreMultiSelectBoxTitle": "Kategori seçim aracı",
-        "coreMultiSelectBoxValidationEnterContent": "Değer giriniz",
-        "corePagesSelectPageValidationMinSelectRequired": "En az bir seçim zorunludur",
-        "corePagesSelectPageValidationNoMoreSelectable": "Daha fazla seçemezsiniz",
-        "coreDialogSecondaryButtonTitle": "İptal",
-        "coreDialogPrimaryButtonTitle": "Tamam"
+        "nCoreMultiSelectBoxValidationEnterContent": "Değer giriniz",
+        "nCoreSelectBoxValidationMinSelectRequired": "En az ${0} seçim zorunludur",
+        "nCoreSelectBoxValidationNoMoreSelectable": "Daha fazla seçemezsiniz",
+        "nCoreDialogSecondaryButtonTitle": "İptal",
+        "nCoreDialogPrimaryButtonTitle": "Tamam",
+        "nCoreSelectBoxClearAll": "Tümünü Temizle",
+        "nCoreSelectBoxSelectAll": "Tümünü Seç"
     }
 };
 export default tr;

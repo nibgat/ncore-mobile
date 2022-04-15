@@ -75,7 +75,7 @@ const textInputStyler = ({
 }: TextInputStylerParams): TextInputStylerResult => {
     let container: ViewStyle = {
         borderColor: isFocused ? colors.primary : colors.panel,
-        paddingHorizontal: spaces.content * 1.75,
+        paddingHorizontal: spaces.container,
         paddingVertical: spaces.content,
         backgroundColor: colors.panel,
         borderRadius: radiuses.half,
@@ -85,7 +85,7 @@ const textInputStyler = ({
     let titleProps: TitleProps = {
         color: value?.length || isFocused ? "primary" : "gray50",
         style: {
-            marginBottom: spaces.content / 2
+            marginBottom: spaces.content
         }
     };
 

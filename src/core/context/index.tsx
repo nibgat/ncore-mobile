@@ -12,8 +12,8 @@ import ThemeProvider, {
     ThemeContext
 } from "./theme";
 import {
+    useNCoreLocalizationReturnType,
     useNCoreBottomSheetReturnType,
-    useNCoreLocalesReturnType,
     useNCoreThemeReturnType
 } from "../constants";
 import {
@@ -50,7 +50,7 @@ const NCoreContext: FC<NCoreContext> = ({
 
 export const useNCoreTheme = (): useNCoreThemeReturnType => useContext(ThemeContext);
 export const useNCoreBottomSheet = (): useNCoreBottomSheetReturnType => useContext(BottomSheetContext);
-export const useNCoreLocale = (): useNCoreLocalesReturnType => {
+export const useNCoreLocalization = (): useNCoreLocalizationReturnType => {
     const {
         activeLocale,
         switchLocale,
@@ -59,8 +59,18 @@ export const useNCoreLocale = (): useNCoreLocalesReturnType => {
     } = useContext(LocalesContext);
 
     return {
-        localize: (localizationKey: keyof NCore.Translation): string => {
-            return currentLocalizationData[localizationKey];
+        localize: (localizationKey: keyof NCore.Translation, params?: Array<string>): string => {
+            if(!params) {
+                return currentLocalizationData[localizationKey];
+            }
+
+            let returnString = currentLocalizationData[localizationKey];
+            params.forEach((item, index) => {
+                const pattern = `\\$\\{${index}\\}`;
+                const regex = new RegExp(pattern, "g");
+                returnString = returnString.replace(regex, item);
+            });
+            return returnString;
         },
         activeLocale,
         switchLocale,

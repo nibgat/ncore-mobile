@@ -11,7 +11,7 @@ import {
     useNCoreTheme
 } from "../../core/context";
 
-interface IPageContainerProps {
+export interface IPageContainerProps {
     contentContainerStyle?: ViewStyle;
     scrollable?: boolean;
     style?: ViewStyle;

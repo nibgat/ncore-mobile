@@ -29,6 +29,7 @@ interface IButtonProps {
     displayBehaviourWhileLoading?: ButtonDisplayBehaviourWhileLoading;
     spreadBehaviour?: ButtonSpreadBehaviour;
     titleStyle?: StyleProp<TextStyle>;
+    style?: ViewStyle | ViewStyle[];
     iconColor?: keyof NCore.Colors;
     textColor?: keyof NCore.Colors;
     color?: keyof NCore.Colors;
@@ -36,10 +37,9 @@ interface IButtonProps {
     onPress: () => void;
     disabled?: boolean;
     loading?: boolean;
-    style?: ViewStyle;
     size?: ButtonSize;
     icon?: NCoreIcon;
-    title: string;
+    title?: string;
 };
 
 type ButtonStylerParams = {
