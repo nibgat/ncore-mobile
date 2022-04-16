@@ -122,7 +122,7 @@ const SelectBox: <T>(props: ISelecBoxProps<T>) => ReactElement = ({
         const foundSelectedIndex = selectedIndexes.indexOf(foundIndex);
         if(foundSelectedIndex !== -1) {
             if(minChoice !== undefined && selectedIndexes.length === minChoice) {
-                Toast.show(localize("nCoreSelectBoxValidationMinSelectRequired", [minChoice.toString()]), Toast.SHORT);
+                Toast.show(localize("nCoreSelectBoxMinSelectionWarningText", [minChoice.toString()]), Toast.SHORT);
                 return;
             }
 
@@ -133,7 +133,7 @@ const SelectBox: <T>(props: ISelecBoxProps<T>) => ReactElement = ({
         }
 
         if(maxChoice !== undefined && selectedIndexes.length === maxChoice) {
-            Toast.show(localize("nCoreSelectBoxValidationNoMoreSelectable"), Toast.SHORT);
+            Toast.show(localize("nCoreSelectBoxMaxSelectionReachedText"), Toast.SHORT);
             return;
         }
 
@@ -171,14 +171,14 @@ const SelectBox: <T>(props: ISelecBoxProps<T>) => ReactElement = ({
 
     const renderValue = () => {
         if(selectedIndexes.length === 0) {
-            return localize("nCoreSelectBoxNonSelectValue");
+            return localize("nCoreSelectBoxNoSelectionText");
         }
 
         if(!multipleSelect) {
             return itemLabelExtractor(data[selectedIndexes[0]]);
         }
 
-        return `${selectedIndexes.length} ${localize("nCoreSelectBoxSelectionValue")}`;
+        return `${selectedIndexes.length} ${localize("nCoreSelectBoxSelectedText")}`;
     };
 
     const renderCheck = (index: number) => {
@@ -237,7 +237,7 @@ const SelectBox: <T>(props: ISelecBoxProps<T>) => ReactElement = ({
             <Text
                 color={color}
             >
-                {selectedIndexes.length} {maxChoice ? `/ ${maxChoice}` : localize("nCoreSelectBoxSelectionValue")}
+                {selectedIndexes.length} {maxChoice ? `/ ${maxChoice}` : localize("nCoreSelectBoxSelectedText")}
             </Text>
         </View>;
     };

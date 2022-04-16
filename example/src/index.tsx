@@ -26,6 +26,14 @@ import {
 } from "./locales";
 import SvgTest from "./assets/svg/Test";
 
+declare global {
+    namespace NCore {
+        interface Translation {
+            language: string;
+        }
+    }
+}
+
 type Test = {
     test: string;
 }
@@ -80,7 +88,7 @@ const App = () => {
                 marginBottom: spaces.container
             }}
         >
-                Hello NİBGAT®. Your selected theme is {activeTheme}. Your text is "{localize("nCoreMultiSelectBoxValidationEnterContent")}" and your localize is "{localize("language")}"
+                Hello NİBGAT®. Your selected theme is {activeTheme}. Your text is "{localize("nCoreDefaultDialogSecondaryButtonTitle")}" and your localize is "{localize("language")}"
         </Text>
         <Button
             title="Switch Theme"
@@ -156,8 +164,7 @@ const App = () => {
         <SelectBox
             title="Hello"
             initialData={TestData}
-            multipleSelect={true}
-            minChoice={1}
+            multipleSelect={false}
             itemLabelExtractor={(item) => {
                 return item.test;
             }}

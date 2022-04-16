@@ -127,15 +127,12 @@ declare global {
         }
 
         interface Translation {
-            language: string;
-            appTitle: string;
-            nCoreDialogSecondaryButtonTitle: string;
-            nCoreDialogPrimaryButtonTitle: string;
-            nCoreSelectBoxSelectionValue: string;
-            nCoreSelectBoxNonSelectValue: string;
-            nCoreSelectBoxValidationMinSelectRequired: string;
-            nCoreSelectBoxValidationNoMoreSelectable: string;
-            nCoreMultiSelectBoxValidationEnterContent: string;
+            nCoreDefaultDialogSecondaryButtonTitle: string;
+            nCoreDefaultDialogPrimaryButtonTitle: string;
+            nCoreSelectBoxSelectedText: string;
+            nCoreSelectBoxNoSelectionText: string;
+            nCoreSelectBoxMinSelectionWarningText: string;
+            nCoreSelectBoxMaxSelectionReachedText: string;
             nCoreSelectBoxSelectAll: string;
             nCoreSelectBoxClearAll: string;
         }

@@ -2,15 +2,12 @@ const en = {
     "code": "en",
     "isRTL": false,
     "translations": {
-        "language": "English",
-        "appTitle": "NİBGAT® - Core Mobile",
-        "nCoreDialogSecondaryButtonTitle": "Cancel",
-        "nCoreDialogPrimaryButtonTitle": "Ok",
-        "nCoreSelectBoxSelectionValue": "Choice",
-        "nCoreSelectBoxNonSelectValue": "No selection",
-        "nCoreSelectBoxValidationMinSelectRequired": "At least ${0} selection is required.",
-        "nCoreSelectBoxValidationNoMoreSelectable": "You cannot choose any more.",
-        "nCoreMultiSelectBoxValidationEnterContent": "Enter value",
+        "nCoreDefaultDialogSecondaryButtonTitle": "Cancel",
+        "nCoreDefaultDialogPrimaryButtonTitle": "Ok",
+        "nCoreSelectBoxSelectedText": "Choice",
+        "nCoreSelectBoxNoSelectionText": "No selection",
+        "nCoreSelectBoxMinSelectionWarningText": "At least ${0} selection is required.",
+        "nCoreSelectBoxMaxSelectionReachedText": "You cannot choose any more.",
         "nCoreSelectBoxSelectAll": "Select All",
         "nCoreSelectBoxClearAll": "Clear All"
     }

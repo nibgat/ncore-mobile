@@ -149,7 +149,7 @@ const Dialog: FC<IDialogProps> = ({
         }
 
         return <Button
-            title={secondaryButtonProps?.title || localize("nCoreDialogSecondaryButtonTitle")}
+            title={secondaryButtonProps?.title || localize("nCoreDefaultDialogSecondaryButtonTitle")}
             loading={secondaryButtonProps?.loading}
             color="layer2"
             textColor="body"
@@ -161,7 +161,7 @@ const Dialog: FC<IDialogProps> = ({
 
     const primaryButton = () => {
         return <Button
-            title={primaryButtonProps?.title || localize("nCoreDialogPrimaryButtonTitle")}
+            title={primaryButtonProps?.title || localize("nCoreDefaultDialogPrimaryButtonTitle")}
             loading={primaryButtonProps?.loading}
             onPress={() => {
                 if(primaryButtonProps?.onPress) primaryButtonProps?.onPress();
