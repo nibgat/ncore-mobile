@@ -146,9 +146,11 @@ const App = () => {
         />
         <CheckBox
             isActive={check}
-            disabled={true}
             onChange={() => {
                 setCheck(!check);
+            }}
+            style={{
+                marginBottom: spaces.container
             }}
         />
         <SelectBox

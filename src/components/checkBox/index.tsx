@@ -20,6 +20,7 @@ interface ICheckBox {
     checkedIcon?: NCoreIcon;
     disabled?: boolean;
     isActive: boolean;
+    style?: ViewStyle;
 };
 
 type CheckBoxStylerParams = {
@@ -28,6 +29,7 @@ type CheckBoxStylerParams = {
     colors: NCore.Colors;
     disabled?: boolean;
     isActive: boolean;
+    style?: ViewStyle;
 };
 
 type CheckBoxStylerResult = {
@@ -40,12 +42,14 @@ const checkBoxStyler = ({
     disabled,
     isActive,
     radiuses,
-    colors
+    colors,
+    style
 }: CheckBoxStylerParams): CheckBoxStylerResult => {
     let container = {
         ...styles.container,
         borderColor: isActive ? colors.primary : colors.seperator,
-        borderRadius: radiuses.quarter
+        borderRadius: radiuses.quarter,
+        ...style
     };
 
     const indicator = {
@@ -70,7 +74,8 @@ const CheckBox = ({
     checkedIcon: CheckedIcon,
     disabled,
     onChange,
-    isActive
+    isActive,
+    style
 }: ICheckBox) => {
     const {
         disabled: disabledStyle,
@@ -86,7 +91,8 @@ const CheckBox = ({
         disabled,
         isActive,
         radiuses,
-        colors
+        colors,
+        style
     });
 
     const renderCheckedIcon = () => {
