@@ -55,7 +55,7 @@ interface ISelecBoxProps<T> {
     title: string;
 };
 
-const SelectBox: <T>(props: ISelecBoxProps<T>) => ReactElement = ({
+const SelectBox = <ItemT extends {}>({
     renderItem: renderItemProp,
     multipleSelect = false,
     initialSelectedIndex,
@@ -70,7 +70,7 @@ const SelectBox: <T>(props: ISelecBoxProps<T>) => ReactElement = ({
     disabled,
     style,
     title
-}) => {
+}: ISelecBoxProps<ItemT>): ReactElement => {
     const {
         localize
     } = useNCoreLocalization();
