@@ -15,7 +15,6 @@ import {
     ClearIcon 
 } from "../../assets/svg";
 import {
-    useNCoreLocalization,
     useNCoreTheme 
 } from "../../core/context";
 import styles from "./stylesheet";
@@ -87,10 +86,6 @@ const SearchBox = ({
         spaces
     } = useNCoreTheme();
 
-    const {
-        localize
-    } = useNCoreLocalization();
-
     const [value, setValue] = useState("");
     const [focused, setFocused] = useState(false);
 
@@ -151,7 +146,7 @@ const SearchBox = ({
         {renderIcon()}
         <TextInput
             onChangeText={(e) => setValue(e)}
-            placeholder={placeholder ? placeholder : localize("coreSearchBoxValidationEnterContent")}
+            placeholder={placeholder}
             placeholderTextColor={colors.hideBody}
             value={value}
             onFocus={() => setFocused(true)}
