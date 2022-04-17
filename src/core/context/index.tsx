@@ -1,139 +1,81 @@
 import React, {
-    createContext,
     useContext,
-    useReducer
-} from 'react';
+    FC
+} from "react";
+import BottomSheetProvider, {
+    BottomSheetContext
+} from "./bottomSheet";
+import LocalesProvider, {
+    LocalesContext
+} from "./locales";
+import ThemeProvider, {
+    ThemeContext
+} from "./theme";
 import {
-    DEFAULT_NCORE_BOTTOM_SHEET_STORE,
-    DEFAULT_NCORE_MODAL_STORE,
-    DEFAULT_NCORE_THEME_STORE,
-    DEFAULT_NCORE_LOCALES
-} from '../constants';
+    useNCoreLocalizationReturnType,
+    useNCoreBottomSheetReturnType,
+    useNCoreThemeReturnType
+} from "../constants";
 import {
-    settingsStoreInitial
-} from '../constants';
+    Host 
+} from "react-native-portalize";
+import {
+    NCoreConfig 
+} from "../types";
 
-const NCoreThemeContext = createContext(DEFAULT_NCORE_THEME_STORE);
-const NCoreThemeDispatchContext = createContext(undefined);
-
-const NCoreModalContext = createContext(DEFAULT_NCORE_MODAL_STORE);
-const NCoreModalDispatchContext = createContext(undefined);
-
-const NCoreBottomSheetContext = createContext(DEFAULT_NCORE_BOTTOM_SHEET_STORE);
-const NCoreBottomSheetDispatchContext = createContext(undefined);
-
-const NCoreLocalesContext = createContext(DEFAULT_NCORE_LOCALES);
-const NCoreLocalesDispatchContext = createContext(undefined);
-
-const NCoreSettingsContext = createContext(settingsStoreInitial);
-const NCoreSettingsDispatchContext = createContext(undefined);
-
-const NCoreContext = ({
-    children
-}: any) => {
-    const [theme, setTheme]: [any, any] = useReducer(
-        (state: any, newValue: any) => ({
-            ...state, ...newValue 
-        }),
-        DEFAULT_NCORE_THEME_STORE
-    );
-
-    const [nCoreModal, setNCoreModal]: [any, any] = useReducer(
-        (state: any, newValue: any) => ({
-            ...state, ...newValue 
-        }),
-        DEFAULT_NCORE_MODAL_STORE
-    );
-
-    const [nCoreBottomSheet, setNCoreBottomSheet]: [any, any] = useReducer(
-        (state: any, newValue: any) => ({
-            ...state, ...newValue 
-        }),
-        DEFAULT_NCORE_BOTTOM_SHEET_STORE
-    );
-
-    const [nCoreLocales, setNCoreLocales]: [any, any] = useReducer(
-        (state: any, newValue: any) => ({
-            ...state, ...newValue 
-        }),
-        DEFAULT_NCORE_LOCALES
-    );
-
-    const [nCoreSettings, setNCoreSettings]: [any, any] = useReducer(
-        (state: any, newValue: any) => ({
-            ...state, ...newValue 
-        }),
-        DEFAULT_NCORE_SETTINGS_STORE
-    );
-
-    return (
-        <NCoreThemeContext.Provider
-            value={theme}
-        >
-            <NCoreThemeDispatchContext.Provider
-                value={setTheme}
-            >
-                <NCoreModalContext.Provider
-                    value={nCoreModal}
-                >
-                    <NCoreModalDispatchContext.Provider
-                        value={setNCoreModal}
-                    >
-                        <NCoreBottomSheetContext.Provider
-                            value={nCoreBottomSheet}
-                        >
-                            <NCoreBottomSheetDispatchContext.Provider
-                                value={setNCoreBottomSheet}
-                            >
-                                <NCoreLocalesContext.Provider
-                                    value={nCoreLocales}
-                                >
-                                    <NCoreLocalesDispatchContext.Provider
-                                        value={setNCoreLocales}
-                                    >
-                                        <NCoreSettingsContext.Provider
-                                            value={nCoreSettings}
-                                        >
-                                            <NCoreSettingsDispatchContext.Provider
-                                                value={setNCoreSettings}
-                                            >
-                                                {children}
-                                            </NCoreSettingsDispatchContext.Provider>
-                                        </NCoreSettingsContext.Provider>
-                                    </NCoreLocalesDispatchContext.Provider>
-                                </NCoreLocalesContext.Provider>
-                            </NCoreBottomSheetDispatchContext.Provider>
-                        </NCoreBottomSheetContext.Provider>
-                    </NCoreModalDispatchContext.Provider>
-                </NCoreModalContext.Provider>
-            </NCoreThemeDispatchContext.Provider>
-        </NCoreThemeContext.Provider>
-    );
+type NCoreContext = {
+    config?: NCoreConfig
 };
 
-export const useNCoreTheme = () => [
-    useContext(NCoreThemeContext),
-    useContext(NCoreThemeDispatchContext)
-];
+const NCoreContext: FC<NCoreContext> = ({
+    children,
+    config
+}) => {
+    return <ThemeProvider
+        initialThemeKey={config?.initialThemeKey}
+        themes={config?.themes}
+        designTokens={config?.designTokens}
+    >
+        <LocalesProvider
+            locales={config?.locales}
+        >
+            <Host>
+                <BottomSheetProvider>
+                    {children}
+                </BottomSheetProvider>
+            </Host>
+        </LocalesProvider>
+    </ThemeProvider>;
+};
 
-export const useNCoreModal = () => [
-    useContext(NCoreModalContext),
-    useContext(NCoreModalDispatchContext)
-];
+export const useNCoreTheme = (): useNCoreThemeReturnType => useContext(ThemeContext);
+export const useNCoreBottomSheet = (): useNCoreBottomSheetReturnType => useContext(BottomSheetContext);
+export const useNCoreLocalization = (): useNCoreLocalizationReturnType => {
+    const {
+        activeLocale,
+        switchLocale,
+        isRTL,
+        currentLocalizationData
+    } = useContext(LocalesContext);
 
-export const useNCoreBottomSheet = () => [
-    useContext(NCoreBottomSheetContext),
-    useContext(NCoreBottomSheetDispatchContext)
-];
+    return {
+        localize: (localizationKey: keyof NCore.Translation, params?: Array<string>): string => {
+            if(!params) {
+                return currentLocalizationData[localizationKey];
+            }
 
-export const useNCoreLocales = () => [
-    useContext(NCoreLocalesContext),
-    useContext(NCoreLocalesDispatchContext)
-];
-
-export const useNCoreSettings = () => [
-    useContext(NCoreSettingsContext),
-    useContext(NCoreSettingsDispatchContext)
-];
+            let returnString = currentLocalizationData[localizationKey];
+            params.forEach((item, index) => {
+                const pattern = `\\$\\{${index}\\}`;
+                const regex = new RegExp(pattern, "g");
+                returnString = returnString.replace(regex, item);
+            });
+            return returnString;
+        },
+        activeLocale,
+        switchLocale,
+        isRTL
+    };
+};
 
 export default NCoreContext;

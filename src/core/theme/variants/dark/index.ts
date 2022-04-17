@@ -1,16 +1,19 @@
-export const palette = {
+export const colors: Required<NCore.Colors> = {
     "primary":          "#00C2A0",
     "body":             "#f5f5f5",
     "constrastBody":    "#2a2a2a",
     "layer1":           "#141414",
     "layer2":           "#1F1F1F",
     "layer3":           "#292929",
+    "panel":            "#1F1F1F",
     "warning":          "#EBD147",
     "danger":           "#EB7E47",
     "success":          "#7EEB47",
     "accent":           "#EB4747",
     "attention":        "#EB477E",
     "info":             "#4799EB",
+    "seperator":        "#333333",
+    "hideBody":         "hsl(0, 0%, 40%)",
     "gray0":            "hsl(0, 0%, 100%)",
     "gray10":           "hsl(0, 0%, 90%)",
     "gray20":           "hsl(0, 0%, 80%)",
@@ -29,168 +32,108 @@ export const palette = {
     "modalBackground":  "rgba(0, 0, 0, 0.5)"
 };
 
-export const tokens = {
-    spaces: {
-        container: 20,
-        content: 8,
-        inline: 4,
-        item: 20
-    },
-    borders: {
-        indicator: 2,
-        line: 1
-    },
-    radiuses: {
-        quarter: 5,
-        hard: 20,
-        half: 10
-    },
-    disabled: {
-        opacity: 0.33
-    }
-};
-
-export const typographyScheme = {
-    "type": "value", // or "number"
-    "normal": {
-        "100": "Montserrat-Thin",
-        "200": "Montserrat-ExtraLight",
-        "300": "Montserrat-Light",
-        "400": "Montserrat-Regular",
-        "500": "Montserrat-Medium",
-        "600": "Montserrat-SemiBold",
-        "700": "Montserrat-Bold",
-        "800": "Montserrat-ExtraBold",
-        "900": "Montserrat-Black"
-    },
-    "italic": {
-        "100": "Montserrat-Thin",
-        "200": "Montserrat-ExtraLightItalic",
-        "300": "Montserrat-LightItalic",
-        "400": "Montserrat-Italic",
-        "500": "Montserrat-MediumItalic",
-        "600": "Montserrat-SemiBoldItalic",
-        "700": "Montserrat-BoldItalic",
-        "800": "Montserrat-ExtraBoldItalic",
-        "900": "Montserrat-BlackItalic"
-    }
-};
-
-export const typography = {
+export const typography: Required<NCore.Typography> = {
     header1: {
-        family: "Montserrat",
+        fontFamily: "Montserrat-Light",
         fontWeight: "300",
-        tokens: {
-            lineHeight: 62.4,
-            fontSize: 48
-        }
+        lineHeight: 62.4,
+        fontSize: 48
     },
     header2: {
-        family: "Montserrat",
+        fontFamily: "Montserrat-Regular",
         fontWeight: "400",
-        tokens: {
-            lineHeight: 41.6,
-            fontSize: 32
-        }
+        lineHeight: 41.6,
+        fontSize: 32
     },
     header3: {
-        family: "Montserrat",
+        fontFamily: "Montserrat-Medium",
         fontWeight: "500",
-        tokens: {
-            lineHeight: 31.2,
-            fontSize: 26
-        }
+        lineHeight: 31.2,
+        fontSize: 26
     },
     header4: {
-        family: "Montserrat",
+        fontFamily: "Montserrat-Regular",
         fontWeight: "400",
-        tokens: {
-            lineHeight: 26,
-            fontSize: 22
-        }
+        lineHeight: 26,
+        fontSize: 22
     },
     header5: {
-        family: "Montserrat",
+        fontFamily: "Montserrat-SemiBold",
         fontWeight: "600",
-        tokens: {
-            lineHeight: 26,
-            fontSize: 22
-        }
+        lineHeight: 26,
+        fontSize: 22
     },
     header6: {
-        family: "Montserrat",
+        fontFamily: "Montserrat-Regular",
         fontWeight: "400",
-        tokens: {
-            lineHeight: 23.4,
-            fontSize: 18
-        }
+        lineHeight: 23.4,
+        fontSize: 18
     },
     header7: {
-        family: "Montserrat",
-        fontWeight: "600",
-        tokens: {
-            lineHeight: 23.4,
-            fontSize: 18
-        }
+        fontFamily: "Montserrat-Medium",
+        fontWeight: "500",
+        lineHeight: 23.4,
+        fontSize: 16
     },
     header8: {
-        family: "Montserrat",
+        fontFamily: "Montserrat-SemiBold",
         fontWeight: "600",
-        tokens: {
-            lineHeight: 20.8,
-            fontSize: 14
-        }
+        lineHeight: 20.8,
+        fontSize: 14
     },
     header9: {
-        family: "Montserrat",
+        fontFamily: "Montserrat-SemiBold",
         fontWeight: "600",
-        tokens: {
-            lineHeight: 20.8,
-            fontSize: 12
-        }
+        lineHeight: 20.8,
+        fontSize: 12
     },
     body: {
-        family: "Montserrat",
+        fontFamily: "Montserrat-Regular",
         fontWeight: "400",
-        tokens: {
-            lineHeight: 22.72,
-            fontSize: 14
-        }
+        lineHeight: 22.72,
+        fontSize: 14
     },
     caption: {
-        family: "Montserrat",
+        fontFamily: "Montserrat-SemiBold",
         fontWeight: "600",
-        tokens: {
-            letterSpacing: -0.5,
-            lineHeight: 14.4,
-            fontSize: 10
-        }
+        letterSpacing: -0.5,
+        lineHeight: 14.4,
+        fontSize: 10
     },
-    button: {
-        family: "Montserrat",
+    buttonSmall: {
+        fontFamily: "Montserrat-SemiBold",
         fontWeight: "600",
-        tokens: {
-            letterSpacing: 0.5,
-            lineHeight: 22.72,
-            fontSize: 14
-        }
+        letterSpacing: 0.5,
+        lineHeight: 20.72,
+        fontSize: 12
+    },
+    buttonMedium: {
+        fontFamily: "Montserrat-SemiBold",
+        fontWeight: "600",
+        letterSpacing: 0.5,
+        lineHeight: 22.72,
+        fontSize: 14
+    },
+    buttonLarge: {
+        fontFamily: "Montserrat-SemiBold",
+        fontWeight: "600",
+        letterSpacing: 0.5,
+        lineHeight: 24.72,
+        fontSize: 16
     },
     overline: {
-        family: "Montserrat",
+        fontFamily: "Montserrat-Regular",
         fontWeight: "400",
-        tokens: {
-            textTransform: "uppercase",
-            letterSpacing: 2,
-            fontSize: 12
-        }
+        textTransform: "uppercase",
+        letterSpacing: 2,
+        fontSize: 12
     }
 };
 
-const theme = {
-    typographyScheme,
+const theme: Required<NCore.Theme> = {
+    key: "dark",
     typography,
-    palette,
-    tokens
+    colors
 };
 
 export default theme;
