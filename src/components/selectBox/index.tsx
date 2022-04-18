@@ -26,9 +26,7 @@ import {
 import Header from "../header";
 import RowItem from "../rowItem";
 import SvgCheck from "../../assets/svg/check";
-import {
-    produce
-} from "immer";
+import produce from "immer";
 import Toast from "react-native-simple-toast";
 import Button from "../button";
 import SearchBox from "../searchBox";
