@@ -75,7 +75,7 @@ const textInputStyler = ({
     let container: ViewStyle = {
         borderColor: isFocused ? colors.primary : colors.panel,
         paddingHorizontal: spaces.container,
-        paddingVertical: spaces.content,
+        paddingVertical: spaces.inline,
         backgroundColor: colors.panel,
         borderRadius: radiuses.half,
         borderWidth: borders.line
@@ -92,6 +92,7 @@ const textInputStyler = ({
         opacity: value ? 1 : 0.5,
         color: colors.body,
         ...typography.body,
+        lineHeight: undefined,
         height: 18
     };
 
@@ -100,9 +101,9 @@ const textInputStyler = ({
     };
 
     if(Platform.OS === "ios") {
-        titleProps.style.marginTop = spaces.content / 2;
-        input.height = 24;
         input.marginBottom = spaces.content / 1.5;
+    } else {
+        container.paddingBottom = spaces.content;
     }
 
     if(disabled) {

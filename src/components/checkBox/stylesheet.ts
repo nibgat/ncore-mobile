@@ -1,5 +1,6 @@
 import {
-    StyleSheet
+    StyleSheet,
+    Platform
 } from "react-native";
 
 const styles = StyleSheet.create({
@@ -8,8 +9,8 @@ const styles = StyleSheet.create({
         justifyContent: "center",
         alignItems: "center",
         borderWidth: 2,
-        height: 30,
-        width: 30
+        height: Platform.OS === "android" ? 28 : 24,
+        width: Platform.OS === "android" ? 28 : 24
     }
 });
 export default styles;
