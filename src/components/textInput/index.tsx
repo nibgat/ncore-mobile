@@ -1,5 +1,4 @@
 import React, {
-    useEffect,
     useState,
     useRef,
     FC
@@ -154,10 +153,6 @@ const TextInput: FC<ITextInputProps> = ({
 
     const inputRef = useRef<NativeTextInput>(null);
 
-    useEffect(() => {
-        if(onChangeText) onChangeText(value);
-    }, [value, onChangeText]);
-
     const finalTitle = isRequired ? "* " + title : title;
 
     const {
@@ -243,7 +238,10 @@ const TextInput: FC<ITextInputProps> = ({
                 {...props}
                 value={value}
                 multiline={multiline}
-                onChangeText={setValue}
+                onChangeText={e => {
+                    if(onChangeText) onChangeText(e);
+                    setValue(e);
+                }}
                 onFocus={onFocus}
                 onBlur={onBlur}
                 ref={inputRef}
