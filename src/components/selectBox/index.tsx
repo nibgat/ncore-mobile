@@ -335,7 +335,7 @@ const SelectBox = <ItemT extends {}>({
                     variant="header9"
                     color={selectedIndexes.length ? "primary" : "hideBody"}
                     style={{
-                        marginBottom: spaces.content / 2
+                        marginBottom: spaces.inline / 2
                     }}
                 >
                     {title}
