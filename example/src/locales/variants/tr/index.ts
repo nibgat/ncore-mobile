@@ -2,7 +2,6 @@ const tr = {
     "code": "tr",
     "isRTL": false,
     "translations": {
-        "language": "Türkçe",
         "nCoreSelectBoxSelectedText": "Seçim",
         "nCoreSelectBoxNoSelectionText": "Seçim yapılmadı",
         "coreSearchBoxValidationEnterContent": "İçerik giriniz",
