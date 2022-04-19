@@ -7,6 +7,10 @@ NİBGAT® | Component Library
 ```sh
 npm install ncore-mobile
 ```
+or
+```sh
+yarn add ncore-mobile
+```
 
 ## Usage
 
