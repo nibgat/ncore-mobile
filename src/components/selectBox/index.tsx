@@ -5,8 +5,11 @@ import React, {
     useRef
 } from "react";
 import {
+    Text as NativeText,
     TouchableOpacity,
     ViewStyle,
+    TextStyle,
+    Platform,
     FlatList,
     View
 } from "react-native";
@@ -19,7 +22,9 @@ import {
 } from "../../core/context";
 import styles from "./stylesheet";
 import BottomSheet from "../bottomSheet";
-import Text from "../text";
+import Text, {
+    ITextProps 
+} from "../text";
 import {
     BottomSheetRef 
 } from "../bottomSheet";
@@ -53,6 +58,149 @@ interface ISelecBoxProps<T> {
     title: string;
 };
 
+type SelectBoxStylerParams = {
+    disabledStyle: NCore.DisabledTokens;
+    style?: ViewStyle | ViewStyle[];
+    radiuses: NCore.RadiusesTokens;
+    typography: NCore.Typography;
+    spaces: NCore.SpacesTokens;
+    selectedIndexes: number[];
+    multipleSelect?: boolean;
+    colors: NCore.Colors;
+    disabled?: boolean;
+    maxChoice?: number;
+    minChoice?: number;
+};
+
+type SelectBoxStylerResult = {
+    containerStyle: ViewStyle | ViewStyle [];
+    helpersContentContainerStyle: ViewStyle;
+    bottomSheetHeaderStyle: ViewStyle;
+    itemTailContainerStyle: ViewStyle;
+    counterColor: keyof NCore.Colors;
+    counterContainerStyle: ViewStyle;
+    helpersContainerStyle: ViewStyle;
+    helperButtonStyle: ViewStyle;
+    itemTitleProps: ITextProps;
+    touchableStyle: ViewStyle;
+    checkBoxStyle: ViewStyle;
+    valueStyle: TextStyle;
+    itemStyle: ViewStyle;
+};
+
+const selectBoxStyler = ({
+    selectedIndexes,
+    multipleSelect,
+    disabledStyle,
+    typography,
+    maxChoice,
+    minChoice,
+    radiuses,
+    disabled,
+    spaces,
+    colors,
+    style
+}: SelectBoxStylerParams): SelectBoxStylerResult => {
+    let containerStyle: ViewStyle | ViewStyle[] = {
+    };
+
+    if(Array.isArray(style)) {
+        containerStyle = style;
+    } else {
+        containerStyle = {
+            ...style
+        };
+    }
+
+    let touchableStyle: ViewStyle = {
+        ...styles.container,
+        paddingHorizontal: spaces.container,
+        paddingVertical: spaces.inline,
+        backgroundColor: colors.panel,
+        borderRadius: radiuses.half
+    };
+
+    const valueStyle = {
+        ...typography.body,
+        height: 18,
+        lineHeight: undefined
+    };
+
+    const checkBoxStyle = {
+        ...styles.check
+    };
+
+    const itemTailContainerStyle = {
+        ...styles.checkContainer
+    };
+
+    const itemStyle = {
+        marginBottom: spaces.content
+    };
+
+    const itemTitleProps: ITextProps = {
+        variant: "header7"
+    };
+
+    const counterContainerStyle = {
+        ...styles.toolsLeftContainer
+    };
+
+    const helpersContainerStyle = {
+        ...styles.toolsRightContainer
+    };
+
+    const helperButtonStyle = {
+        ...styles.toolsButton
+    };
+
+    const helpersContentContainerStyle = {
+        ...styles.toolsContainer,
+        marginBottom: spaces.content
+    };
+
+    const bottomSheetHeaderStyle = {
+        marginBottom: multipleSelect ? spaces.content : spaces.container * 1.5
+    };
+
+    let counterColor: keyof NCore.Colors = "body";
+
+    if(minChoice !== undefined && selectedIndexes.length < minChoice) {
+        counterColor = "accent";
+    }
+
+    if(maxChoice !== undefined && selectedIndexes.length > maxChoice) {
+        counterColor = "accent";
+    }
+
+    if(disabled) {
+        touchableStyle = {
+            ...touchableStyle,
+            ...disabledStyle
+        };
+    }
+
+    if(Platform.OS === "android") {
+        touchableStyle.paddingBottom = spaces.content;
+    }
+
+    return {
+        helpersContentContainerStyle,
+        bottomSheetHeaderStyle,
+        itemTailContainerStyle,
+        counterContainerStyle,
+        helpersContainerStyle,
+        helperButtonStyle,
+        containerStyle,
+        touchableStyle,
+        itemTitleProps,
+        checkBoxStyle,
+        counterColor,
+        valueStyle,
+        itemStyle
+    };
+};
+
 const SelectBox = <ItemT extends {}>({
     renderItem: renderItemProp,
     multipleSelect = false,
@@ -75,6 +223,7 @@ const SelectBox = <ItemT extends {}>({
 
     const {
         disabled: disabledStyle,
+        typography,
         radiuses,
         spaces,
         colors
@@ -96,6 +245,34 @@ const SelectBox = <ItemT extends {}>({
             console.error("If you want to use single selection, you must provide a number for initialSelectedIndex prop.");
         }
     }, [initialSelectedIndex, multipleSelect]);
+
+    const {
+        helpersContentContainerStyle,
+        bottomSheetHeaderStyle,
+        itemTailContainerStyle,
+        counterContainerStyle,
+        helpersContainerStyle,
+        helperButtonStyle,
+        containerStyle,
+        touchableStyle,
+        itemTitleProps,
+        checkBoxStyle,
+        counterColor,
+        valueStyle,
+        itemStyle
+    } = selectBoxStyler({
+        selectedIndexes,
+        multipleSelect,
+        disabledStyle,
+        typography,
+        maxChoice,
+        minChoice,
+        radiuses,
+        disabled,
+        spaces,
+        colors,
+        style
+    });
 
     const closeSelectPage = () => {
         selectPageRef.current?.close();
@@ -181,10 +358,20 @@ const SelectBox = <ItemT extends {}>({
 
     const renderCheck = (index: number) => {
         if(selectedIndexes.indexOf(index) !== -1) {
-            return <SvgCheck color={colors.primary} size={25} style={styles.check} />;
+            return <SvgCheck color={colors.primary} size={25} style={checkBoxStyle} />;
         }
 
         return null;
+    };
+
+    const itemPress = (key: string) => {
+        onItemPress(key);
+    };
+
+    const renderItemTailComponent = (index: number) => {
+        return <View style={itemTailContainerStyle}>
+            {renderCheck(index)}
+        </View>;
     };
 
     const renderItem = ({
@@ -201,39 +388,21 @@ const SelectBox = <ItemT extends {}>({
     }) : <RowItem
         key={item.__key}
         title={itemLabelExtractor(item)}
-        TailComponent={<View style={styles.checkContainer}>
-            {renderCheck(index)}
-        </View>}
-        onPress={() => {
-            onItemPress(item.__key);
-        }}
+        TailComponent={renderItemTailComponent(index)}
+        onPress={() => itemPress(item.__key)}
         titleProps={{
-            color: selectedIndexes.indexOf(index) !== -1 ? "primary" : "body",
-            variant: "header7"
+            ...itemTitleProps,
+            color: selectedIndexes.indexOf(index) !== -1 ? "primary" : "body"
         }}
-        style={{
-            marginBottom: spaces.content
-        }}
+        style={itemStyle}
     />;
 
     const renderCounter = () => {
-        let color: keyof NCore.Colors = "body";
-
-        if(minChoice !== undefined && selectedIndexes.length < minChoice) {
-            color = "accent";
-        }
-
-        if(maxChoice !== undefined && selectedIndexes.length > maxChoice) {
-            color = "accent";
-        }
-
         return <View
-            style={[
-                styles.toolsLeftContainer
-            ]}
+            style={counterContainerStyle}
         >
             <Text
-                color={color}
+                color={counterColor}
             >
                 {selectedIndexes.length} {maxChoice ? `/ ${maxChoice}` : localize("nCoreSelectBoxSelectedText")}
             </Text>
@@ -246,9 +415,7 @@ const SelectBox = <ItemT extends {}>({
         }
 
         return <View
-            style={[
-                styles.toolsRightContainer
-            ]}
+            style={helpersContainerStyle}
         >
             <Button
                 title={localize("nCoreSelectBoxSelectAll")}
@@ -257,7 +424,7 @@ const SelectBox = <ItemT extends {}>({
                 onPress={() => {
                     setSelectedIndexes(data.map((_, i) => i));
                 }}
-                style={styles.toolsButton}
+                style={helperButtonStyle}
             />
             <Text> / </Text>
             <Button
@@ -267,23 +434,18 @@ const SelectBox = <ItemT extends {}>({
                 onPress={() => {
                     setSelectedIndexes([]);
                 }}
-                style={styles.toolsButton}
+                style={helperButtonStyle}
             />
         </View>;
     };
 
-    const renderTools = () => {
+    const renderHelpersContent = () => {
         if(!multipleSelect) {
             return null;
         }
 
         return <View
-            style={[
-                styles.toolsContainer,
-                {
-                    marginBottom: spaces.content
-                }
-            ]}
+            style={helpersContentContainerStyle}
         >
             {renderCounter()}
             {renderHelpers()}
@@ -303,52 +465,8 @@ const SelectBox = <ItemT extends {}>({
         />;
     };
 
-    return <View
-        style={[
-            style
-        ]}
-    >
-        <TouchableOpacity
-            onPress={() => {
-                if(!disabled) {
-                    selectPageRef.current?.open();
-                }
-            }}
-            disabled={disabled}
-            style={[
-                styles.container,
-                {
-                    paddingHorizontal: spaces.container,
-                    paddingVertical: spaces.content,
-                    backgroundColor: colors.panel,
-                    borderRadius: radiuses.half
-                },
-                disabled ? disabledStyle : null
-            ]}
-        >
-            <View
-                style={[
-                    styles.content
-                ]}
-            >
-                <Text
-                    variant="header9"
-                    color={selectedIndexes.length ? "primary" : "hideBody"}
-                    style={{
-                        marginBottom: spaces.inline / 2
-                    }}
-                >
-                    {title}
-                </Text>
-                <Text>
-                    {renderValue()}
-                </Text>
-            </View>
-            <ChevronBottom
-                color={colors.hideBody}
-            />
-        </TouchableOpacity>
-        <BottomSheet
+    const renderBottomSheet = () => {
+        return <BottomSheet
             ref={selectPageRef}
             fullScreen={true}
             withHandle={false}
@@ -361,14 +479,10 @@ const SelectBox = <ItemT extends {}>({
                 onBack={() => {
                     closeSelectPage();
                 }}
-                style={[
-                    {
-                        marginBottom: multipleSelect ? spaces.content : spaces.container * 1.5
-                    }
-                ]}
+                style={bottomSheetHeaderStyle}
             />
             {renderSearchBox()}
-            {renderTools()}
+            {renderHelpersContent()}
             <FlatList
                 showsHorizontalScrollIndicator={false}
                 showsVerticalScrollIndicator={false}
@@ -376,7 +490,46 @@ const SelectBox = <ItemT extends {}>({
                 renderItem={renderItem}
                 data={data}
             />
-        </BottomSheet>
+        </BottomSheet>;
+    };
+
+    return <View
+        style={containerStyle}
+    >
+        <TouchableOpacity
+            onPress={() => {
+                if(!disabled) {
+                    selectPageRef.current?.open();
+                }
+            }}
+            disabled={disabled}
+            style={touchableStyle}
+        >
+            <View
+                style={[
+                    styles.content
+                ]}
+            >
+                <Text
+                    variant="header9"
+                    color={selectedIndexes.length ? "primary" : "hideBody"}
+                    style={{
+                        marginBottom: spaces.inline
+                    }}
+                >
+                    {title}
+                </Text>
+                <NativeText
+                    style={valueStyle}
+                >
+                    {renderValue()}
+                </NativeText>
+            </View>
+            <ChevronBottom
+                color={colors.hideBody}
+            />
+        </TouchableOpacity>
+        {renderBottomSheet()}
     </View>;
 };
 export default SelectBox;

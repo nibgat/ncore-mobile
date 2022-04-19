@@ -15,6 +15,7 @@ const styles = StyleSheet.create({
     checkContainer: {
         justifyContent: "center",
         alignItems: "center",
+        alignSelf: "center",
         height: 30,
         width: 30
     },

@@ -1,7 +1,8 @@
 import React from "react";
 import {
     TouchableOpacity,
-    ViewStyle
+    ViewStyle,
+    Platform
 } from "react-native";
 import {
     CheckBoxIcon 
@@ -54,7 +55,7 @@ const checkBoxStyler = ({
 
     const indicator = {
         color: colors.primary,
-        size: 20
+        size: Platform.OS === "android" ? 18 : 14
     };
 
     if(disabled) {
