@@ -115,9 +115,9 @@ const selectBoxStyler = ({
     let touchableStyle: ViewStyle = {
         ...styles.container,
         paddingHorizontal: spaces.container,
-        paddingVertical: spaces.inline,
         backgroundColor: colors.panel,
-        borderRadius: radiuses.half
+        borderRadius: radiuses.half,
+        paddingTop: spaces.content
     };
 
     const valueStyle = {
@@ -180,8 +180,10 @@ const selectBoxStyler = ({
         };
     }
 
-    if(Platform.OS === "android") {
-        touchableStyle.paddingBottom = spaces.content;
+    if(Platform.OS === "ios") {
+        touchableStyle.paddingBottom = spaces.inline;
+    } else {
+        touchableStyle.paddingBottom = spaces.content * 1.5;
     }
 
     return {

@@ -75,9 +75,9 @@ const textInputStyler = ({
     let container: ViewStyle = {
         borderColor: isFocused ? colors.primary : colors.panel,
         paddingHorizontal: spaces.container,
-        paddingVertical: spaces.inline,
         backgroundColor: colors.panel,
         borderRadius: radiuses.half,
+        paddingTop: spaces.content,
         borderWidth: borders.line
     };
 
@@ -102,8 +102,9 @@ const textInputStyler = ({
 
     if(Platform.OS === "ios") {
         input.marginBottom = spaces.content / 1.5;
+        container.paddingBottom = spaces.inline;
     } else {
-        container.paddingBottom = spaces.content;
+        container.paddingBottom = spaces.content * 1.5;
     }
 
     if(disabled) {
