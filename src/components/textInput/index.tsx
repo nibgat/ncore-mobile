@@ -84,7 +84,7 @@ const textInputStyler = ({
     let titleProps: TitleProps = {
         color: value?.length || isFocused ? "primary" : "gray50",
         style: {
-            marginBottom: spaces.content
+            marginBottom: spaces.inline
         }
     };
 
