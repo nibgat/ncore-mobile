@@ -123,7 +123,8 @@ const selectBoxStyler = ({
     const valueStyle = {
         ...typography.body,
         height: 18,
-        lineHeight: undefined
+        lineHeight: undefined,
+        color: colors.body
     };
 
     const checkBoxStyle = {
