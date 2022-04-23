@@ -13,13 +13,13 @@ import {
     BottomSheet,
     TextInput,
     SelectBox,
+    StateCard,
+    CheckBox,
     Button,
     Switch,
     Dialog,
     Chip,
-    Text,
-    StateCard,
-    CheckBox
+    Text
 } from "ncore-mobile";
 import {
     tr
@@ -248,6 +248,7 @@ const App = () => {
         <BottomSheet
             ref={bottomSheetRef}
             closeOnOverlayTap={true}
+            autoHeight={true}
         >
             <StateCard
                 title="Test deneme"

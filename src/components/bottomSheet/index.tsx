@@ -49,6 +49,7 @@ type BottomSheetStylerParams = {
     spaces: NCore.SpacesTokens;
     modalStyleProp?: ViewStyle;
     rootStyleProp?: ViewStyle;
+    autoHeight?: boolean;
     fullScreen?: boolean;
 };
 
@@ -66,10 +67,11 @@ const bottomSheetStyler = ({
     modalStyleProp,
     rootStyleProp,
     fullScreen,
+    autoHeight,
     radiuses,
     spaces
 }: BottomSheetStylerParams): BottomSheetStylerResult => {
-    const contentContainerStyle = {
+    const contentContainerStyle: ViewStyle = {
         ...styles.contentContainerStyle
     };
 
@@ -94,6 +96,10 @@ const bottomSheetStyler = ({
         ...styles.rootStyle,
         ...rootStyleProp
     };
+
+    if(autoHeight) {
+        contentContainerStyle.flex = undefined;
+    }
 
     if(fullScreen) {
         childrenStyle.borderTopLeftRadius = 0;
@@ -179,6 +185,7 @@ const BottomSheet: RefForwardingComponent<BottomSheetRef, IBottomSheetProps> = (
         modalStyleProp,
         rootStyleProp,
         fullScreen,
+        autoHeight,
         radiuses,
         spaces
     });
