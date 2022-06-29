@@ -235,7 +235,23 @@ const SelectBox = <ItemT extends {}>({
     const selectPageRef = useRef<BottomSheetRef>(null);
     const debounceRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
-    const [selectedIndexes, setSelectedIndexes] = useState<number[]>(Array.isArray(initialSelectedIndex) ? initialSelectedIndex : []);
+    const getSelectedIndexes = () => {
+        if(
+            initialSelectedIndex === undefined ||
+            initialSelectedIndex === null ||
+            initialSelectedIndex === -1
+        ) {
+            return [];
+        }
+
+        if(Array.isArray(initialSelectedIndex)) {
+            return initialSelectedIndex;
+        }
+
+        return [initialSelectedIndex];
+    };
+
+    const [selectedIndexes, setSelectedIndexes] = useState<number[]>(getSelectedIndexes());
     const [data, setData] = useState(() => initialData?.map((item, index) => ({
         ...item,
         __key: typeof keyExtractor === "function" ? keyExtractor(item, index) : `selectBox-${index}`
