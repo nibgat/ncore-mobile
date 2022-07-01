@@ -1,7 +1,7 @@
 {
   "name": "ncore-mobile",
-  "version": "0.1.0-alpha.6",
-  "description": "NİBGAT® | Component Library",
+  "version": "1.0.0",
+  "description": "NİBGAT® | NCore Mobile Component Library",
   "main": "lib/commonjs/index",
   "module": "lib/module/index",
   "types": "lib/typescript/index.d.ts",
