@@ -24,6 +24,7 @@ export type NCoreConfig = {
     designTokens?: NCore.DesignTokens;
     locales?: Array<LocaleConfig>
     initialThemeKey?: NCore.ThemeKey;
+    initialLanguage?: String;
 };
 
 declare global {

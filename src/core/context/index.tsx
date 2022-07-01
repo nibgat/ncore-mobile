@@ -37,6 +37,7 @@ const NCoreContext: FC<NCoreContext> = ({
         designTokens={config?.designTokens}
     >
         <LocalesProvider
+            initialLanguage={config?.initialLanguage}
             locales={config?.locales}
         >
             <Host>
