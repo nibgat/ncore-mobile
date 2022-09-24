@@ -2,6 +2,7 @@ const tr = {
     "code": "tr",
     "isRTL": false,
     "translations": {
+        "appName": "NCore Mobil",
         "nCoreSelectBoxSelectedText": "Seçim",
         "nCoreSelectBoxNoSelectionText": "Seçim yapılmadı",
         "coreSearchBoxValidationEnterContent": "İçerik giriniz",
@@ -10,7 +11,13 @@ const tr = {
         "nCoreDefaultDialogSecondaryButtonTitle": "İptal",
         "nCoreDefaultDialogPrimaryButtonTitle": "Tamam",
         "nCoreSelectBoxClearAll": "Tümünü Temizle",
-        "nCoreSelectBoxSelectAll": "Tümünü Seç"
+        "nCoreSelectBoxSelectAll": "Tümünü Seç",
+        "activeTheme": "Aktif Tema",
+        "activeLanguage": "Aktif Dil",
+        "textTypo": "Text / Tipografi",
+        "textForTextComponent": "Merhaba, Ben bir NCore Metniyim",
+        "colors": "Renkler",
+        "button": "Button"
     }
 };
 export default tr;
