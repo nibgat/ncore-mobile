@@ -127,6 +127,11 @@ android {
         targetCompatibility JavaVersion.VERSION_1_8
     }
 
+    packagingOptions {
+        pickFirst '**/libc++_shared.so'
+        pickFirst '**/libfbjni.so'
+    }
+
     defaultConfig {
         applicationId "com.example.ncoremobile"
         minSdkVersion rootProject.ext.minSdkVersion
@@ -174,6 +179,11 @@ android {
                         versionCodes.get(abi) * 1048576 + defaultConfig.versionCode
             }
 
+        }
+    }
+    configurations.all {
+        resolutionStrategy {
+            force 'com.facebook.react:react-native:0.63.4'
         }
     }
 }

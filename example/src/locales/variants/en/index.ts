@@ -16,7 +16,9 @@ const en = {
         "textTypo": "Text / Typography",
         "textForTextComponent": "Hi, I am a NCore Text",
         "colors": "Colors",
-        "button": "Button"
+        "button": "Button",
+        "input-placeholder": "Please enter text",
+        "search": "Search"
     }
 };
 export default en;

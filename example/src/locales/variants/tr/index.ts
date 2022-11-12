@@ -17,7 +17,9 @@ const tr = {
         "textTypo": "Text / Tipografi",
         "textForTextComponent": "Merhaba, Ben bir NCore Metniyim",
         "colors": "Renkler",
-        "button": "Button"
+        "button": "Button",
+        "input-placeholder": "Lütfen bir metin girin",
+        "search": "Ara"
     }
 };
 export default tr;

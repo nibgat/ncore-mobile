@@ -10,6 +10,7 @@ import HomeScreen from "../pages/home";
 import TextScreen from "../pages/text";
 import ColorsScreen from "../pages/colors";
 import ButtonScreen from "../pages/button";
+import TextInputScreen from "../pages/textInput";
 
 const Stack = createNativeStackNavigator();
 
@@ -36,6 +37,10 @@ const RootNav = () => {
             <Stack.Screen
                 name="Button"
                 component={ButtonScreen}
+            />
+            <Stack.Screen
+                name="TextInput"
+                component={TextInputScreen}
             />
         </Stack.Navigator>
     </NavigationContainer>;

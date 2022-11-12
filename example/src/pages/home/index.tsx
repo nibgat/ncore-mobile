@@ -1,5 +1,6 @@
 import React, {
-    useEffect
+    useEffect,
+    useState
 } from "react";
 import {
     Image
@@ -9,6 +10,7 @@ import {
     useNCoreLocalization,
     PageContainer,
     useNCoreTheme,
+    SearchBox,
     Button,
     Text
 } from "ncore-mobile";
@@ -21,8 +23,63 @@ const LOGO: Record<NCore.ThemeKey, any> = {
     "light": require("../../assets/logo/lightlogo.png")
 };
 
+const BUTTONS: Array<{
+    title: keyof NCore.Translation | string;
+    useTranslationForTitle: boolean;
+    spreadBehaviour: "stretch" | "baseline" | "free";
+    navigationName: string;
+    color: keyof NCore.Colors;
+    textColor: keyof NCore.Colors;
+    style: any;
+}> = [
+    {
+        title: "textTypo",
+        useTranslationForTitle: true,
+        spreadBehaviour: "stretch",
+        navigationName: "Text",
+        color: "layer3",
+        textColor: "body",
+        style: (spaces: NCore.SpacesTokens) => ({
+            marginBottom: spaces.content
+        })
+    },
+    {
+        title: "colors",
+        useTranslationForTitle: true,
+        spreadBehaviour: "stretch",
+        navigationName: "Colors",
+        color: "layer3",
+        textColor: "body",
+        style: (spaces: NCore.SpacesTokens) => ({
+            marginBottom: spaces.content
+        })
+    },
+    {
+        title: "button",
+        useTranslationForTitle: true,
+        spreadBehaviour: "stretch",
+        navigationName: "Button",
+        color: "layer3",
+        textColor: "body",
+        style: (spaces: NCore.SpacesTokens) => ({
+            marginBottom: spaces.content
+        })
+    },
+    {
+        title: "TextInput",
+        useTranslationForTitle: false,
+        spreadBehaviour: "stretch",
+        navigationName: "TextInput",
+        color: "layer3",
+        textColor: "body",
+        style: (spaces: NCore.SpacesTokens) => ({
+            marginBottom: spaces.content * 4
+        })
+    }
+];
+
 const Home = () => {
-    const navigation = useNavigation();
+    // const navigation = useNavigation();
 
     const {
         activeLocale,
@@ -36,10 +93,18 @@ const Home = () => {
         spaces
     } = useNCoreTheme();
 
+    const [data, setData] = useState<Array<{
+        title: keyof NCore.Translation | string;
+        useTranslationForTitle: boolean;
+        spreadBehaviour: "stretch" | "baseline" | "free";
+        navigationName: string;
+        color: keyof NCore.Colors;
+        textColor: keyof NCore.Colors;
+        style: any;
+    }>>(BUTTONS);
+
     useEffect(() => {
-        navigation.setOptions({
-            headerShown: false
-        });
+        
     });
 
     return <PageContainer
@@ -87,45 +152,44 @@ const Home = () => {
                 marginBottom: spaces.content * 4
             }}
         />
-        <Button
-            title={localize("textTypo")}
-            spreadBehaviour="stretch"
-            onPress={() => {
-                // @ts-ignore
-                navigation.navigate("Text");
+        <SearchBox
+            placeholder={localize("search")}
+            onChangeText={searchText => {
+                if(searchText && searchText.length) {
+                    setData(BUTTONS.filter(e => {
+                        if(e.useTranslationForTitle) {
+                            // @ts-ignore
+                            return localize(e.title).match(searchText);
+                        } else {
+                            return e.title.match(searchText);
+                        }
+                    }));
+                } else {
+                    setData(BUTTONS);
+                }
             }}
-            color="layer3"
-            textColor="body"
+            cleanable={true}
             style={{
-                marginBottom: spaces.content
+                marginBottom: spaces.content * 4
             }}
         />
-        <Button
-            title={localize("colors")}
-            spreadBehaviour="stretch"
-            onPress={() => {
-                // @ts-ignore
-                navigation.navigate("Colors");
-            }}
-            color="layer3"
-            textColor="body"
-            style={{
-                marginBottom: spaces.content
-            }}
-        />
-        <Button
-            title={localize("button")}
-            spreadBehaviour="stretch"
-            onPress={() => {
-                // @ts-ignore
-                navigation.navigate("Button");
-            }}
-            color="layer3"
-            textColor="body"
-            style={{
-                marginBottom: spaces.content
-            }}
-        />
+        {
+            data.map((item, index) => {
+                return <Button
+                    key={`button-${index}`}
+                    // @ts-ignore
+                    title={item.useTranslationForTitle ? localize(item.title) : item.title}
+                    spreadBehaviour={item.spreadBehaviour}
+                    onPress={() => {
+                        // @ts-ignore
+                        navigation.navigate(item.navigationName);
+                    }}
+                    color={item.color}
+                    textColor={item.textColor}
+                    style={item.style(spaces)}
+                />;
+            })
+        }
     </PageContainer>;
 };
 export default Home;

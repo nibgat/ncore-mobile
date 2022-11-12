@@ -8,6 +8,8 @@ declare global {
             textForTextComponent: string;
             colors: string;
             button: string;
+            "input-placeholder": string;
+            search: string;
         }
     }
 }

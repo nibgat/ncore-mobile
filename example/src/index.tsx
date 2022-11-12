@@ -1,9 +1,6 @@
 import React from "react";
 import Navigation from "./navigation";
 import {
-    GestureHandlerRootView 
-} from "react-native-gesture-handler";
-import {
     NCoreProvider
 } from "ncore-mobile";
 import {
@@ -11,25 +8,22 @@ import {
     tr
 } from "./locales";
 import stylesheet from "./stylesheet";
+import Home from "./pages/home";
 
 const App = () => {
     return <Navigation/>;
 };
 
 const NCoreContext = () => {
-    return <GestureHandlerRootView
-        style={stylesheet.container}
+    return <NCoreProvider
+        config={{
+            locales: [
+                tr,
+                en
+            ]
+        }}
     >
-        <NCoreProvider
-            config={{
-                locales: [
-                    tr,
-                    en
-                ]
-            }}
-        >
-            <App/>
-        </NCoreProvider>
-    </GestureHandlerRootView>;
+        <Home/>
+    </NCoreProvider>;
 };
 export default NCoreContext;
