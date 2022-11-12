@@ -63,6 +63,8 @@ const LocalesProvider: FC<LocalesProvider> = ({
             const initialLanguagesData = prepareLocaleData(initialLanguage, locales);
             return {
                 ...initialState,
+                activeLocale: initialLanguagesData.code,
+                isRTL: initialLanguagesData.isRTL,
                 currentLocalizationData: initialLanguagesData.translations
             };
         }

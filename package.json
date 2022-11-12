@@ -1,6 +1,6 @@
 {
   "name": "ncore-mobile",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "NİBGAT® | NCore Mobile Component Library",
   "main": "lib/commonjs/index",
   "module": "lib/module/index",

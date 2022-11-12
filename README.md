@@ -14,6 +14,14 @@
 
 Please visit for docs: [NCore Mobile](https://ncore.nibgat.space/mobile)
 
+### Example
+
+```
+yarn example android
+or
+yarn example ios
+```
+
 ### Dependencies
 
 If you install with yarn these packages will already be installed.
