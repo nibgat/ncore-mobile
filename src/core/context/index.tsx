@@ -9,7 +9,7 @@ import {
 import ModalContextInheritance from "./modal";
 import light from "../theme/variants/light";
 import {
-    en
+    en, tr
 } from "../locales";
 import {
     NCoreContextConfigType
@@ -37,7 +37,8 @@ class Context {
             {
                 initialLanguage: "en",
                 locales: [
-                    en
+                    en,
+                    tr
                 ]
             },
             {

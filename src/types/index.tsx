@@ -207,6 +207,11 @@ declare global {
             nCoreSelectBoxMaxSelectionReachedText: string;
             nCoreSelectBoxSelectAll: string;
             nCoreSelectBoxClearAll: string;
+            "active-theme": string;
+            "active-language": string;
+            "ncore-mobile": string;
+            "welcome-description": string;
+            "button": string;
         }
     }
 }

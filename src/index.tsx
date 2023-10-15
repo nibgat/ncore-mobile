@@ -25,6 +25,8 @@ export type {
 export {
     PageContainer,
     BottomSheet,
+    Dialog,
+    Button,
     Text
 } from "./components";
 

@@ -2,7 +2,8 @@ import NCoreContext, {
     ConfigType
 } from "ncore-context";
 import {
-    en
+    en,
+    tr
 } from "../locales";
 import {
     LocaleContextType,
@@ -11,7 +12,8 @@ import {
 
 class LocaleContextInheritance<T extends LanguageType> extends NCoreContext<LocaleContextType, ConfigType<LocaleContextType>> {
     locales = [
-        en
+        en,
+        tr
     ];
 
     constructor(initialState: T, config: ConfigType<LocaleContextType>) {
@@ -27,11 +29,11 @@ class LocaleContextInheritance<T extends LanguageType> extends NCoreContext<Loca
 
     switchLocale = (localeCode: string) => {
         const selectedLanguageData = this.locales.find(e => e.code === localeCode) ?? en;
-    
+
         if(!selectedLanguageData) {
             throw Error(`Can not find a locale for the given code: ${localeCode}`);
         }
-    
+
         const translations = {
             ...en.translations,
             ...selectedLanguageData.translations
@@ -58,7 +60,26 @@ class LocaleContextInheritance<T extends LanguageType> extends NCoreContext<Loca
 
     prepare = (initialState: LanguageType) => {
         if(initialState.locales) {
-            this.locales = initialState.locales;
+            let newLangData: typeof this.locales = [];
+
+            initialState.locales.forEach((lang) => {
+                const alreadyExistsData = this.locales.find(_lang => _lang.code === lang.code);
+
+                if(alreadyExistsData) {
+                    newLangData.push({
+                        ...alreadyExistsData,
+                        ...lang,
+                        translations: {
+                            ...alreadyExistsData.translations,
+                            ...lang.translations
+                        }
+                    });
+                } else {
+                    newLangData.push(lang);
+                }
+            });
+
+            this.locales = newLangData;
         }
 
         if(initialState.initialLanguage) {
