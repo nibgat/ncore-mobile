@@ -11,21 +11,40 @@ class NCoreInheritance {
     NCoreContext;
 
     constructor() {
-        this.NCoreContext = new Context();
+        this.NCoreContext = new Context({
+            key: "NCore"
+        });
     }
+
+    ContextApi: FC = ({
+        children
+    }) => {
+        const {
+            colors
+        } = NCoreContext.ThemeContext.useContext();
+
+        return <GestureHandlerRootView
+            style={[
+                stylesheet.container,
+                {
+                    backgroundColor: colors.layer1
+                }
+            ]}
+        >
+            {children}
+        </GestureHandlerRootView>;
+    };
 
     Provider: FC = ({
         children
     }) => {
         const NCoreContext = this.NCoreContext;
 
-        return <GestureHandlerRootView
-            style={stylesheet.container}
-        >
-            <NCoreContext.Provider>
+        return <NCoreContext.Provider>
+            <this.ContextApi>
                 {children}
-            </NCoreContext.Provider>
-        </GestureHandlerRootView>;
+            </this.ContextApi>
+        </NCoreContext.Provider>;
     };
 };
 

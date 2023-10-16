@@ -211,7 +211,6 @@ declare global {
             "active-language": string;
             "ncore-mobile": string;
             "welcome-description": string;
-            "button": string;
         }
     }
 }

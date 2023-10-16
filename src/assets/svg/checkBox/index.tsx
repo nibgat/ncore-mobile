@@ -3,11 +3,11 @@ import Svg, {
     Path
 } from "react-native-svg";
 import {
-    INCoreIconProps 
-} from "../../../core/types";
-import {
     calculateSvgLongSideSize 
 } from "../util";
+import {
+    INCoreIconPropsType 
+} from "../../../types";
 
 const CheckBoxDefaultSize = {
     y: 12,
@@ -20,7 +20,7 @@ const SvgCheckBox = ({
     size = LongSide.value,
     color = "#000",
     ...props
-}: INCoreIconProps) => {
+}: INCoreIconPropsType) => {
     let x = LongSide.key === "x" ? 0 : size / 4;
     let y = LongSide.key === "y" ? 0 : size / 4;
 

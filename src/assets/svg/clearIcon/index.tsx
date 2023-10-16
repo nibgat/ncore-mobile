@@ -1,13 +1,13 @@
 import React from "react";
-import {
-    INCoreIconProps 
-} from "../../../core/types";
 import Svg, {
     Path 
 } from "react-native-svg";
 import {
     calculateSvgLongSideSize 
 } from "../util";
+import {
+    INCoreIconPropsType 
+} from "../../../types";
 
 const ClearIconDefaultSize = {
     y: 20,
@@ -20,7 +20,7 @@ const SvgClearIcon = ({
     size = LongSide.value,
     color,
     ...props
-}: INCoreIconProps) => {
+}: INCoreIconPropsType) => {
     let x = LongSide.key === "x" ? 0 : size / 4;
     let y = LongSide.key === "y" ? 0 : size / 4;
 

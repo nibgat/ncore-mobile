@@ -14,11 +14,10 @@ const en: {
         "nCoreSelectBoxMaxSelectionReachedText": "You cannot choose any more.",
         "nCoreSelectBoxSelectAll": "Select All",
         "nCoreSelectBoxClearAll": "Clear All",
-        "active-theme": "Active Theme",
-        "active-language": "Active Language",
+        "active-theme": "Theme",
+        "active-language": "Language",
         "ncore-mobile": "NCore Mobile",
-        "welcome-description": "Welcome to NCore Design System Component Library",
-        "button": "Button"
+        "welcome-description": "Welcome to NCore Design System Component Library"
     }
 };
 export default en;

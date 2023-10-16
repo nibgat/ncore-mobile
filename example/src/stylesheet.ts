@@ -3,6 +3,10 @@ import {
 } from "react-native";
 
 const stylesheet = StyleSheet.create({
+    loadingContainer: {
+        justifyContent: "center",
+        alignItems: "center"
+    },
     contentContainer: {
         alignItems: "center"
     },
@@ -22,6 +26,11 @@ const stylesheet = StyleSheet.create({
     },
     toolButtonRight: {
         flex: 1
+    },
+    seperator: {
+        borderRadius: 2,
+        width: "100%",
+        height: 1
     }
 });
 export default stylesheet;

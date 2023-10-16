@@ -14,11 +14,10 @@ const tr: {
         "nCoreSelectBoxMaxSelectionReachedText": "Daha fazla seçemezsin.",
         "nCoreSelectBoxSelectAll": "Tümünü Seç",
         "nCoreSelectBoxClearAll": "Tümünü Temizle",
-        "active-theme": "Aktif Tema",
-        "active-language": "Aktif Dil",
+        "active-theme": "Tema",
+        "active-language": "Dil",
         "ncore-mobile": "NCore Mobil",
-        "welcome-description": "NCore Design Sistem ve Bileşen Kütüphanesi'ne hoş geldiniz.",
-        "button": "Button"
+        "welcome-description": "NCore Design Sistem ve Bileşen Kütüphanesi'ne hoş geldiniz."
     }
 };
 export default tr;

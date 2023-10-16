@@ -1,121 +1,55 @@
 import React from 'react';
 import {
-    StatusBar,
-    Image,
-    View
+    ActivityIndicator
 } from 'react-native';
 import {
     PageContainer,
-    NCoreLocale,
     NCoreTheme,
-    Button,
-    NCore,
-    Text
+    NCore
 } from "ncore-mobile";
 import stylesheet from './stylesheet';
-
-const lightIcon = require("../assets/lightlogo.png");
-const darkIcon = require("../assets/darklogo.png");
+import {
+    Montserrat_600SemiBold_Italic,
+    Montserrat_400Regular_Italic,
+    Montserrat_500Medium_Italic,
+    Montserrat_300Light_Italic,
+    Montserrat_600SemiBold,
+    Montserrat_400Regular,
+    Montserrat_500Medium,
+    Montserrat_300Light,
+    useFonts
+} from "@expo-google-fonts/montserrat";
+import Navigation from "./navigation";
 
 const ContextAPI = () => {
     const {
-        activeTheme,
-        colors,
-        spaces
+        colors
     } = NCoreTheme.useContext();
 
-    const {
-        activeLocale,
-        localize
-    } = NCoreLocale.useContext();
+    let [fontsLoaded, fontError] = useFonts({
+        "Montserrat-SemiBold-Italic": Montserrat_600SemiBold_Italic,
+        "Montserrat-Regular-Italic": Montserrat_400Regular_Italic,
+        "Montserrat-Medium-Italic": Montserrat_500Medium_Italic,
+        "Montserrat-Light-Italic": Montserrat_300Light_Italic,
+        "Montserrat-SemiBold": Montserrat_600SemiBold,
+        "Montserrat-Regular": Montserrat_400Regular,
+        "Montserrat-Medium": Montserrat_500Medium,
+        "Montserrat-Light": Montserrat_300Light
+    });
 
-    return <PageContainer
-        contentContainerStyle={stylesheet.contentContainer}
-    >
-        <StatusBar
-            barStyle={activeTheme === "dark" ? "light-content" : "dark-content"}
-            backgroundColor={colors.layer1}
-        />
-
-        <Image
-            source={activeTheme === "dark" ? darkIcon : lightIcon}
-            resizeMode="contain"
-            style={stylesheet.logo}
-        />
-
-        <Text
-            variant="header2"
-            style={{
-                marginBottom: spaces.content
-            }}
+    if(!fontsLoaded && !fontError) {
+        return <PageContainer
+            scrollable={false}
+            style={stylesheet.loadingContainer}
         >
-            {localize("ncore-mobile")}
-        </Text>
-        <Text
-            variant="header6"
-            color="hideBody"
-            style={[
-                stylesheet.welcomeText,
-                {
-                    marginBottom: spaces.content * 4
-                }
-            ]}
-        >
-            {localize("welcome-description")}
-        </Text>
-
-        <View
-            style={[
-                stylesheet.toolsContainer,
-                {
-                    marginBottom: spaces.content
-                }
-            ]}
-        >
-            <Button
-                spreadBehaviour="free"
-                color={activeTheme === "dark" ? "constrastBody" : "body"}
-                textColor={activeTheme === "dark" ? "body" : "constrastBody"}
-                title={`${localize("active-theme")}: ${activeTheme.charAt(0).toLocaleUpperCase()}${activeTheme.slice(1)}`}
-                style={[
-                    stylesheet.toolButtonLeft,
-                    {
-                        paddingRight: spaces.container / 2,
-                        paddingLeft: spaces.container / 2,
-                        marginRight: spaces.content / 2
-                    }
-                ]}
-                onPress={() => {
-                    NCoreTheme.setTheme(activeTheme === "dark" ? "light" : "dark");
-                }}
+            <ActivityIndicator
+                color={colors.primary}
+                size="large"
             />
-            <Button
-                spreadBehaviour="free"
-                color="constrastBody"
-                textColor="body"
-                title={`${localize("active-language")}: ${activeLocale.toLocaleUpperCase()}`}
-                style={[
-                    stylesheet.toolButtonRight,
-                    {
-                        paddingRight: spaces.container / 2,
-                        paddingLeft: spaces.container / 2,
-                        marginLeft: spaces.content / 2
-                    }
-                ]}
-                onPress={() => {
-                    NCoreLocale.switchLocale(activeLocale === "en" ? "tr" : "en");
-                }}
-            />
-        </View>
+        </PageContainer>;
+    }
 
-        <Button
-            spreadBehaviour="stretch"
-            title={localize("button")}
-            onPress={() => {
-                NCoreTheme.setTheme(activeTheme === "dark" ? "light" : "dark");
-            }}
-        />
-    </PageContainer>;
+    return <Navigation/>;
 };
 
 const App = () => {

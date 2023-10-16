@@ -3,11 +3,11 @@ import Svg, {
     Path
 } from "react-native-svg";
 import {
-    INCoreIconProps 
-} from "../../../core/types";
-import {
     calculateSvgLongSideSize 
 } from "../util";
+import {
+    INCoreIconPropsType 
+} from "../../../types";
 
 const CheckDefaultSize = {
     y: 35,
@@ -21,7 +21,7 @@ const SvgCheck = ({
     color = "#000",
     style,
     ...props
-}: INCoreIconProps) => {
+}: INCoreIconPropsType) => {
     let x = LongSide.key === "x" ? 0 : size / 4;
     let y = LongSide.key === "y" ? 0 : size / 4;
 

@@ -1,13 +1,13 @@
 import React from "react";
-import {
-    INCoreIconProps 
-} from "../../../core/types";
 import Svg, {
     Rect 
 } from "react-native-svg";
 import {
     calculateSvgLongSideSize 
 } from "../util";
+import {
+    INCoreIconPropsType 
+} from "../../../types";
 
 const RadioCheckedDefaultSize = {
     y: 20,
@@ -20,7 +20,7 @@ const RadioChecked = ({
     size = LongSide.value,
     color,
     ...props
-}: INCoreIconProps) => {
+}: INCoreIconPropsType) => {
     const strokeWidth = size / 10;
 
     const containerSize = size - strokeWidth;
