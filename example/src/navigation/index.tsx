@@ -24,6 +24,7 @@ const Root = () => {
     return <NavigationContainer>
         <RootStack.Navigator
             screenOptions={{
+                animation: "slide_from_right",
                 headerStyle: {
                     backgroundColor: colors.layer1
                 },
@@ -37,7 +38,7 @@ const Root = () => {
                 name="Welcome"
                 component={WelcomePage}
                 options={{
-                    headerShown: false
+                    headerShown: false,
                 }}
             />
             <RootStack.Screen
