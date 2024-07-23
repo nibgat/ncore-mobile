@@ -3,6 +3,9 @@ import {
 } from "react-native";
 
 const stylesheet = StyleSheet.create({
+    container: {
+        flex: 1
+    },
     loadingContainer: {
         justifyContent: "center",
         alignItems: "center"

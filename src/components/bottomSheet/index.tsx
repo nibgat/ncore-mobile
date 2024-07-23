@@ -1,5 +1,4 @@
 import React, {
-    RefForwardingComponent,
     useImperativeHandle,
     forwardRef,
     RefObject,
@@ -22,6 +21,9 @@ import IBottomSheetProps, {
 import {
     windowHeight
 } from "../../utils";
+import {
+    RefForwardingComponent
+} from "../../types";
 
 const BottomSheet: RefForwardingComponent<BottomSheetRef, IBottomSheetProps> = ({
     pageContainerStyle: pageContainerStyleProp,

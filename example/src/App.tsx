@@ -20,6 +20,9 @@ import {
     useFonts
 } from "@expo-google-fonts/montserrat";
 import Navigation from "./navigation";
+import {
+    GestureHandlerRootView
+} from 'react-native-gesture-handler';
 
 const ContextAPI = () => {
     const {
@@ -53,8 +56,14 @@ const ContextAPI = () => {
 };
 
 const App = () => {
-    return <NCore.Provider>
-        <ContextAPI/>
-    </NCore.Provider>;
+    return <GestureHandlerRootView
+        style={{
+            ...stylesheet.container
+        }}
+    >
+        <NCore.Provider>
+            <ContextAPI/>
+        </NCore.Provider>
+    </GestureHandlerRootView>;
 };
 export default App;

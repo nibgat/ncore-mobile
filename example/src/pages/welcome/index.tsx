@@ -145,7 +145,55 @@ const Welcome = () => {
                 marginBottom: spaces.content
             }}
             onPress={() => {
-                NCoreTheme.setTheme(activeTheme === "dark" ? "light" : "dark");
+                navigation.navigate("Button");
+            }}
+        />
+        <Button
+            spreadBehaviour="stretch"
+            title="Page Container"
+            color="constrastBody"
+            textColor="body"
+            style={{
+                marginBottom: spaces.content
+            }}
+            onPress={() => {
+                navigation.navigate("PageContainer");
+            }}
+        />
+        <Button
+            spreadBehaviour="stretch"
+            title="Dialog"
+            color="constrastBody"
+            textColor="body"
+            style={{
+                marginBottom: spaces.content
+            }}
+            onPress={() => {
+                navigation.navigate("Dialog");
+            }}
+        />
+        <Button
+            spreadBehaviour="stretch"
+            title="BottomSheet"
+            color="constrastBody"
+            textColor="body"
+            style={{
+                marginBottom: spaces.content
+            }}
+            onPress={() => {
+                navigation.navigate("BottomSheet");
+            }}
+        />
+        <Button
+            spreadBehaviour="stretch"
+            title="Header"
+            color="constrastBody"
+            textColor="body"
+            style={{
+                marginBottom: spaces.content
+            }}
+            onPress={() => {
+                navigation.navigate("Header");
             }}
         />
     </PageContainer>;

@@ -7,11 +7,16 @@ import {
 } from '@react-navigation/native-stack';
 
 import {
+    PageContainerPage,
+    BottomSheetPage,
     WelcomePage,
+    ButtonPage,
+    DialogPage,
+    HeaderPage,
     TextPage
 } from "../pages";
 import {
-    NCoreTheme 
+    NCoreTheme
 } from "../../../src/core";
 
 const RootStack = createNativeStackNavigator();
@@ -44,6 +49,26 @@ const Root = () => {
             <RootStack.Screen
                 name="Text"
                 component={TextPage}
+            />
+            <RootStack.Screen
+                name="Button"
+                component={ButtonPage}
+            />
+            <RootStack.Screen
+                name="PageContainer"
+                component={PageContainerPage}
+            />
+            <RootStack.Screen
+                name="Dialog"
+                component={DialogPage}
+            />
+            <RootStack.Screen
+                name="BottomSheet"
+                component={BottomSheetPage}
+            />
+            <RootStack.Screen
+                name="Header"
+                component={HeaderPage}
             />
         </RootStack.Navigator>
     </NavigationContainer>;

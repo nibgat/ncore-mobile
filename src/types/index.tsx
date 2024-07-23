@@ -1,4 +1,5 @@
 import {
+    ForwardRefRenderFunction,
     FC
 } from "react";
 import {
@@ -83,6 +84,9 @@ export type NCoreContextConfigType = {
     onSetStateFromStorage?: () => any;
     isSaveState?: boolean;
     key: string;
+};
+
+export interface RefForwardingComponent <T, P = {}> extends ForwardRefRenderFunction<T, P> {
 };
 
 export type NCoreThemeKeyType = NCore.ThemeKeyType;
