@@ -53,3 +53,7 @@ export {
 export {
     default as SelectBoxPage
 } from "./selectBox";
+
+export {
+    default as CheckBoxPage
+} from "./checkBox";

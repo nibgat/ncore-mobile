@@ -280,6 +280,18 @@ const Welcome = () => {
                 navigation.navigate("SelectBox");
             }}
         />
+        <Button
+            spreadBehaviour="stretch"
+            title="Check Box"
+            color="constrastBody"
+            textColor="body"
+            style={{
+                marginBottom: spaces.content
+            }}
+            onPress={() => {
+                navigation.navigate("CheckBox");
+            }}
+        />
     </PageContainer>;
 };
 export default Welcome;

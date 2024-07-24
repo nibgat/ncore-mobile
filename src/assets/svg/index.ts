@@ -4,24 +4,24 @@ export {
 
 export {
     default as UncheckedIcon
-} from "./radioUnchecked";
+} from "./radioUncheckedIcon";
 
 export {
     default as CheckedIcon
-} from "./radioChecked";
+} from "./radioCheckedIcon";
 
 export {
     default as ChevronDownIcon
-} from "./chevronDown";
+} from "./chevronDownIcon";
 
 export {
     default as ChevronLeftIcon
-} from "./chevronLeft";
+} from "./chevronLeftIcon";
 
 export {
     default as CheckIcon
-} from "./check";
+} from "./checkIcon";
 
 export {
     default as CheckBoxIcon
-} from "./checkBox";
+} from "./checkBoxIcon";

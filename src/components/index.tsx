@@ -49,3 +49,7 @@ export {
 export {
     default as SelectBox
 } from "./selectBox";
+
+export {
+    default as CheckBox
+} from "./checkBox";

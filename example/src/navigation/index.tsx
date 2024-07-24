@@ -13,6 +13,7 @@ import {
     StateCardPage,
     SearchBoxPage,
     SelectBoxPage,
+    CheckBoxPage,
     RowItemPage,
     WelcomePage,
     ButtonPage,
@@ -104,6 +105,10 @@ const Root = () => {
             <RootStack.Screen
                 name="SelectBox"
                 component={SelectBoxPage}
+            />
+            <RootStack.Screen
+                name="CheckBox"
+                component={CheckBoxPage}
             />
         </RootStack.Navigator>
     </NavigationContainer>;

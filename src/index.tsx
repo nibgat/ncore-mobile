@@ -29,6 +29,7 @@ export {
     StateCard,
     SearchBox,
     SelectBox,
+    CheckBox,
     RowItem,
     Switch,
     Header,
