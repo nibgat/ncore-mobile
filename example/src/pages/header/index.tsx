@@ -4,15 +4,15 @@ import React, {
 import {
     View
 } from "react-native";
+import stylesheet from "./stylesheet";
 import {
     Header as NCoreHeader,
     PageContainer,
     NCoreTheme,
     Button
 } from "ncore-mobile";
-import stylesheet from "./stylesheet";
 import {
-    HomeIcon 
+    HomeIcon
 } from "../../../assets/svgr";
 
 const Header = () => {

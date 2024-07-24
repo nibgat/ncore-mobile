@@ -174,7 +174,7 @@ const Welcome = () => {
         />
         <Button
             spreadBehaviour="stretch"
-            title="BottomSheet"
+            title="Bottom Sheet"
             color="constrastBody"
             textColor="body"
             style={{
@@ -198,7 +198,7 @@ const Welcome = () => {
         />
         <Button
             spreadBehaviour="stretch"
-            title="TextInput"
+            title="Text Input"
             color="constrastBody"
             textColor="body"
             style={{
@@ -206,6 +206,18 @@ const Welcome = () => {
             }}
             onPress={() => {
                 navigation.navigate("TextInput");
+            }}
+        />
+        <Button
+            spreadBehaviour="stretch"
+            title="Switch"
+            color="constrastBody"
+            textColor="body"
+            style={{
+                marginBottom: spaces.content
+            }}
+            onPress={() => {
+                navigation.navigate("Switch");
             }}
         />
     </PageContainer>;

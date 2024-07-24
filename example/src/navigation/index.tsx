@@ -14,6 +14,7 @@ import {
     ButtonPage,
     DialogPage,
     HeaderPage,
+    SwitchPage,
     TextPage
 } from "../pages";
 import {
@@ -74,6 +75,10 @@ const Root = () => {
             <RootStack.Screen
                 name="TextInput"
                 component={TextInputPage}
+            />
+            <RootStack.Screen
+                name="Switch"
+                component={SwitchPage}
             />
         </RootStack.Navigator>
     </NavigationContainer>;

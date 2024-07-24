@@ -25,3 +25,7 @@ export {
 export {
     default as TextInput
 } from "./textInput";
+
+export {
+    default as Switch
+} from "./switch";

@@ -29,3 +29,7 @@ export {
 export {
     default as TextInputPage
 } from "./textInput";
+
+export {
+    default as SwitchPage
+} from "./switch";
