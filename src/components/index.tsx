@@ -53,3 +53,7 @@ export {
 export {
     default as CheckBox
 } from "./checkBox";
+
+export {
+    default as RadioButton
+} from "./radioButton";

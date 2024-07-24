@@ -292,6 +292,18 @@ const Welcome = () => {
                 navigation.navigate("CheckBox");
             }}
         />
+        <Button
+            spreadBehaviour="stretch"
+            title="Radio Button"
+            color="constrastBody"
+            textColor="body"
+            style={{
+                marginBottom: spaces.content
+            }}
+            onPress={() => {
+                navigation.navigate("RadioButton");
+            }}
+        />
     </PageContainer>;
 };
 export default Welcome;

@@ -57,3 +57,7 @@ export {
 export {
     default as CheckBoxPage
 } from "./checkBox";
+
+export {
+    default as RadioButtonPage
+} from "./radioButton";

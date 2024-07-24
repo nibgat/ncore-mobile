@@ -9,6 +9,7 @@ import {
 import {
     PageContainerPage,
     BottomSheetPage,
+    RadioButtonPage,
     TextInputPage,
     StateCardPage,
     SearchBoxPage,
@@ -109,6 +110,10 @@ const Root = () => {
             <RootStack.Screen
                 name="CheckBox"
                 component={CheckBoxPage}
+            />
+            <RootStack.Screen
+                name="RadioButton"
+                component={RadioButtonPage}
             />
         </RootStack.Navigator>
     </NavigationContainer>;

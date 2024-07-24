@@ -3,11 +3,11 @@ export {
 } from "./clearIcon";
 
 export {
-    default as UncheckedIcon
-} from "./radioUncheckedIcon";
+    default as RadioUnCheckedIcon
+} from "./radioUnCheckedIcon";
 
 export {
-    default as CheckedIcon
+    default as RadioCheckedIcon
 } from "./radioCheckedIcon";
 
 export {

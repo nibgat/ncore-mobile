@@ -1,41 +1,31 @@
 import React from "react";
 import Svg, {
-    Rect 
+    Path
 } from "react-native-svg";
-import {
-    calculateSvgLongSideSize 
-} from "../util";
-import {
-    INCoreIconPropsType 
-} from "../../../types";
-
-const RadioCheckedDefaultSize = {
-    y: 20,
-    x: 20
-};
-
-const LongSide = calculateSvgLongSideSize(RadioCheckedDefaultSize);
 
 const RadioChecked = ({
-    size = LongSide.value,
-    color,
+    color = "#000",
+    size = 40,
     ...props
-}: INCoreIconPropsType) => {
-    const strokeWidth = size / 10;
-
-    const containerSize = size - strokeWidth;
-    const indicatorSize = size / 2;
-
-    const indicatorLocation = (strokeWidth / 2) + ((containerSize - indicatorSize) / 2);
+}) => {
+    const pathScale = 40 / size;
 
     return <Svg
-        width={size}
         height={size}
-        fill="transparent"
+        width={size}
+        fill="none"
         {...props}
     >
-        <Rect x={strokeWidth / 2} y={strokeWidth / 2} width={containerSize} height={containerSize} rx={containerSize / 2} stroke={color} strokeWidth={strokeWidth} />
-        <Rect x={indicatorLocation} y={indicatorLocation} width={indicatorSize} height={indicatorSize} rx={indicatorSize / 2} fill={color} />
+        <Path
+            fill={color}
+            d="M20 2.5C10.34 2.5 2.5 10.34 2.5 20S10.34 37.5 20 37.5 37.5 29.66 37.5 20 29.66 2.5 20 2.5ZM20 34c-7.735 0-14-6.265-14-14S12.265 6 20 6s14 6.265 14 14-6.265 14-14 14Z"
+            scale={1 / pathScale}
+        />
+        <Path
+            fill={color}
+            d="M20 29.5a9.5 9.5 0 1 0 0-19 9.5 9.5 0 0 0 0 19Z"
+            scale={1 / pathScale}
+        />
     </Svg>;
-};  
+};
 export default RadioChecked;
