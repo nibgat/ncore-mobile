@@ -220,6 +220,18 @@ const Welcome = () => {
                 navigation.navigate("Switch");
             }}
         />
+        <Button
+            spreadBehaviour="stretch"
+            title="StateCard"
+            color="constrastBody"
+            textColor="body"
+            style={{
+                marginBottom: spaces.content
+            }}
+            onPress={() => {
+                navigation.navigate("StateCard");
+            }}
+        />
     </PageContainer>;
 };
 export default Welcome;

@@ -9,6 +9,7 @@ import {
     NCoreTheme,
     Button
 } from "ncore-mobile";
+import stylesheet from "./stylesheet";
 
 const PageContainer = () => {
     const [isScrollable, setIsScrollable] = useState(false);
@@ -33,9 +34,9 @@ const PageContainer = () => {
             }}
         />
         <View
-            style={{
-                height: 750
-            }}
+            style={[
+                stylesheet.placeholderView
+            ]}
         />
     </NCorePageContainer>;
 };

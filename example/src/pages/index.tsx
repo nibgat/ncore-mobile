@@ -33,3 +33,7 @@ export {
 export {
     default as SwitchPage
 } from "./switch";
+
+export {
+    default as StateCard
+} from "./stateCard";

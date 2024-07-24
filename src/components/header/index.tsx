@@ -7,7 +7,7 @@ import {
 import headerStyler, {
     stylesheet 
 } from "./stylesheet";
-import IHeaderProps from "./type";
+import IHeaderProps from "./types";
 import Button from "../button";
 import Text from "../text";
 import {

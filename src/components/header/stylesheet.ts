@@ -7,7 +7,7 @@ import {
 import {
     HeaderStylerParams,
     HeaderStylerResult
-} from "./type";
+} from "./types";
 
 export const stylesheet = StyleSheet.create({
     container: {
