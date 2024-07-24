@@ -9,6 +9,7 @@ import {
 import {
     PageContainerPage,
     BottomSheetPage,
+    TextInputPage,
     WelcomePage,
     ButtonPage,
     DialogPage,
@@ -69,6 +70,10 @@ const Root = () => {
             <RootStack.Screen
                 name="Header"
                 component={HeaderPage}
+            />
+            <RootStack.Screen
+                name="TextInput"
+                component={TextInputPage}
             />
         </RootStack.Navigator>
     </NavigationContainer>;

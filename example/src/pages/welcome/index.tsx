@@ -196,6 +196,18 @@ const Welcome = () => {
                 navigation.navigate("Header");
             }}
         />
+        <Button
+            spreadBehaviour="stretch"
+            title="TextInput"
+            color="constrastBody"
+            textColor="body"
+            style={{
+                marginBottom: spaces.content
+            }}
+            onPress={() => {
+                navigation.navigate("TextInput");
+            }}
+        />
     </PageContainer>;
 };
 export default Welcome;

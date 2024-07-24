@@ -25,3 +25,7 @@ export {
 export {
     default as HeaderPage
 } from "./header";
+
+export {
+    default as TextInputPage
+} from "./textInput";

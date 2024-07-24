@@ -25,6 +25,7 @@ export type {
 export {
     PageContainer,
     BottomSheet,
+    TextInput,
     Header,
     Dialog,
     Button,
@@ -34,6 +35,10 @@ export {
 export {
     BottomSheetRef
 } from "./components/bottomSheet/types";
+
+export {
+    TextInputRefProps
+} from "./components/textInput/types";
 
 export {
     default as NCore,
