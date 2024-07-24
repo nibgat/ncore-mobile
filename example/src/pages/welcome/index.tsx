@@ -222,7 +222,7 @@ const Welcome = () => {
         />
         <Button
             spreadBehaviour="stretch"
-            title="StateCard"
+            title="State Card"
             color="constrastBody"
             textColor="body"
             style={{
@@ -230,6 +230,54 @@ const Welcome = () => {
             }}
             onPress={() => {
                 navigation.navigate("StateCard");
+            }}
+        />
+        <Button
+            spreadBehaviour="stretch"
+            title="Search Box"
+            color="constrastBody"
+            textColor="body"
+            style={{
+                marginBottom: spaces.content
+            }}
+            onPress={() => {
+                navigation.navigate("SearchBox");
+            }}
+        />
+        <Button
+            spreadBehaviour="stretch"
+            title="Row Item"
+            color="constrastBody"
+            textColor="body"
+            style={{
+                marginBottom: spaces.content
+            }}
+            onPress={() => {
+                navigation.navigate("RowItem");
+            }}
+        />
+        <Button
+            spreadBehaviour="stretch"
+            title="Chip"
+            color="constrastBody"
+            textColor="body"
+            style={{
+                marginBottom: spaces.content
+            }}
+            onPress={() => {
+                navigation.navigate("Chip");
+            }}
+        />
+        <Button
+            spreadBehaviour="stretch"
+            title="Select Box"
+            color="constrastBody"
+            textColor="body"
+            style={{
+                marginBottom: spaces.content
+            }}
+            onPress={() => {
+                navigation.navigate("SelectBox");
             }}
         />
     </PageContainer>;

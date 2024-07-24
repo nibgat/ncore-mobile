@@ -2,50 +2,27 @@ import React from "react";
 import Svg, {
     Path
 } from "react-native-svg";
-import {
-    calculateSvgLongSideSize 
-} from "../util";
-import {
-    INCoreIconPropsType 
-} from "../../../types";
 
-const CheckDefaultSize = {
-    y: 35,
-    x: 35
-};
-
-const LongSide = calculateSvgLongSideSize(CheckDefaultSize);
-
-const SvgCheck = ({
-    size = LongSide.value,
+const Check = ({
     color = "#000",
-    style,
+    size = 40,
     ...props
-}: INCoreIconPropsType) => {
-    let x = LongSide.key === "x" ? 0 : size / 4;
-    let y = LongSide.key === "y" ? 0 : size / 4;
-
-    if(LongSide.key === "xy") {
-        x = 0;
-        y = 0;
-    }
+}) => {
+    const pathScale = 40 / size;
 
     return <Svg
         height={size}
         width={size}
         fill="none"
-        style={[
-            style
-        ]}
         {...props}
     >
         <Path
-            x={x}
-            y={y}
-            scale={size / LongSide.value}
-            d="M17.5 0C7.85 0 0 7.85 0 17.5S7.85 35 17.5 35 35 27.15 35 17.5 27.15 0 17.5 0Zm9.108 11.635L15.3 25.096a1.346 1.346 0 0 1-1.01.48h-.022a1.345 1.345 0 0 1-1-.445L8.42 19.746a1.346 1.346 0 1 1 2-1.8l3.811 4.234L24.546 9.903a1.346 1.346 0 0 1 2.062 1.732Z"
             fill={color}
+            fillRule="evenodd"
+            d="M20 1C9.507 1 1 9.507 1 20s8.507 19 19 19 19-8.507 19-19S30.493 1 20 1Zm8.236 15.787a1.728 1.728 0 1 0-2.654-2.21l-7.427 8.91-3.843-3.845a1.727 1.727 0 0 0-2.442 2.443l5.182 5.182a1.728 1.728 0 0 0 2.547-.116l8.637-10.364Z"
+            clipRule="evenodd"
+            scale={1 / pathScale}
         />
     </Svg>;
 };
-export default SvgCheck;
+export default Check;

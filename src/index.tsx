@@ -27,10 +27,14 @@ export {
     BottomSheet,
     TextInput,
     StateCard,
+    SearchBox,
+    SelectBox,
+    RowItem,
     Switch,
     Header,
     Dialog,
     Button,
+    Chip,
     Text
 } from "./components";
 

@@ -6,6 +6,11 @@ import {
     GestureHandlerRootView
 } from "react-native-gesture-handler";
 import Context from "./context";
+import {
+    enableMapSet
+} from "immer";
+
+enableMapSet();
 
 class NCoreInheritance {
     NCoreContext;

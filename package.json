@@ -66,12 +66,13 @@
     "react-native": "0.72.5",
     "react-native-builder-bob": "0.20.0",
     "release-it": "15.0.0",
-    "typescript": "5.0.2"
+    "typescript": "5.5.4"
   },
   "resolutions": {
     "@types/react": "17.0.21"
   },
   "peerDependencies": {
+    "immer": ">= 10.1.1",
     "ncore-context": ">= 0.1.0-pre-alpha.6",
     "react": "*",
     "react-native": "*",
@@ -131,11 +132,12 @@
     ]
   },
   "dependencies": {
-    "ncore-context": "^0.1.0-pre-alpha.6",
+    "immer": "10.1.1",
+    "ncore-context": "0.1.0-pre-alpha.6",
     "react-native-gesture-handler": "2.13.1",
     "react-native-modalize": "2.1.1",
-    "react-native-portalize": "^1.0.7",
-    "react-native-simple-toast": "^3.0.1",
+    "react-native-portalize": "1.0.7",
+    "react-native-simple-toast": "3.0.1",
     "react-native-svg": "13.14.0"
   }
 }

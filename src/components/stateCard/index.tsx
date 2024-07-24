@@ -13,11 +13,11 @@ import {
     NCoreTheme
 } from "../../core";
 import {
-    Check 
+    CheckIcon 
 } from "../../assets/svg";
 
 const StateCard: FC<IStateCardProps> = ({
-    icon: IconProp = (props) => <Check
+    icon: IconProp = (props) => <CheckIcon
         {...props}
     />,
     children,

@@ -36,7 +36,7 @@ export type LanguageType = {
 };
 
 export type LocaleContextType = {
-    localize: (translationKey: keyof NCore.TranslationType) => string;
+    localize: (translationKey: keyof NCore.TranslationType, parameters?: Array<string>) => string;
     translations: Record<keyof NCore.TranslationType, string>;
     activeLocale: string;
     isRTL: boolean;

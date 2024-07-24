@@ -35,5 +35,21 @@ export {
 } from "./switch";
 
 export {
-    default as StateCard
+    default as StateCardPage
 } from "./stateCard";
+
+export {
+    default as SearchBoxPage
+} from "./searchBox";
+
+export {
+    default as RowItemPage
+} from "./rowItem";
+
+export {
+    default as ChipPage
+} from "./chip";
+
+export {
+    default as SelectBoxPage
+} from "./selectBox";

@@ -1,47 +1,26 @@
 import React from "react";
 import Svg, {
-    Path 
+    Path
 } from "react-native-svg";
-import {
-    calculateSvgLongSideSize 
-} from "../util";
-import {
-    INCoreIconPropsType 
-} from "../../../types";
 
-const ClearIconDefaultSize = {
-    y: 20,
-    x: 20
-};
-
-const LongSide = calculateSvgLongSideSize(ClearIconDefaultSize);
-
-const SvgClearIcon = ({
-    size = LongSide.value,
-    color,
+const Clear = ({
+    color = "#000",
+    size = 40,
     ...props
-}: INCoreIconPropsType) => {
-    let x = LongSide.key === "x" ? 0 : size / 4;
-    let y = LongSide.key === "y" ? 0 : size / 4;
-
-    if(LongSide.key === "xy") {
-        x = 0;
-        y = 0;
-    }
+}) => {
+    const pathScale = 40 / size;
 
     return <Svg
-        width={size}
         height={size}
+        width={size}
         fill="none"
         {...props}
     >
         <Path
-            x={x}
-            y={y}
-            scale={size / LongSide.value}
-            d="M10 0c5.53 0 10 4.47 10 10s-4.47 10-10 10S0 15.53 0 10 4.47 0 10 0zm3.59 5L10 8.59 6.41 5 5 6.41 8.59 10 5 13.59 6.41 15 10 11.41 13.59 15 15 13.59 11.41 10 15 6.41 13.59 5z"
             fill={color}
+            d="M20 1C9.524 1 1 9.524 1 20c0 10.477 8.524 19 19 19 10.477 0 19-8.523 19-19C39 9.524 30.477 1 20 1Zm6.88 23.813a1.462 1.462 0 1 1-2.067 2.066L20 22.067l-4.813 4.812a1.462 1.462 0 0 1-2.066-2.066L17.933 20l-4.812-4.813a1.462 1.462 0 0 1 2.066-2.066L20 17.933l4.813-4.812a1.462 1.462 0 0 1 2.066 2.066L22.067 20l4.812 4.813Z"
+            scale={1 / pathScale}
         />
     </Svg>;
 };
-export default SvgClearIcon;
+export default Clear;

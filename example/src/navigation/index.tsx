@@ -10,12 +10,16 @@ import {
     PageContainerPage,
     BottomSheetPage,
     TextInputPage,
+    StateCardPage,
+    SearchBoxPage,
+    SelectBoxPage,
+    RowItemPage,
     WelcomePage,
     ButtonPage,
     DialogPage,
     HeaderPage,
     SwitchPage,
-    StateCard,
+    ChipPage,
     TextPage
 } from "../pages";
 import {
@@ -83,7 +87,23 @@ const Root = () => {
             />
             <RootStack.Screen
                 name="StateCard"
-                component={StateCard}
+                component={StateCardPage}
+            />
+            <RootStack.Screen
+                name="SearchBox"
+                component={SearchBoxPage}
+            />
+            <RootStack.Screen
+                name="RowItem"
+                component={RowItemPage}
+            />
+            <RootStack.Screen
+                name="Chip"
+                component={ChipPage}
+            />
+            <RootStack.Screen
+                name="SelectBox"
+                component={SelectBoxPage}
             />
         </RootStack.Navigator>
     </NavigationContainer>;

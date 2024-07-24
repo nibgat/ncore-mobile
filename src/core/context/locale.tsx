@@ -18,7 +18,17 @@ class LocaleContextInheritance<T extends LanguageType> extends NCoreContext<Loca
 
     constructor(initialState: T, config: ConfigType<LocaleContextType>) {
         super({
-            localize: (translationKey: keyof NCore.TranslationType) => en.translations[translationKey],
+            localize: (translationKey: keyof NCore.TranslationType, parameters?: Array<string>) => {
+                if(parameters && parameters.length) {
+                    let temp = en.translations[translationKey];
+                    parameters.forEach((item, index) => {
+                        temp.replace(`{{${index}}}`, item);
+                    });
+                    return temp;
+                }
+
+                return en.translations[translationKey];
+            },
             translations: en.translations,
             activeLocale: en.code,
             isRTL: en.isRTL
@@ -43,16 +53,24 @@ class LocaleContextInheritance<T extends LanguageType> extends NCoreContext<Loca
             activeLocale: localeCode,
             isRTL: selectedLanguageData.isRTL,
             translations: translations,
-            localize: (translationKey: keyof NCore.TranslationType) => translations[translationKey]
+            localize: this.localize
         };
 
         this.state = newState;
         this.setState(newState);
     };
 
-    localize = (localeCode: keyof NCore.TranslationType) => {
+    localize = (localeCode: keyof NCore.TranslationType, parameters?: Array<string>) => {
         if(!this.state) {
             return "";
+        }
+
+        if(parameters && parameters.length) {
+            let temp = this.state.translations[localeCode];
+            parameters.forEach((item, index) => {
+                temp.replace(`{{${index}}}`, item);
+            });
+            return temp;
         }
 
         return this.state.translations[localeCode];

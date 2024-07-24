@@ -13,6 +13,7 @@ import {
 export const stylesheet = StyleSheet.create({
     container: {
         flexDirection: "row",
+        alignItems: "center",
         borderWidth: 1,
         width: "100%"
     },
@@ -51,10 +52,10 @@ const textInputStyler = ({
 }: TextInputStylerParams): TextInputStylerResult => {
     let container: ViewStyle = {
         borderColor: isFocused ? colors.primary : colors.panel,
-        paddingHorizontal: spaces.container,
+        paddingHorizontal: spaces.container / 1.5,
+        paddingTop: spaces.content * 1.25,
         backgroundColor: colors.panel,
         borderRadius: radiuses.half,
-        paddingTop: spaces.content,
         borderWidth: borders.line
     };
 
@@ -81,7 +82,7 @@ const textInputStyler = ({
         input.marginBottom = spaces.content / 1.5;
         container.paddingBottom = spaces.inline;
     } else {
-        container.paddingBottom = spaces.content * 1.5;
+        container.paddingBottom = spaces.content * 1.25;
     }
 
     if(disabled) {

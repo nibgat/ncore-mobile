@@ -30,7 +30,7 @@ const stateCardStyler = ({
     };
 
     let iconContainerStyle: ViewStyle = {
-        marginBottom: spaces.content * 2
+        marginBottom: spaces.content
     };
 
     let contentStyle: TextStyle = {

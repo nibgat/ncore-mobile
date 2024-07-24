@@ -11,15 +11,15 @@ export {
 } from "./radioChecked";
 
 export {
-    default as ChevronBottom
-} from "./chevronBottom";
+    default as ChevronDownIcon
+} from "./chevronDown";
 
 export {
-    default as ChevronLeft
+    default as ChevronLeftIcon
 } from "./chevronLeft";
 
 export {
-    default as Check
+    default as CheckIcon
 } from "./check";
 
 export {
