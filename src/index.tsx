@@ -49,6 +49,10 @@ export {
 } from "./components/textInput/types";
 
 export {
+    LoadingIcon
+} from "./assets/svg";
+
+export {
     default as NCore,
     NCoreContext,
     NCoreLocale,

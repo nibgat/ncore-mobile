@@ -25,3 +25,7 @@ export {
 export {
     default as CheckBoxIcon
 } from "./checkBoxIcon";
+
+export {
+    default as LoadingIcon
+} from "./loadingIcon";
