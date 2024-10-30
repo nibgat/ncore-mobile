@@ -4,7 +4,7 @@ export {
 
 export {
     default as RadioUnCheckedIcon
-} from "./radioUnCheckedIcon";
+} from "./radioUncheckedIcon";
 
 export {
     default as RadioCheckedIcon

@@ -12742,7 +12742,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"ncore-context@npm:^0.1.0-pre-alpha.6":
+"ncore-context@npm:0.1.0-pre-alpha.6, ncore-context@npm:^0.1.0-pre-alpha.6":
   version: 0.1.0-pre-alpha.6
   resolution: "ncore-context@npm:0.1.0-pre-alpha.6"
   peerDependencies:
@@ -12798,17 +12798,17 @@ __metadata:
     eslint-plugin-prettier: 4.0.0
     immer: 10.1.1
     jest: 28.1.1
-    ncore-context: ^0.1.0-pre-alpha.6
+    ncore-context: 0.1.0-pre-alpha.6
     react: 18.2.0
     react-native: 0.72.5
     react-native-builder-bob: 0.20.0
     react-native-gesture-handler: 2.13.1
     react-native-modalize: 2.1.1
-    react-native-portalize: ^1.0.7
-    react-native-simple-toast: ^3.0.1
+    react-native-portalize: 1.0.7
+    react-native-simple-toast: 3.0.1
     react-native-svg: 13.14.0
     release-it: 15.0.0
-    typescript: ^5.5.4
+    typescript: 5.5.4
   peerDependencies:
     immer: ">= 10.1.1"
     ncore-context: ">= 0.1.0-pre-alpha.6"
@@ -14746,7 +14746,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-native-portalize@npm:1.0.7, react-native-portalize@npm:^1.0.7":
+"react-native-portalize@npm:1.0.7":
   version: 1.0.7
   resolution: "react-native-portalize@npm:1.0.7"
   peerDependencies:
@@ -14786,16 +14786,6 @@ __metadata:
     react: "*"
     react-native: ">=0.71.0"
   checksum: 703071268216a3274d76ec3e08467563a9a95ee0a046ec46a55de65a901beac48793996274e2f6ab1aa0b4604d1ded8766a249961d05fa6bfd9277226be64ac7
-  languageName: node
-  linkType: hard
-
-"react-native-simple-toast@npm:^3.0.1":
-  version: 3.0.2
-  resolution: "react-native-simple-toast@npm:3.0.2"
-  peerDependencies:
-    react: "*"
-    react-native: ">=0.71.0"
-  checksum: 9aba7c1f2a887e4fc771e7dfc56529f771048df4ebf1c29b6cf69a5fb3617852d7a964a44f04a9c9401523f6155824a8bca74a83bf840ab69d66e9c18d46a6f9
   languageName: node
   linkType: hard
 
@@ -17143,7 +17133,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"typescript@npm:^5.5.4":
+"typescript@npm:5.5.4":
   version: 5.5.4
   resolution: "typescript@npm:5.5.4"
   bin:
@@ -17153,7 +17143,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"typescript@patch:typescript@^5.5.4#~builtin<compat/typescript>":
+"typescript@patch:typescript@5.5.4#~builtin<compat/typescript>":
   version: 5.5.4
   resolution: "typescript@patch:typescript@npm%3A5.5.4#~builtin<compat/typescript>::version=5.5.4&hash=14eedb"
   bin:
