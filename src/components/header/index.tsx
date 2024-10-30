@@ -15,7 +15,7 @@ import {
 } from "ncore-mobile";
 import {
     ChevronLeftIcon
-} from "../../../example/assets/svgr";
+} from "../../assets/svg";
 
 const Header: FC<IHeaderProps> = ({
     backButton = true,
