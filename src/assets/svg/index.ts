@@ -4,7 +4,7 @@ export {
 
 export {
     default as RadioUnCheckedIcon
-} from "./radioUnCheckedIcon";
+} from "./radioUncheckedIcon";
 
 export {
     default as RadioCheckedIcon
@@ -25,3 +25,7 @@ export {
 export {
     default as CheckBoxIcon
 } from "./checkBoxIcon";
+
+export {
+    default as LoadingIcon
+} from "./loadingIcon";

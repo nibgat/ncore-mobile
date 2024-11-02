@@ -1,31 +1,42 @@
 import React, {
+    useEffect,
+    useRef,
     FC
 } from "react";
 import {
     ActivityIndicator,
     TouchableOpacity,
     TextStyle,
+    Animated,
     View
 } from "react-native";
-import Text from "../text";
-import {
-    NCoreTheme 
-} from "../../core";
-import {
-    IButtonProps 
-} from "./types";
 import buttonStyler, {
     stylesheet
 } from "./stylesheet";
+import {
+    IButtonProps
+} from "./types";
+import Text from "../text";
+import {
+    NCoreTheme
+} from "../../core";
+import {
+    LoadingIcon
+} from "../../assets/svg";
+import {
+    Easing 
+} from "react-native";
 
 const Button: FC<IButtonProps> = ({
     displayBehaviourWhileLoading = "disabled",
     spreadBehaviour = "baseline",
     icon: IconComponentProp,
     variant = "filled",
+    customLoadingIcon,
     color = "primary",
     disabled = false,
     size = "medium",
+    isCustomLoading,
     titleStyle,
     textColor,
     iconColor,
@@ -42,6 +53,8 @@ const Button: FC<IButtonProps> = ({
         spaces,
         colors
     } = NCoreTheme.useContext();
+
+    const rotateAnim = useRef(new Animated.Value(0)).current;
 
     const {
         loadingProps,
@@ -64,12 +77,52 @@ const Button: FC<IButtonProps> = ({
         size
     });
 
+    useEffect(() => {
+        if(loading && isCustomLoading) {
+            rotateLoading();
+        } else {
+            rotateAnim.stopAnimation();
+            rotateAnim.setValue(0);
+        }
+    }, [loading, isCustomLoading]);
+
+    const rotateLoading = () => {
+        Animated.loop(
+            Animated.timing(rotateAnim, {
+                useNativeDriver: true,
+                easing: Easing.linear,
+                duration: 1000,
+                toValue: 1
+            })
+        ).start();
+    };
+
     const renderLoading = () => {
         if(!loading) {
             return null;
         }
 
         const loadingSize = typography[loadingProps.containerSize]?.fontSize || 16;
+
+        if(isCustomLoading) {
+            return <Animated.View
+                style={[
+                    {
+                        transform: [{
+                            rotateZ: rotateAnim.interpolate({
+                                inputRange: [0, 1],
+                                outputRange: ["0deg", "360deg"]
+                            })
+                        }]
+                    }
+                ]}
+            >
+                {customLoadingIcon ? customLoadingIcon : <LoadingIcon
+                    color={colors[titleProps.color]}
+                    size={loadingSize * 1.5}
+                />}
+            </Animated.View>;
+        }
 
         return <View
             style={[

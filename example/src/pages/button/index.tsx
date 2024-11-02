@@ -61,7 +61,9 @@ const Button = () => {
     const [color, setColor]: [keyof NCore.ColorsType | undefined, Dispatch<keyof NCore.ColorsType | undefined>] = useState<keyof NCore.ColorsType | undefined>(undefined);
     const [variant, setVariant]: [ButtonVariant | undefined, Dispatch<ButtonVariant | undefined>] = useState<ButtonVariant | undefined>(undefined);
     const [size, setSize]: [ButtonSize | undefined, Dispatch<ButtonSize | undefined>] = useState<ButtonSize | undefined>(undefined);
+    const [isCustomLoading, setIsCustomLoading] = useState(false);
     const [isDisabled, setIsDisabled] = useState(false);
+    const [isLoading, setIsLoading] = useState(false);
     const [iconIndex, setIconIndex] = useState(0);
 
     const {
@@ -80,9 +82,11 @@ const Button = () => {
                 }}
                 icon={iconIndex === 0 ? undefined : iconList[iconIndex - 1]?.icon}
                 spreadBehaviour={spreadBehaviour}
+                isCustomLoading={isCustomLoading}
                 disabled={isDisabled}
                 iconColor={iconColor}
                 textColor={textColor}
+                loading={isLoading}
                 variant={variant}
                 title="Click Me"
                 color={color}
@@ -214,6 +218,30 @@ const Button = () => {
             }}
             onPress={() => {
                 setIsDisabled(!isDisabled);
+            }}
+        />
+        <NCoreButton
+            title={`loading = ${isLoading ? "true" : "false"}`}
+            spreadBehaviour="stretch"
+            color="constrastBody"
+            textColor="body"
+            style={{
+                marginBottom: spaces.content
+            }}
+            onPress={() => {
+                setIsLoading(!isLoading);
+            }}
+        />
+        <NCoreButton
+            title={`isCustomLoading = ${isCustomLoading ? "true" : "false"}`}
+            spreadBehaviour="stretch"
+            color="constrastBody"
+            textColor="body"
+            style={{
+                marginBottom: spaces.content
+            }}
+            onPress={() => {
+                setIsCustomLoading(!isCustomLoading);
             }}
         />
         <NCoreButton

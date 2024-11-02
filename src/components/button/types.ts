@@ -25,9 +25,11 @@ export interface IButtonProps {
     spreadBehaviour?: ButtonSpreadBehaviour;
     iconColor?: keyof NCore.ColorsType;
     textColor?: keyof NCore.ColorsType;
+    customLoadingIcon?: NCoreIconType;
     titleStyle?: StyleProp<TextStyle>;
     style?: ViewStyle | ViewStyle[];
     color?: keyof NCore.ColorsType;
+    isCustomLoading?: boolean;
     variant?: ButtonVariant;
     icon?: NCoreIconType;
     onPress: () => void;
